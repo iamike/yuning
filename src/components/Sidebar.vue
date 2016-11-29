@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="sidebar" class="ui vertical sidebar menu">
+  <div id="sidebar" class="ui vertical sidebar menu right inverted">
     <a class="active item">Home</a>
     <a class="item">Work</a>
     <a class="item">Company</a>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import '../../static/semantic/dist/components/sidebar'
+
 
 export default {
   name: 'sidebar',
@@ -19,8 +19,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-& { @import "../../static/semantic/dist/components/sidebar.css"; }
-
-</style>

@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import App from './App'
 import Sidebar from './components/Sidebar'
 
+import '../static/semantic/dist/semantic'
+
 // TODO: remove
 const Home = { template: '<div>This is Home</div>' }
 const Foo = { template: '<div>This issss Foo</div>' }
