@@ -7,7 +7,7 @@
           <h2 class="ui header inverted">关注我们的公众号, 体验300小时课程</h2>
           <div class="ui buttons">
             <a href="#" class="ui inverted olive button">公众号</a>
-            <a href="#" class="ui inverted olive button">iOS</a>
+            <a href="#" class="ui inverted  button">iOS</a>
             <a href="#" class="ui inverted olive button">Android</a>
           </div>
         </div>
@@ -28,7 +28,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>

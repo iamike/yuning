@@ -1,33 +1,108 @@
 <template lang="html">
-  <div class="ui vertical stripe segment">
-    <div class="ui middle aligned stackable grid container">
-      <div class="row">
-        <div class="six wide left floated column">
-          <img src="../assets/images/dummy-1.png" class="ui large rounded image">
-        </div>
-        <div class="eight wide column">
-          <div class="ui piled very padded segment">
-            <img class="ui fluid image" src="../assets/images/video.jpg" alt="" />
-            <h3 class="ui header center aligned">我们的愿景</h3>
-            <p class="ui center aligned">打造高质量亲子陪伴充分感受到孩子每一步的成长，共同享受成长乐趣。</p>
-
-            <div class="row">
-              <div class="center aligned column">
-                <a class="ui green button">Check Them Out</a>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="ui text container">
+  <div class="ui middle aligned one column centered grid">
+    <div class="ui segment basic padded very">
+      <h1 class="ui header">优质师资保障品质</h1>
+      <p>
+        成长保是专业的在线儿童成长顾问平台，具有数百位儿童咨询师和儿童游戏咨询师，一直专注儿童成长。
+      </p>
+    </div>
+  </div>
+  <div class="ui middle aligned six column centered grid" id="teacherPicDemo">
+    <div class="row">
+      <div class="column">
+        <img class="ui image circular" src="../assets/images/teacher/1451877247605556164.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1441616743197847732.jpg">
+      </div>
+      <div class="column">
+        <img class="ui image circular" src="../assets/images/teacher/1451874991238942279.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1444980853702296467.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1434527076153012793.jpg">
+      </div>
+      <div class="column">
+        <img class="ui image circular" src="../assets/images/teacher/1434527253147131380.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1434527358728820025.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1434698941671885934.jpg">
+      </div>
+      <div class="column">
+        <img class="ui image circular" src="../assets/images/teacher/1434699639804185319.jpg">
+        <img class="ui image circular" src="../assets/images/teacher/1451875395258650311.png">
       </div>
     </div>
   </div>
+
+</div>
+
+
 </template>
 
 <script>
+
+
 export default {
-  name: 'mast-head2'
+  name: 'mast-head2',
+  data () {
+    return {
+      animated: false,
+      animation: function(){
+        var vm = this
+
+        if (vm.animated===false) {
+          vm.animated = true
+          let $animateElements = $('#teacherPicDemo img.circular')
+
+          if (!$animateElements.hasClass('visible')){
+
+            $('.phonePlaceholder').fadeIn()
+
+            $animateElements.transition({
+              animation : 'scale',
+              reverse   : 'auto', // default setting
+              interval  : 200,
+              onComplete : function(){
+
+              }
+            })
+          }
+
+        }
+
+
+      }
+    }
+  }
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped >
+#teacherPicDemo img.circular {
+  visibility: hidden;
+
+}
+img.phonePlaceholder {
+  position: absolute;
+  bottom:0px;
+  left:0px;
+  transform: rotate(-9deg) translateX(81px) translateY(60px);
+}
+.ui.text.container {
+  // position: relative;
+  // background: url(../assets/images/bg/bg.png);
+  // background-size: cover;
+  // background-repeat: no-repeat;
+
+}
+/*.swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}*/
+
 </style>

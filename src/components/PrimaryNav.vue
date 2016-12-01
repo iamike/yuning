@@ -24,7 +24,7 @@
           </div>
         </div> -->
 
-        <div class="right item hidden">
+        <div class="right item hidden" id="userLogin">
           <button class="ui tiny olive button">
             <i class="icon user"></i>
             登录
@@ -101,6 +101,9 @@ export default {
 </script>
 
 <style lang="scss" scoped >
+#userLogin {
+  margin-bottom: 15px;
+}
 .overlay {
   float: right;
   margin: 0em 3em 1em 0em;

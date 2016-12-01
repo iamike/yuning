@@ -58,46 +58,36 @@ export default {
   components: {
     // MenuItem
   },
-  mounted() {
-    // fix menu when passed
-    // $('.masthead').visibility({
-    //   once: false,
-    //   onBottomPassed: function() {
-    //     $('.fixed.menu').transition('fade in')
-    //   },
-    //   onBottomPassedReverse: function() {
-    //     $('.fixed.menu').transition('fade out')
-    //   }
-    // })
-    $(document).ready(function(){
-        //leaf
-        setTimeout(function(){
-          $('.brandleaf')
-          .transition({
-            animation : 'fade up',
-            duration  : 1000,
-            onComplete : function(){
-              $('.introduction .ui.statistic .label, .introduction .ui.statistic .value, .introduction .slogan, .introduction .green.button')
-              .transition({
-                animation : 'fade up',
-                duration  : 1000,
-                interval  : 1000,
-                onComplete : function(){
-                  $('.brandleaf')
-                  .transition({
-                    animation:'tada',
-                    duration  : 1800,
-                  })
-                  .transition('set looping')
-                }
-              })
-            }
-          })
+  data () {
+    return {
+      animation () {
 
-        },1000)
+      $('.brandleaf')
+        .transition({
+          animation : 'fade up',
+          duration  : 1000,
+          onComplete : function(){
 
-    })
+            $('.introduction .ui.statistic .label, .introduction .ui.statistic .value, .introduction .slogan, .introduction .green.button')
+            .transition({
+              animation : 'fade up',
+              duration  : 1000,
+              interval  : 1000,
+              onComplete : function(){
 
+                $('.brandleaf')
+                .transition({
+                  animation:'tada',
+                  duration  : 1800,
+                })
+                .transition('set looping')
+
+              }
+            })
+          }
+        })
+      }
+    }
   }
 }
 </script>
@@ -121,6 +111,7 @@ export default {
     height: 100vh;
     width: 100vw;
     margin: 0px;
+    padding: 0px;
 
   }
   .ui.segment.ctx {

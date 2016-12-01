@@ -15,6 +15,7 @@
   "dependencies": {
     "cropper": "^2.3.4",
     "jquery": "^3.1.1",
+    "jquery.simple-text-rotator": "0.0.1",
     "semantic-ui": "^2.2.6",
     "semantic-ui-css": "^2.2.4",
     "swiper": "^3.4.0",
