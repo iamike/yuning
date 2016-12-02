@@ -7,7 +7,7 @@
         <a class="toc item "><i class="sidebar icon"></i></a>
         <router-link class="active green item" :to="{ name: 'home' }"><i class="icon home"></i> 首页</router-link>
         <a class="ui item courseCenter" href="#" style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
-        <router-link class="item blue" :to="{ name: 'bar', params: { id: 123 }}" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
+        <router-link class="item blue" :to="{ name: 'bookstore' }" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
         <a class="ui item showAppQR" href="#"><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
         <!-- <div class="right menu">
           <div class="item">
@@ -18,22 +18,23 @@
           </div>ss
         </div> -->
         <div class="right item hidden" id="userLogin">
-          <button class="ui tiny olive button">
+          <button class="ui tiny olive button" v-on:click="toggleUserPopup">
             <i class="icon user"></i>
             登录
           </button>
         </div>
+        <user-popup></user-popup>
         <div id="coursePopup" class="ui fluid popup bottom left transition hidden">
          <div class="ui four column relaxed divided grid">
            <div class="column">
-             <h4 class="ui header">课程中心</h4>
+             <h4 class="ui header">课程</h4>
              <div class="ui link list">
                <a class="item">名师课程</a>
                <a class="item">名师介绍</a>
              </div>
            </div>
            <div class="column">
-             <h4 class="ui header">名师在线直播</h4>
+             <h4 class="ui header">直播</h4>
              <div class="ui middle aligned selection list">
               <div class="item">
                 <img class="ui avatar image" src="../assets/images/avatar/small/helen.jpg">
@@ -56,14 +57,14 @@
             </div>
            </div>
            <div class="column">
-             <h4 class="ui header">心理专栏</h4>
+             <h4 class="ui header">心理</h4>
              <div class="ui link list">
                <a class="item">咨询</a>
                <a class="item">课程</a>
              </div>
            </div>
            <div class="column">
-             <h4 class="ui header">心理专栏</h4>
+             <h4 class="ui header">其他</h4>
              <div class="ui link list">
                <a class="item">咨询</a>
                <a class="item">课程</a>
@@ -76,26 +77,18 @@
            <div class="column">
              <h4 class="ui header">Android</h4>
              <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-
            </div>
            <div class="column">
              <h4 class="ui header">iOS</h4>
              <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-
            </div>
            <div class="column">
              <h4 class="ui header">微信公众号</h4>
                <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-               <h2 class="ui header inverted ">现在就关注我们的公众号
-                 <div class="sub header"><i class="wechat icon left floated"></i>免费体验300小时课程</div>
-               </h2>
            </div>
            <div class="column">
              <h4 class="ui header">微博</h4>
                <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-               <h2 class="ui header inverted ">现在就关注我们的公众号
-                 <div class="sub header"><i class="wechat icon left floated"></i>免费体验300小时课程</div>
-               </h2>
            </div>
           </div>
        </div>
@@ -106,8 +99,24 @@
 </template>
 
 <script>
+import UserPopup from './UserPopup'
+
 export default {
   name: 'primary-nav',
+  components: {
+    UserPopup
+  },
+  computed: {
+    userPopup () {
+      return this.$store.state.userPopup
+    }
+  },
+  methods: {
+    toggleUserPopup () {
+      // console.log(this.userPopup)
+      this.$store.commit('toggleUserPopup')
+    }
+  },
   mounted: function() {
 
     $('.item.courseCenter')
@@ -208,10 +217,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
     }
   }
 }
-
-
-
-
-
-
 </style>

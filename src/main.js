@@ -1,39 +1,62 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 
 //import components
 import App from './App'
-import Sidebar from './components/Sidebar'
 import Home from './components/Homepage'
+import BookStore from './components/BookStore'
 
 import '../static/semantic/dist/semantic'
 
 
-const Foo = { template: '<div>This issss Foo</div>' }
 const Bar = { template: '<div>This is Bar  {{ $route.params.id }}</div>' }
 
 /* router */
 Vue.use(VueRouter)
+
+/* vuex */
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    userPopup: false
+  },
+  mutations: {
+    toggleUserPopup (state) {
+      // console.log(state.userPopup)
+      if (state.userPopup == true) {
+        state.userPopup = false
+        $('.ui.user.modal').modal('hide')
+      } else {
+        state.userPopup = true
+        $('.ui.user.modal').modal('show')
+      }
+
+    }
+  }
+})
 const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/', name: 'home', component: Home },
-    { path: '/foo', name: 'foo', component: Foo },
+    { path: '/bookstore', name: 'bookstore', component: BookStore },
     { path: '/bar/:id', name: 'bar', component: Bar }
   ]
 })
 
 /* appInstance */
-const appInstance = new Vue({
+new Vue({
   router,
+  store,
   el: '#app',
   template: '<App/>',
   components: { App }
 })
 
-/* sidebarInstance */
-const sidebarInstance = new Vue({
-  el: '#sidebar',
-  template: '<Sidebar/>',
-  components: { Sidebar }
-})
+// /* sidebarInstance */
+// const sidebarInstance = new Vue({
+//   el: '#sidebar',
+//   template: '<Sidebar/>',
+//   components: { Sidebar }
+// })

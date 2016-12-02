@@ -20,7 +20,8 @@
     "semantic-ui-css": "^2.2.4",
     "swiper": "^3.4.0",
     "vue": "^2.0.1",
-    "vue-semantic": "git+https://github.com/CroudSupport/vue-semantic.git"
+    "vue-semantic": "git+https://github.com/CroudSupport/vue-semantic.git",
+    "vuex": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

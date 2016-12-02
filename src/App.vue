@@ -3,31 +3,23 @@
       <primary-nav></primary-nav>
       <router-view class="view"></router-view>
       <sticky-footer></sticky-footer>
-      <footer></footer>
   </div>
 </template>
 <script>
-import FollowingMenu from './components/FollowingMenu'
 import PrimaryNav from './components/PrimaryNav'
-import Homepage from './components/Homepage'
+import AppFooter from './components/Footer'
 import StickyFooter from './components/StickyFooter'
 
 export default {
   name: 'app',
   components: {
     PrimaryNav,
-    Homepage,
     StickyFooter
   },
   ready () {
 
   },
   mounted () {
-    //
-    // $('.overlay').visibility({
-    //   type: 'fixed',
-    //   offset: 80
-    // });
 
 
   }
