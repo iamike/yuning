@@ -4,18 +4,17 @@ import VueRouter from 'vue-router'
 //import components
 import App from './App'
 import Sidebar from './components/Sidebar'
+import Home from './components/Homepage'
 
 import '../static/semantic/dist/semantic'
 
-// TODO: remove
-const Home = { template: '<div>This is Home</div>' }
+
 const Foo = { template: '<div>This issss Foo</div>' }
 const Bar = { template: '<div>This is Bar  {{ $route.params.id }}</div>' }
 
 /* router */
 Vue.use(VueRouter)
 const router = new VueRouter({
-  mode: 'history',
   base: __dirname,
   routes: [
     { path: '/', name: 'home', component: Home },

@@ -21,9 +21,8 @@
         </div>
         <div class="seven wide column">
           <h4 class="ui inverted header"></h4>
-          <h3 >{{ $route.name }}</h3>
+        
           <div class="divider ui"></div>
-          <router-view class="view"></router-view>
           <p>成长保 ©2011-2016 育宁文化发展（上海）有限公司沪ICP备13005274号-3</p>
         </div>
       </div>

@@ -1,15 +1,9 @@
 <template>
-
   <div id="app">
-
-
       <primary-nav></primary-nav>
-
-      <homepage></homepage>
-
+      <router-view class="view"></router-view>
       <sticky-footer></sticky-footer>
       <footer></footer>
-
   </div>
 </template>
 <script>
