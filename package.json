@@ -20,6 +20,8 @@
     "semantic-ui-css": "^2.2.4",
     "swiper": "^3.4.0",
     "vue": "^2.0.1",
+    "vue-localstorage": "^0.1.2",
+    "vue-resource": "^1.0.3",
     "vue-semantic": "git+https://github.com/CroudSupport/vue-semantic.git",
     "vuex": "^2.0.0"
   },

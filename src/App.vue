@@ -27,14 +27,11 @@ export default {
 }
 </script>
 
-<style lang="less">
-/* Global */
 
-
-
-</style>
 <style lang="scss" scoped>
-
+  #app {
+    padding-top: 82px;
+  }
 
 </style>
 <style >

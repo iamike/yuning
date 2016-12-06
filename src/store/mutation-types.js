@@ -1,0 +1,2 @@
+
+export const USER_LOGIN_STATUS = 'USER_LOGIN_STATUS'

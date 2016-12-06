@@ -2,156 +2,85 @@
   <div class="ui fixed menu">
     <div class="ui container">
       <img class="ui logo left floated" src="../assets/images/logo.png" alt="" />
-
-      <div class="ui large container secondary pointing menu right floated">
+      <div class="ui large container menu right floated">
         <a class="toc item "><i class="sidebar icon"></i></a>
         <router-link class="active green item" :to="{ name: 'home' }"><i class="icon home"></i> 首页</router-link>
-        <a class="ui item courseCenter" href="#" style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
+        <a class="ui item courseCenter" href="#" @click.prevent style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
         <router-link class="item blue" :to="{ name: 'bookstore' }" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
-        <a class="ui item showAppQR" href="#"><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
-        <!-- <div class="right menu">
-          <div class="item">
-            <div class="ui transparent icon input">
-              <input type="text" placeholder="Search...">
-              <i class="search link icon"></i>
-            </div>
-          </div>ss
-        </div> -->
-        <div class="right item hidden" id="userLogin">
-          <button class="ui tiny olive button" v-on:click="toggleUserPopup">
+        <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
+
+        <div class="right item" id="userLogin" >
+          <button class="ui tiny olive button" v-on:click="toggleUserPopup" v-show="!userLoginStatus">
             <i class="icon user"></i>
             登录
           </button>
-        </div>
-        <user-popup></user-popup>
-        <div id="coursePopup" class="ui fluid popup bottom left transition hidden">
-         <div class="ui four column relaxed divided grid">
-           <div class="column">
-             <h4 class="ui header">课程</h4>
-             <div class="ui link list">
-               <a class="item">名师课程</a>
-               <a class="item">名师介绍</a>
-             </div>
-           </div>
-           <div class="column">
-             <h4 class="ui header">直播</h4>
-             <div class="ui middle aligned selection list">
-              <div class="item">
-                <img class="ui avatar image" src="../assets/images/avatar/small/helen.jpg">
-                <div class="content">
-                  <div class="header">Helen</div>
-                </div>
-              </div>
-              <div class="item">
-                <img class="ui avatar image" src="../assets/images/avatar/small/christian.jpg">
-                <div class="content">
-                  <div class="header">Christian</div>
-                </div>
-              </div>
-              <div class="item">
-                <img class="ui avatar image" src="../assets/images/avatar/small/daniel.jpg">
-                <div class="content">
-                  <div class="header">Daniel</div>
-                </div>
+          <div class="ui compact menu" v-if="userInfo!=undefined">
+            <div class="ui simple dropdown item">
+              <img class="ui avatar image" v-bind:src="userInfo.avatar">
+              <span >{{userInfo.nickname}}</span>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <router-link class="item" :to="{ name: 'userInfoLanding', params: { id: userInfo.id }}" >用户中心</router-link>
+                <div class="item" v-on:click="signOut">注销</div>
               </div>
             </div>
-           </div>
-           <div class="column">
-             <h4 class="ui header">心理</h4>
-             <div class="ui link list">
-               <a class="item">咨询</a>
-               <a class="item">课程</a>
-             </div>
-           </div>
-           <div class="column">
-             <h4 class="ui header">其他</h4>
-             <div class="ui link list">
-               <a class="item">咨询</a>
-               <a class="item">课程</a>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div id="appqrPopup" class="ui fluid popup bottom center transition hidden">
-         <div class="ui four column relaxed divided grid">
-           <div class="column">
-             <h4 class="ui header">Android</h4>
-             <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-           </div>
-           <div class="column">
-             <h4 class="ui header">iOS</h4>
-             <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-           </div>
-           <div class="column">
-             <h4 class="ui header">微信公众号</h4>
-               <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-           </div>
-           <div class="column">
-             <h4 class="ui header">微博</h4>
-               <img class="ui image top aligned small spaced left floated" src="../assets/images/qrcode/wechat_mp.jpg" alt="" />
-           </div>
           </div>
-       </div>
-
+        </div>
+        <user-login-modal></user-login-modal>
+        <course-popup></course-popup>
+        <app-download-popup></app-download-popup>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import UserPopup from './UserPopup'
+import CoursePopup from './CoursePopup'
+import AppDownloadPopup from './AppDownloadPopup'
+import UserLoginModal from './UserLoginModal'
+
+import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'primary-nav',
   components: {
-    UserPopup
+    UserLoginModal,
+    CoursePopup,
+    AppDownloadPopup
   },
-  computed: {
-    userPopup () {
-      return this.$store.state.userPopup
+
+  beforeCreate: function () {
+
+  },
+  created: function(){
+    // when user fisrt landing page
+    if (this.$localStorage.get('access_token')!= null) {
+      this.$store.dispatch('logIn')
+      // this.userInfo = this.$localStorage.get('user_info')
     }
   },
+  computed: mapGetters(['userLoginStatus','userInfo']),
   methods: {
-    toggleUserPopup () {
-      // console.log(this.userPopup)
-      this.$store.commit('toggleUserPopup')
-    }
+    signOut: function(){
+      this.$localStorage.remove('access_token')
+      this.$localStorage.remove('user_info')
+      this.$store.dispatch('logOut')
+      this.$router.push('/')
+
+    },
+    ...mapActions(['toggleUserPopup'])
   },
   mounted: function() {
-
-    $('.item.courseCenter')
-      .popup({
-        inline     : true,
-        popup: '#coursePopup',
-        // hoverable  : true,
-        position   : 'bottom left',
-        on: 'click',
-        delay: {
-          show: 300,
-          hide: 800
-        }
-      })
-
-    $('.item.showAppQR')
-      .popup({
-        inline     : true,
-        popup: '#appqrPopup',
-        // hoverable  : true,
-        position   : 'bottom center',
-        on: 'click',
-        delay: {
-          show: 300,
-          hide: 800
-        }
-      })
+    //TODO: responsive needed,
+    //problem: semantic need performance issue for set the sidebar inside the #app div.
+    $('.ui.sidebar').sidebar('attach events', '.toc.item')
   }
 }
 </script>
 
 <style lang="scss" scoped >
-#userLogin {
-  margin-bottom: 15px;
-}
+
 .overlay {
   float: right;
   margin: 0em 3em 1em 0em;
@@ -173,47 +102,43 @@ background: linear-gradient(to bottom,  #feffff 80%,#ededed 100%); /* W3C, IE10+
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
 
 }
-/*.introduction {
-  position: absolute;
-  top:250px;
-  left:50%;
-  text-align: center;
-  margin-left: -210px;
-  z-index: 2;
-}*/
+
 .logo{
   padding: 1em 2em;
-  @media only screen and (max-width: 700px) {
 
+  @media only screen and (max-width: 700px) {
     // float: right;
     transform: scale(0.5);
     padding: 0px;
     margin: 0px;
   }
 }
+.user-info {
 
-.ui.secondary {
+}
 
-  &.pointing.menu {
-    border-bottom: none;
+.large.menu, .compact.menu {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+.large.menu {
+  .item {
+    color:#7b7b7b;
+  }
+  .active.item {
+    border-color:#9dca4c;
+  }
+  .toc.item {
+    display: none;
+  }
 
-    .item {
-      color:#7b7b7b;
-    }
-    .active.item {
-      border-color:#9dca4c;
-    }
+  @media only screen and (max-width: 700px) {
+    .item {display: none;}
+
     .toc.item {
-      display: none;
-    }
-
-    @media only screen and (max-width: 700px) {
-      .item {display: none;}
-
-      .toc.item {
-        // float: left;
-        display: block;
-      }
+      // float: left;
+      display: block;
     }
   }
 }
