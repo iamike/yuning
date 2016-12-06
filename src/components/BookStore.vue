@@ -1,7 +1,9 @@
 <template lang="html">
-  <p>
-    book page
-  </p>
+  <div class="ui container">
+    <p>
+      book page
+    </p>
+  </div>
 </template>
 
 <script>

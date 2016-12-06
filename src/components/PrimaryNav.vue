@@ -20,7 +20,7 @@
               <span >{{userInfo.nickname}}</span>
               <i class="dropdown icon"></i>
               <div class="menu">
-                <router-link class="item" :to="{ name: 'userInfoLanding', params: { id: userInfo.id }}" >用户中心</router-link>
+                <router-link class="item" :to="{ name: 'userDashboard', params: { id: userInfo.id }}" >用户中心</router-link>
                 <div class="item" v-on:click="signOut">注销</div>
               </div>
             </div>
@@ -75,6 +75,7 @@ export default {
     //TODO: responsive needed,
     //problem: semantic need performance issue for set the sidebar inside the #app div.
     $('.ui.sidebar').sidebar('attach events', '.toc.item')
+    $('.coupled.modal').modal({allowMultiple: true})
   }
 }
 </script>

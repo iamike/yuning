@@ -23,10 +23,16 @@ const router = new VueRouter({
     {
       path: '/user/:id(\\d+)',
       // path: '/UserInfoLanding/:id(\\d+)',
-      name: 'userInfoLanding',
-      component: resolve => require(['./components/UserInfoLanding.vue'], resolve)
+      name: 'userDashboard',
+      component: resolve => require(['./components/UserDashboard.vue'], resolve)
+
+      // ,
+      // children: [{
+      //     path: 'info',
+      //     component: resolve => require(['./components/UserInfo.vue'], resolve)
+      // }]
     },
-    { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/UserInfoLanding.vue'], resolve)},
+    { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
     { path: '*', redirect: '/' }
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <primary-nav></primary-nav>
-      <router-view class="view"></router-view>
+      <router-view class="mainContent"></router-view>
       <sticky-footer></sticky-footer>
   </div>
 </template>
@@ -29,10 +29,12 @@ export default {
 
 
 <style lang="scss" scoped>
-  #app {
-    padding-top: 82px;
+  #homepage.mainContent {
+    padding-top: 0px;
   }
-
+  .mainContent {
+    padding-top: 108px;
+  }
 </style>
 <style >
 
