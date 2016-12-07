@@ -18,25 +18,38 @@ import '../static/semantic/dist/semantic'
 
 const router = new VueRouter({
   base: __dirname,
+  linkActiveClass: 'active',
   routes: [
-    { path: '/', name: 'home', component: Home },
+    { path: '/home', name: 'home', component: Home },
     {
       path: '/user/:id(\\d+)',
       // path: '/UserInfoLanding/:id(\\d+)',
       name: 'userDashboard',
-      component: resolve => require(['./components/UserDashboard.vue'], resolve)
-
-      // ,
-      // children: [{
-      //     path: 'info',
-      //     component: resolve => require(['./components/UserInfo.vue'], resolve)
-      // }]
+      redirect: '/user/:id(\\d+)/info',
+      component: resolve => require(['./components/UserDashboard.vue'], resolve),
+      children: [{
+          path: 'info',
+          name: 'info',
+          components: {
+            userMain: resolve => require(['./components/UserInfo.vue'], resolve),
+            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
+            userNav: resolve => require(['./components/UserNav.vue'], resolve)
+          }
+      },{
+          path: 'modifyPassword',
+          name: 'modifyPassword',
+          components: {
+            userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
+            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
+            userNav: resolve => require(['./components/UserNav.vue'], resolve)
+          }
+      }]
     },
     { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
-    { path: '*', redirect: '/' }
+    { path: '/', redirect: '/home' },
+    { path: '*', redirect: '/home' }
   ]
 })
-
 
 const localStorage = {
   access_token: {
@@ -46,6 +59,7 @@ const localStorage = {
     type: Object
   }
 }
+
 /* appInstance */
 new Vue({
   localStorage,

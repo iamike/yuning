@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="ui container">
-    <user-nav></user-nav>
+    <router-view name="userNav"></router-view>
     <div class="ui grid">
       <div class="row">
         <div class="four wide column">
-          <user-sidebar></user-sidebar>
+          <router-view name="userSidebar"></router-view>
         </div>
         <div class="twelve wide column">
-          <user-info></user-info>
+          <router-view name="userMain"></router-view>
         </div>
       </div>
     </div>
@@ -15,17 +15,8 @@
 </template>
 
 <script>
-import UserNav from './UserNav'
-import UserInfo from './UserInfo'
-import UserSidebar from './UserSidebar'
-
 export default {
   name: 'user-dashboard',
-  components: {
-    UserNav,
-    UserInfo,
-    UserSidebar
-  },
   beforeRouteEnter (route, from, next) {
     let userInfo = window.localStorage.user_info
     if (userInfo) {
