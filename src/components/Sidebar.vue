@@ -8,7 +8,6 @@
     <a class="item">Signup</a>
   </div>
 </template>
-
 <script>
 
 

@@ -10,9 +10,9 @@
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
 
         <div class="right item" id="userLogin" >
-          <button class="ui tiny olive button" v-on:click="toggleUserPopup" v-show="!userLoginStatus">
+          <button class="ui tiny olive button" v-on:click="toggleUserLoginPopup" v-show="!userLoginStatus">
             <i class="icon user"></i>
-            登录
+            登录 | 注册
           </button>
           <div class="ui compact menu" v-if="userInfo!=undefined">
             <div class="ui simple dropdown item">
@@ -69,13 +69,12 @@ export default {
       this.$router.push('/')
 
     },
-    ...mapActions(['toggleUserPopup'])
+    ...mapActions(['toggleUserLoginPopup'])
   },
   mounted: function() {
     //TODO: responsive needed,
     //problem: semantic need performance issue for set the sidebar inside the #app div.
     $('.ui.sidebar').sidebar('attach events', '.toc.item')
-    $('.coupled.modal').modal({allowMultiple: true})
   }
 }
 </script>

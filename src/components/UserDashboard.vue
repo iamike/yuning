@@ -30,7 +30,7 @@ export default {
     let userInfo = window.localStorage.user_info
     if (userInfo) {
       next(vm => {
-        console.log(vm)
+        // console.log(vm)
       })
     } else {
       next('/')

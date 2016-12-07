@@ -22,7 +22,7 @@
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="errors!=''" v-show="userAuthInfo.username != '' && userAuthInfo.username != ''" class="ui visible error message">
+    <div v-if="errors!=''" class="ui visible error message">
       <ul class="list">
         <li>{{ errors }}</li>
       </ul>
@@ -38,15 +38,17 @@ import VueLocalStorage from 'vue-localstorage'
 Vue.use(VueResource)
 Vue.use(VueLocalStorage)
 
-import { mapState } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'user-login-form',
+  computed: {
+    ...mapState(['czbApiDomain'])
+  },
   methods: {
     userAtLogin () {
       let userAuthInfoObj = JSON.parse(JSON.stringify(this.userAuthInfo))
-      this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/login', userAuthInfoObj)
+      this.$http.post(this.czbApiDomain+'/czb-server/czb/user/login', userAuthInfoObj)
       .then((res) => {
           if (res.status == 200 && res.body.isSuccess == true ) {
             this.$localStorage.set('access_token', res.body.result.access_token)
@@ -63,7 +65,6 @@ export default {
         this.$localStorage.remove('access_token')
         this.$localStorage.remove('user_info')
         this.$store.dispatch('logOut')
-        return 'ops....'
       })
     },
     ...mapActions(['toggleUserPopup','logIn','logOut'])
@@ -71,10 +72,7 @@ export default {
   mounted () {
 
     let vm = this
-    let successCallback = function(vm) {
-      // console.log(event, fields, vm)
-      return vm
-    }
+
     $('#userLoginForm').form({
       fields: {
         username: {

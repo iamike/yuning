@@ -1,16 +1,27 @@
 <template lang="html">
-
+  <div class="ui modal small user-register coupled">
+    <i class="close icon"></i>
+    <div class="header">
+      用户注册
+    </div>
+    <div class="ui segment padded basic">
+      <div class="ui one column middle aligned very relaxed stackable grid">
+        <div class="column">
+          <user-register-form></user-register-form>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import UserRegisterFrom from './UserRegisterFrom'
+import UserRegisterForm from './UserRegisterForm'
 
 export default {
   name: 'user-register-modal',
-  mounted () {
-
+  components: {
+    UserRegisterForm
   }
-
 }
 </script>
 

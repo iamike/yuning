@@ -1,19 +1,29 @@
 const actions = {
-  toggleUserPopup ({ commit }) {
-    commit('toggleUserPopup')
+  toggleUserLoginPopup ({ commit }) {
+    commit('toggleUserLoginPopup')
+  },
+  toggleUserRegisterPopup ({ commit }) {
+    commit('toggleUserRegisterPopup')
   },
   logIn ({ commit }) {
     commit('userlogIn')
-    commit('toggleUserPopup')
-
+    commit('toggleUserLoginPopup')
   },
   logOut ({ commit }){
     commit('userlogOut')
+  },
+  register ({ commit }){
+    console.log('user is at registing')
   }
 }
 const mutations = {
-  toggleUserPopup () {
-    $('.ui.user.modal').modal('toggle')
+  toggleUserLoginPopup () {
+    $('.coupled.modal').modal({allowMultiple: true})
+    $('.ui.user-login.modal').modal('toggle')
+  },
+  toggleUserRegisterPopup () {
+    $('.ui.user-login.modal').modal('hide')
+    $('.ui.user-register.modal').modal('toggle')
   },
   userlogIn (state) {
     state.userLoginStatus = true
