@@ -24,29 +24,67 @@ const router = new VueRouter({
     {
       path: '/user/:id',
       name: 'userDashboard',
-      redirect: '/user/:id/info',
+      redirect: '/user/:id/profile',
       component: resolve => require(['./components/UserDashboard.vue'], resolve),
-      children: [{
+      children:[{
+        path: 'profile',
+        name: 'profile',
+        redirect: '/user/:id/profile/info',
+        components: {
+          userNav: resolve => require(['./components/UserNav.vue'], resolve),
+          userSection: resolve => require(['./components/UserDashboardProfile.vue'], resolve)
+        },
+        children:[{
           path: 'info',
           name: 'info',
           components: {
             userMain: resolve => require(['./components/UserInfo.vue'], resolve),
             userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
-            userNav: resolve => require(['./components/UserNav.vue'], resolve)
           }
-      },{
+        },{
           path: 'modifyPassword',
           name: 'modifyPassword',
           components: {
             userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
             userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
-            userNav: resolve => require(['./components/UserNav.vue'], resolve)
           }
+        }]
+      },{
+        path: 'account',
+        name: 'account',
+        components: {
+          userNav: resolve => require(['./components/UserNav.vue'], resolve),
+          userSection: resolve => require(['./components/UserDashboardAccount.vue'], resolve)
+        }
+      },{
+        path: 'order',
+        name: 'order',
+        components: {
+          userNav: resolve => require(['./components/UserNav.vue'], resolve),
+          userSection: resolve => require(['./components/UserDashboardOrder.vue'], resolve)
+        }
       }]
+
     },
     { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
-    { path: '/', redirect: '/home' },
-    { path: '*', redirect: '/home' }
+    // { path: '/', redirect: '/home' },
+    // { path: '*', redirect: '/home' }
+
+    // children: [{
+    //     path: 'info',
+    //     name: 'info',
+    //     components: {
+    //       userMain: resolve => require(['./components/UserInfo.vue'], resolve),
+    //       userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
+    //     }
+    // },{
+    //     path: 'modifyPassword',
+    //     name: 'modifyPassword',
+    //     components: {
+    //       userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
+    //       userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
+    //     }
+    // }]
   ]
 })
 

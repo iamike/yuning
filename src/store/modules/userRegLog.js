@@ -23,7 +23,7 @@ const mutations = {
   },
   toggleUserRegisterPopup () {
     $('.ui.user-login.modal').modal('hide')
-    $('.ui.user-register.modal').modal('toggle')
+    $('.ui.user-register.modal').modal({transition:'vertical flip',mobileTransition : 'horizontal flip'}).modal('toggle')
   },
   userlogIn (state) {
     state.userLoginStatus = true

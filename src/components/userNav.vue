@@ -1,11 +1,9 @@
 <template lang="html">
   <div class="ui pointing menu">
-    <a class="item active">
-      个人资料
-    </a>
-    <a class="item">
-      帐户资料
-    </a>
+    <router-link class="item" :to="{ name: 'profile' }">个人资料</router-link>
+    <router-link class="item" :to="{ name: 'account' }">帐户资料</router-link>
+    <router-link class="item" :to="{ name: 'order' }">订单资料</router-link>
+
     <!-- <div class="right menu">
       <div class="item">
         <div class="ui transparent icon input">
