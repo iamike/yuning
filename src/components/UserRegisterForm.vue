@@ -8,17 +8,23 @@
       <label>验证码</label>
       <div class="ui action input">
         <input type="tel" name="verifyCode" placeholder="验证码" v-model="userRegisterInfo.verify_code">
-        <button class="ui teal submit right labeled icon button " data-submitter='verifyMode'>
-          <i class="send icon"></i>
+        <button class="ui teal submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ verifyRemain < 60 ? 'disabled':'']">
           发送验证码
         </button>
       </div>
+    </div>
+    <div class="ui success visible message" v-show="verifyRemain < 60">
+      <i class="close icon"></i>
+      <div class="header">
+        验证码已经发送成功.
+      </div>
+      <p>如果您没有收到， 请在{{verifyRemain}}秒后重试...</p>
     </div>
     <div class="field">
       <label>密码</label>
       <input type="password" name="password" v-model="userRegisterInfo.passWord" >
     </div>
-    <div class="ui submit olive button" data-submitter='registerMode'>注册</div>
+    <div class="ui submit olive button" >注册</div>
     <!-- errors from frontend -->
     <div class="ui error message">
       <ul>
@@ -42,27 +48,30 @@ export default {
   data () {
     return {
       userRegisterInfo: {
-        mobile: '18930706272',
-        passWord: 'password',
-        verify_code: '3576',
+        mobile: '',
+        passWord: '',
+        verify_code: '',
         register_from: 'web'
       },
-      errors:undefined
+      errors: undefined,
+      verifyRemain: 60
     }
   },
   computed: {
     ...mapState(['czbApiDomain'])
   },
   methods: {
-    sendVerifyCode () {
+    sendVerifyCode ( callback ) {
       let userVerifyInfoObj = JSON.parse(JSON.stringify({ mobile: this.userRegisterInfo.mobile }))
-      console.log(userVerifyInfoObj)
-      this.$http.post(this.czbApiDomain+'/czb/user/sendMsg', userVerifyInfoObj )
+
+      this.$http.post(this.czbApiDomain+'/czb-server/czb/user/sendMsg', userVerifyInfoObj )
       .then((res) => {
           if (res.status == 200 && res.body.isSuccess == true ) {
-            console.log('testSendVerifyCode')
+            // console.log('testSendVerifyCode')
             // this.$store.dispatch('register')
             // this.$router.push('/user/' + res.body.result.id)
+            callback
+
           } else {
             //if user login info has error, print the error message on the form
             // console.log('test')
@@ -85,7 +94,7 @@ export default {
             // this.$router.push('/user/' + res.body.result.id)
           } else {
             //if user login info has error, print the error message on the form
-            console.log('test')
+            // console.log('test')
             this.errors = res.body.errorMsg
           }
       }, (err) => {
@@ -102,50 +111,82 @@ export default {
 
     let vm = this
     let formTrigger = $('#userRegisterForm .submit')
-    let formValidateMode = undefined
-    //check verifyCode field
-    formTrigger.on('click',function(){
-      formValidateMode = $(this).attr('data-submitter')
-    })
-    //check all fields
-    $('#userRegisterForm').form({
-      fields: {
-        mobile: {
-          identifier: 'mobile',
-          rules: [
-            {
-              type: 'empty',
-              prompt: '请输入手机号码'
-            }
-          ]
-        },
-        password: {
-          identifier: 'password',
-          rules: [
-            {
-              type: 'empty',
-              prompt: '请输入密码'
-            }
-          ]
-        },
-        verifyCode: {
-          identifier: 'verifyCode',
-          rules: [
-            {
-              type: 'empty',
-              prompt: '请输入验证码'
-            }
-          ]
-        }
+    let verifyCodeMode = {
+      mobile: {
+        identifier: 'mobile',
+        rules: [
+          {
+            type: 'empty',
+            prompt: '请输入手机号码'
+          }
+        ]
+      }
+    }
+    let verifyAllMode = {
+      mobile: {
+        identifier: 'mobile',
+        rules: [
+          {
+            type: 'empty',
+            prompt: '请输入手机号码'
+          }
+        ]
       },
-      onSuccess: function(event, fields){
-        if (formValidateMode == 'verifyMode') {
-          vm.sendVerifyCode()
-        } else {
-          vm.sendRegisterInfo()
+      password: {
+        identifier: 'password',
+        rules: [
+          {
+            type: 'empty',
+            prompt: '请输入密码'
+          }
+        ]
+      },
+      verifyCode: {
+        identifier: 'verifyCode',
+        rules: [
+          {
+            type: 'empty',
+            prompt: '请输入验证码'
+          }
+        ]
+      }
+    }
+    let submitAction = function(fieldsObject, successAction, additionalAction) {
+
+      $('#userRegisterForm').form({
+        fields: fieldsObject,
+        onSuccess: function(event){
+          successAction()
+          additionalAction && additionalAction()
         }
+      })
+    }
+    let timer = function(){
+      let timerInstance = setInterval(function(){
+
+        if (vm.verifyRemain < 1){
+          clearInterval(timerInstance)
+          vm.verifyRemain = 60
+          return
+        }
+        vm.verifyRemain -= 1
+
+      },1000)
+    }
+
+    formTrigger.on('click',function(){
+      $('#userRegisterForm').form('destory')
+
+      if ($(this).attr('data-mode') == 'verifyMode' && vm.verifyRemain > 59 ) {
+        // console.log('verifyMode')
+        submitAction(verifyCodeMode, vm.sendVerifyCode, timer )
+
+      } else {
+        // console.log('submitMode')
+        submitAction(verifyAllMode, vm.sendRegisterInfo)
       }
     })
+
   }
 }
 </script>

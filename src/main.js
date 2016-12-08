@@ -22,10 +22,9 @@ const router = new VueRouter({
   routes: [
     { path: '/home', name: 'home', component: Home },
     {
-      path: '/user/:id(\\d+)',
-      // path: '/UserInfoLanding/:id(\\d+)',
+      path: '/user/:id',
       name: 'userDashboard',
-      redirect: '/user/:id(\\d+)/info',
+      redirect: '/user/:id/info',
       component: resolve => require(['./components/UserDashboard.vue'], resolve),
       children: [{
           path: 'info',
