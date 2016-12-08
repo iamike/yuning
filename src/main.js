@@ -48,6 +48,13 @@ const router = new VueRouter({
             userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
             userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
           }
+        },{
+          path: 'babyInfo',
+          name: 'babyInfo',
+          components: {
+            userMain: resolve => require(['./components/UserBabyInfo.vue'], resolve),
+            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
+          }
         }]
       },{
         path: 'account',
@@ -67,24 +74,8 @@ const router = new VueRouter({
 
     },
     { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
-    // { path: '/', redirect: '/home' },
-    // { path: '*', redirect: '/home' }
-
-    // children: [{
-    //     path: 'info',
-    //     name: 'info',
-    //     components: {
-    //       userMain: resolve => require(['./components/UserInfo.vue'], resolve),
-    //       userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
-    //     }
-    // },{
-    //     path: 'modifyPassword',
-    //     name: 'modifyPassword',
-    //     components: {
-    //       userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
-    //       userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
-    //     }
-    // }]
+    { path: '/', redirect: '/home' },
+    { path: '*', redirect: '/home' }
   ]
 })
 

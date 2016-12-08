@@ -1,10 +1,8 @@
 <template lang="html">
-  <div class="ui secondary vertical pointing menu">
-    <router-link :to="{name:'info'}" class="item">个人资料</router-link>
+  <div class="ui vertical fluid tabular menu">
+    <router-link :to="{name:'info'}" class="item">资料修改</router-link>
     <router-link :to="{name:'modifyPassword'}" class="item">修改密码</router-link>
-    <a class="item">
-      宝宝档案修改
-    </a>
+    <router-link :to="{name:'babyInfo'}" class="item">宝宝档案修改</router-link>
 </div>
 </template>
 

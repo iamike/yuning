@@ -1,5 +1,7 @@
 <template lang="html">
-
+<div class="">
+  hello baby
+</div>
 </template>
 
 <script>
