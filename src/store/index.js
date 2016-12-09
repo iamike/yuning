@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import state from './state'
 import * as actions from './actions'
 import * as getters from './getters'
 import userRegLog from './modules/userRegLog'
@@ -8,10 +9,9 @@ import userRegLog from './modules/userRegLog'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    czbApiDomain: 'http://192.168.16.178:8099',
-    otherApiDomain: ''
-  },
+  state,
+  actions,
+  getters,
   modules: {
     userRegLog
   }

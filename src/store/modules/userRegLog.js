@@ -1,3 +1,10 @@
+import user from '../../api/user'
+import * as types from '../mutation-types'
+
+const state = {
+  USER_SIGN_IN_INFO: undefined,
+  USER_SIGN_IN_ERRORS: undefined
+}
 const actions = {
   toggleUserLoginPopup ({ commit }) {
     commit('toggleUserLoginPopup')
@@ -5,15 +12,15 @@ const actions = {
   toggleUserRegisterPopup ({ commit }) {
     commit('toggleUserRegisterPopup')
   },
-  logIn ({ commit }) {
-    commit('userlogIn')
-    commit('toggleUserLoginPopup')
+  [types.USER_SIGN_IN] ({commit}, data ) {
+    console.log('user sign in call from userRegLog',data)
+    user.signIn({commit}, data)
   },
-  logOut ({ commit }){
-    commit('userlogOut')
-  },
-  register ({ commit }){
-    console.log('user is at registing')
+  [types.MODIFY_USER_INFO_START] ({commit}, newData) {
+    if ( newData.id ) {
+      commit(types.MODIFY_USER_INFO_PROCESSING)
+      user.modifyInfo({commit}, newData)
+    }
   }
 }
 const mutations = {
@@ -25,22 +32,30 @@ const mutations = {
     $('.ui.user-login.modal').modal('hide')
     $('.ui.user-register.modal').modal({transition:'vertical flip',mobileTransition : 'horizontal flip'}).modal('toggle')
   },
-  userlogIn (state) {
-    state.userLoginStatus = true
-    state.userInfo = JSON.parse(window.localStorage.user_info)
+  // SIGN IN/OUT
+  [types.USER_SIGN_IN] ({commit}) {
+    console.log('user sign in mutation')
   },
-  userlogOut (state) {
-    state.userLoginStatus = false
-    state.userInfo = undefined
+  [types.USER_SIGN_IN_SUCCESS] (state, payload) {
+    state.USER_SIGN_IN_INFO = payload
+  },
+  [types.USER_SIGN_IN_FAILURE] (state, payload) {
+    state.USER_SIGN_IN_INFO = undefined
+    state.USER_SIGN_IN_ERRORS = payload
+  },
+  [types.MODIFY_USER_INFO_PROCESSING] ({commit}) {
+    // console.log('user is at updating infomation')
+  },
+  [types.MODIFY_USER_INFO_SUCCESS] ({commit},payload) {
+    console.log('successful, data updated',payload)
+  },
+  [types.MODIFY_USER_INFO_FAILURE] ({commit},payload) {
+    console.log('failure, data has not updated',payload)
   }
 }
-const state = {
-  userLoginStatus: false,
-  userInfo: undefined
-}
 const getters = {
-  userLoginStatus: state => state.userLoginStatus,
-  userInfo: state => state.userInfo
+  [types.USER_SIGN_IN_INFO]: state => state[types.USER_SIGN_IN_INFO],
+  [types.USER_SIGN_IN_ERRORS]: state => state[types.USER_SIGN_IN_ERRORS]
 }
 export default {
   state,

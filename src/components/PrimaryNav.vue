@@ -10,14 +10,14 @@
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
 
         <div class="right item" id="userLogin" >
-          <button class="ui tiny olive button" v-on:click="toggleUserLoginPopup" v-show="!userLoginStatus">
+          <button class="ui tiny olive button" v-on:click="toggleUserLoginPopup" v-show="!USER_SIGN_IN_INFO">
             <i class="icon user"></i>
             登录 | 注册
           </button>
           <div class="ui compact menu" v-if="userInfo!=undefined">
             <div class="ui simple dropdown item">
               <img class="ui avatar image" v-bind:src="userInfo.avatar">
-              <span >{{userInfo.nickname}}</span>
+              <span>{{userInfo.nickname}}</span>
               <i class="dropdown icon"></i>
               <div class="menu">
                 <router-link class="item" :to="{ name: 'userDashboard', params: { id: userInfo.id }}" >用户中心</router-link>
@@ -39,8 +39,7 @@ import CoursePopup from './CoursePopup'
 import AppDownloadPopup from './AppDownloadPopup'
 import UserLoginModal from './UserLoginModal'
 
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'primary-nav',
@@ -49,26 +48,23 @@ export default {
     CoursePopup,
     AppDownloadPopup
   },
-
-  beforeCreate: function () {
-
-  },
   created: function(){
     // when user fisrt landing page
     if (this.$localStorage.get('access_token')!= null) {
       this.$store.dispatch('logIn')
-      // this.userInfo = this.$localStorage.get('user_info')
+      // this.currentUserInfo = this.$localStorage.get('user_info')
+      // console.log(this.$store.state.userRegLog.userInfo.nickname)
     }
   },
-  computed: mapGetters(['userLoginStatus','userInfo']),
+  computed: mapGetters(['USER_SIGN_IN_INFO']),
   methods: {
-    signOut: function(){
-      this.$localStorage.remove('access_token')
-      this.$localStorage.remove('user_info')
-      this.$store.dispatch('logOut')
-      this.$router.push('/')
-
-    },
+    // signOut: function(){
+    //   this.$localStorage.remove('access_token')
+    //   this.$localStorage.remove('user_info')
+    //   this.$store.dispatch('logOut')
+    //   this.$router.push('/')
+    //
+    // },
     ...mapActions(['toggleUserLoginPopup'])
   },
   mounted: function() {
@@ -80,7 +76,6 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-
 .overlay {
   float: right;
   margin: 0em 3em 1em 0em;

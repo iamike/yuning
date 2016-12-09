@@ -4,7 +4,7 @@
       <div class="ui piled segment raised ">
           <a class="ui teal ribbon label"><i class="settings icon"></i> 个人资料</a>
           <img :src="userInfo.avatar" class="ui small circular bordered image right floated">
-          <h4 class="ui header"><i class="user icon"></i> {{ userInfo.nickname }}</h4>
+          <h4 class="ui header"><i class="user icon"></i> {{ userInfo.nickname }} <input type="text" name="name" v-model="userInfo.nickname"></h4>
           <div class="ui divider"></div>
           <p>
             <i class="icon map"></i> {{ userInfo.region }}
@@ -22,17 +22,30 @@
           <template v-if="userInfo.gender == 1"><i class="icon man"></i> 爸爸</template>
           <template v-else><i class="icon"></i> 妈妈</template>
         </p>
+        <div class="ui action">
+          <div class="ui button" @click="modifyUserInfo(userInfo)">
+            修改信息
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-info',
-  computed: mapGetters(['userInfo'])
+  data () {
+    return {
+      userInfo: this.$store.state.userRegLog.userInfo
+    }
+  },
+  methods: {
+    modifyUserInfo (userInfo) {
+      this.$store.dispatch('MODIFY_USER_INFO_START', userInfo)
+    }
+  }
 }
 </script>
 

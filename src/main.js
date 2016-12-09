@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueLocalStorage from 'vue-localstorage'
+import VueResource from 'vue-resource'
 
 Vue.use(VueRouter)
 Vue.use(VueLocalStorage)
+Vue.use(VueResource)
 
 //import components
 import App from './App'
