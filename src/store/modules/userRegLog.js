@@ -2,8 +2,8 @@ import user from '../../api/user'
 import * as types from '../mutation-types'
 
 const state = {
-  USER_SIGN_IN_INFO: undefined,
-  USER_SIGN_IN_ERRORS: undefined
+  [types.USER_SIGN_IN_INFO]: undefined,
+  [types.USER_SIGN_IN_ERRORS]: undefined
 }
 const actions = {
   toggleUserLoginPopup ({ commit }) {
@@ -13,7 +13,6 @@ const actions = {
     commit('toggleUserRegisterPopup')
   },
   [types.USER_SIGN_IN] ({commit}, data ) {
-    console.log('user sign in call from userRegLog',data)
     user.signIn({commit}, data)
   },
   [types.MODIFY_USER_INFO_START] ({commit}, newData) {
@@ -33,17 +32,15 @@ const mutations = {
     $('.ui.user-register.modal').modal({transition:'vertical flip',mobileTransition : 'horizontal flip'}).modal('toggle')
   },
   // SIGN IN/OUT
-  [types.USER_SIGN_IN] ({commit}) {
-    console.log('user sign in mutation')
-  },
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {
-    state.USER_SIGN_IN_INFO = payload
+    state[types.USER_SIGN_IN_INFO] = payload
   },
   [types.USER_SIGN_IN_FAILURE] (state, payload) {
-    state.USER_SIGN_IN_INFO = undefined
-    state.USER_SIGN_IN_ERRORS = payload
+    state[types.USER_SIGN_IN_INFO] = undefined
+    state[types.USER_SIGN_IN_ERRORS] = payload
   },
   [types.MODIFY_USER_INFO_PROCESSING] ({commit}) {
+    // MAYBE PUT LOADING? AT HERE?
     // console.log('user is at updating infomation')
   },
   [types.MODIFY_USER_INFO_SUCCESS] ({commit},payload) {

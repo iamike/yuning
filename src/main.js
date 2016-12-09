@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueLocalStorage from 'vue-localstorage'
 import VueResource from 'vue-resource'
 
 Vue.use(VueRouter)
-Vue.use(VueLocalStorage)
 Vue.use(VueResource)
 
 //import components
@@ -81,18 +79,8 @@ const router = new VueRouter({
   ]
 })
 
-const localStorage = {
-  access_token: {
-    type: String
-  },
-  user_info: {
-    type: Object
-  }
-}
-
 /* appInstance */
 new Vue({
-  localStorage,
   router,
   store,
   el: '#app',

@@ -4,7 +4,6 @@ import * as types from '../store/mutation-types'
 
 export default {
   signIn ({commit}, loginData ) {
-
     // success get info from server
     let success = (res) => {
       if (res.body.isSuccess == true) {
@@ -21,6 +20,8 @@ export default {
     // data matched
     let logCorrect = (payload) => {
       commit(types.USER_SIGN_IN_SUCCESS, payload)
+      // console.log(Vue.localStorage)
+      // Vue.localStorage.set(types.USER_SIGN_IN_INFO, payload)
     }
 
     // data has errors
@@ -35,10 +36,10 @@ export default {
 
   },
   signOut ({commit}, userData ){
-    this.$localStorage.remove('access_token')
-    this.$localStorage.remove('user_info')
-    this.$store.dispatch('logOut')
-    this.$router.push('/')
+    // this.$localStorage.remove('access_token')
+    // this.$localStorage.remove('user_info')
+    // this.$store.dispatch('logOut')
+    // this.$router.push('/')
   },
   modifyInfo ( {commit}, updateData) {
     const json = JSON.parse(JSON.stringify(updateData))
@@ -50,8 +51,8 @@ export default {
       nickname: updateData.nickname
     }
     const success = (res) => {
-      console.log(commit)
-      commit(types.MODIFY_USER_INFO_SUCCESS,res.body)
+      // console.log(commit)
+      commit(types.MODIFY_USER_INFO_SUCCESS, res.body)
     }
     const failure = err => {
       commit(types.MODIFY_USER_INFO_FAILURE)

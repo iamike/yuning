@@ -50,21 +50,14 @@ export default {
   },
   created: function(){
     // when user fisrt landing page
-    if (this.$localStorage.get('access_token')!= null) {
-      this.$store.dispatch('logIn')
+    // if (this.$localStorage.get('access_token')!= null) {
+    //   this.$store.dispatch('logIn')
       // this.currentUserInfo = this.$localStorage.get('user_info')
       // console.log(this.$store.state.userRegLog.userInfo.nickname)
-    }
+    // }
   },
   computed: mapGetters(['USER_SIGN_IN_INFO']),
   methods: {
-    // signOut: function(){
-    //   this.$localStorage.remove('access_token')
-    //   this.$localStorage.remove('user_info')
-    //   this.$store.dispatch('logOut')
-    //   this.$router.push('/')
-    //
-    // },
     ...mapActions(['toggleUserLoginPopup'])
   },
   mounted: function() {
