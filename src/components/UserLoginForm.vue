@@ -52,11 +52,12 @@ export default {
   },
   methods: {
     userSignIn () {
-      this.$store.dispatch('USER_SIGN_IN', this.userInfo)
-      .then(res => {
+      this.$store.dispatch('USER_SIGN_IN_ACTION', this.userInfo)
+      .then((res) => {
         // success
         console.log('success from components')
-        this.$router.push('/bookstore')
+        this.$router.push('/user/' + this.$store.state.userRegLog.USER_SIGN_IN_INFO.id )
+
       })
       .catch((err) => {
         // failure

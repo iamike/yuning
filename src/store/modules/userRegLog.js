@@ -1,4 +1,5 @@
 import userApi from '../../api/user'
+import commonApi from '../../api/common'
 import * as types from '../mutation-types'
 
 const state = {
@@ -15,42 +16,24 @@ const actions = {
   [types.USER_CHECK_IN] ({commit}, data) {
     userApi.checkIn({commit}, data)
   },
-  [types.USER_SIGN_IN] ({commit}, data )  {
-
+  [types.USER_SIGN_IN_ACTION] ({commit}, data )  {
     let userSignInApiResult = new Promise((resolve, reject) => {
       userApi.signIn({commit}, data, resolve, reject)
     })
     return userSignInApiResult
-    // console.log(userSignInApiResult)
-
-    // return new Promise((resolve, reject) => {
-
-      // resolve()
-      // console.log(resolve)
-
-      // console.log(userApi.signIn({commit}, data))
-
-      // reject()
-      //  if (userApi.signIn({commit}, data)) {
-      //   //  commit('updateTitle', data)
-      //   //  userApi.signIn({commit}, data)
-      //    resolve()
-      //  } else {
-      //    reject()
-      //  }
-    // })
-
-    // userApi.signIn({commit}, data)
   },
   [types.USER_SIGN_OUT] ({commit}) {
-    userApi.signOut({commit})
+    let userSignOutApiResult = new Promise((resolve, reject) => {
+      userApi.signOut({commit},resolve, reject)
+    })
+    return userSignOutApiResult
   },
   [types.MODIFY_USER_INFO_START] ({commit}, newData) {
     if ( newData.id ) {
       commit(types.MODIFY_USER_INFO_PROCESSING)
       userApi.modifyInfo({commit}, newData)
     }
-  }
+  },
 }
 const mutations = {
   [types.TOGGLE_USER_LOGIN_POPUP] () {
@@ -77,7 +60,8 @@ const mutations = {
   },
   // SIGN OUT
   [types.USER_SIGN_OUT] (state) {
-    state[types.USER_SIGN_OUT] = undefined
+    state[types.USER_SIGN_IN_INFO] = undefined
+    state[types.USER_SIGN_IN_ERRORS] = undefined
   },
   [types.MODIFY_USER_INFO_PROCESSING] ({commit}) {
     // MAYBE PUT LOADING? AT HERE?

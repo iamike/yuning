@@ -7,7 +7,9 @@
     <div class="ui segment padded basic">
       <div class="ui one column middle aligned very relaxed stackable grid">
         <div class="column">
-          <user-register-form></user-register-form>
+          <user-register-form>
+              <verify-mobile v-bind:request-interval="60" ></verify-mobile>
+          </user-register-form>
         </div>
       </div>
     </div>
@@ -16,11 +18,13 @@
 
 <script>
 import UserRegisterForm from './UserRegisterForm'
+import VerifyMobile from './VerifyMobile'
 
 export default {
   name: 'user-register-modal',
   components: {
-    UserRegisterForm
+    UserRegisterForm,
+    VerifyMobile
   }
 }
 </script>

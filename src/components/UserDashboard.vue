@@ -10,16 +10,16 @@
 <script>
 export default {
   name: 'user-dashboard',
-  // beforeRouteEnter (route, from, next) {
-  //   let userInfo = window.localStorage.user_info
-  //   if (userInfo) {
-  //     next(vm => {
-  //       // console.log(vm)
-  //     })
-  //   } else {
-  //     next('/')
-  //   }
-  // }
+  beforeRouteEnter (route, from, next) {
+    let userInfo = window.localStorage.USER_SIGN_IN_INFO
+    if (userInfo) {
+      next(vm => {
+        // console.log(vm)
+      })
+    } else {
+      next('/')
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 export const API_ROOT = 'http://192.168.16.178:8099'
 export const API_PATH_USER_MODIFY_INFO = '/czb-server/czb/user/userInfoModify'
 export const API_PATH_USER_LOGIN = '/czb-server/czb/user/login'
-export const API_PATH_USER_GET_VERIFY_CODE = ''
+export const API_PATH_USER_GET_VERIFY_CODE = '/czb-server/czb/user/sendMsg'
 export const API_PATH_USER_CHECK_VERIFY_CODE = ''

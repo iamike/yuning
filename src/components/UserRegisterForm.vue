@@ -4,22 +4,7 @@
       <label>手机号</label>
       <input type="tel" name="mobile" placeholder="手机号" v-model="userRegisterInfo.mobile">
     </div>
-    <div class="field">
-      <label>验证码</label>
-      <div class="ui action input">
-        <input type="tel" name="verifyCode" placeholder="验证码" v-model="userRegisterInfo.verify_code">
-        <button class="ui teal submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ verifyRemain < 60 ? 'disabled':'']">
-          发送验证码
-        </button>
-      </div>
-    </div>
-    <div class="ui success visible message" v-show="verifyRemain < 60">
-      <i class="close icon"></i>
-      <div class="header">
-        验证码已经发送成功.
-      </div>
-      <p>如果您没有收到， 请在{{verifyRemain}}秒后重试...</p>
-    </div>
+    <slot></slot>
     <div class="field">
       <label>密码</label>
       <input type="password" name="password" v-model="userRegisterInfo.passWord" >
@@ -57,14 +42,12 @@ export default {
       verifyRemain: 60
     }
   },
-  computed: {
-    ...mapState(['czbApiDomain'])
-  },
   methods: {
     sendVerifyCode ( callback ) {
+
       let userVerifyInfoObj = JSON.parse(JSON.stringify({ mobile: this.userRegisterInfo.mobile }))
 
-      this.$http.post(this.czbApiDomain+'/czb-server/czb/user/sendMsg', userVerifyInfoObj )
+      this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/sendMsg', userVerifyInfoObj )
       .then((res) => {
           if (res.status == 200 && res.body.isSuccess == true ) {
             // console.log('testSendVerifyCode')
@@ -87,7 +70,7 @@ export default {
     },
     sendRegisterInfo () {
       let userRegisterInfoObj = JSON.parse(JSON.stringify(this.userRegisterInfo))
-      this.$http.post(this.czbApiDomain+'/czb-server/czb/user/userRegist', this.userRegisterInfo)
+      this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/userRegist', this.userRegisterInfo )
       .then((res) => {
           if (res.status == 200 && res.body.isSuccess == true ) {
             this.$store.dispatch('register')
@@ -105,7 +88,7 @@ export default {
         // return 'ops....'
       })
     },
-    ...mapActions(['register'])
+    ...mapActions(['register','SEND_VERIFY_CODE'])
   },
   mounted () {
 
@@ -179,7 +162,8 @@ export default {
 
       if ($(this).attr('data-mode') == 'verifyMode' && vm.verifyRemain > 59 ) {
         // console.log('verifyMode')
-        submitAction(verifyCodeMode, vm.sendVerifyCode, timer )
+        // submitAction(verifyCodeMode, vm.sendVerifyCode, timer )
+        vm.$store.dispatch('SEND_VERIFY_CODE', { mobile: '18930706272' })
 
       } else {
         // console.log('submitMode')

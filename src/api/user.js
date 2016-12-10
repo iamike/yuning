@@ -19,6 +19,7 @@ export default {
         logError(res.body.errorMsg)
       }
     }
+
     // connection problem?
     let failure = (err) => {
       commit(types.USER_SIGN_IN_FAILURE, '网络连接有些小问题...')
@@ -29,22 +30,13 @@ export default {
       commit(types.USER_SIGN_IN_SUCCESS, payload)
       commit(types.TOGGLE_USER_LOGIN_POPUP)
       localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(payload));
-      // console.log('job finished from API')
-      // return 'success from api'
-      // setTimeout(function(){
-        resolve()
-      // },2000)
-
+      resolve()
     }
 
     // data has errors
     let logError = (payload) => {
       commit(types.USER_SIGN_IN_FAILURE, payload)
-      // console.log('job finished from API')
-      // return 'failure from api'
-      // setTimeout(function(){
       reject()
-      // },2000)
     }
 
     Vue.http
@@ -52,13 +44,14 @@ export default {
     .then(success, failure)
 
   },
-  signOut ({commit}){
+  signOut ({commit},resolve, reject){
     localStorage.removeItem(types.USER_SIGN_IN_INFO)
     commit(types.USER_SIGN_OUT)
+    resolve()
   },
   modifyInfo ( {commit}, {id, gender, region, email, nickname}) {
     const json = JSON.parse(JSON.stringify(updateData))
-    const newJson = {
+    const data = {
       user_id: id,
       gender,
       region,
@@ -72,6 +65,6 @@ export default {
     const failure = err => {
       commit(types.MODIFY_USER_INFO_FAILURE)
     }
-    Vue.http.post(api.API_ROOT + api.API_PATH_USER_MODIFY_INFO, newJson).then(success, failure)
+    Vue.http.post(api.API_ROOT + api.API_PATH_USER_MODIFY_INFO, data).then(success, failure)
   }
 }
