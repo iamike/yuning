@@ -10,21 +10,11 @@
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
 
         <div class="right item" id="userLogin" >
-          <button class="ui tiny olive button" v-on:click="toggleUserLoginPopup" v-show="!USER_SIGN_IN_INFO">
+          <button class="ui tiny olive button" v-on:click="TOGGLE_USER_LOGIN_POPUP" v-show="!userSignInInfo">
             <i class="icon user"></i>
             登录 | 注册
           </button>
-          <div class="ui compact menu" v-if="userInfo!=undefined">
-            <div class="ui simple dropdown item">
-              <img class="ui avatar image" v-bind:src="userInfo.avatar">
-              <span>{{userInfo.nickname}}</span>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <router-link class="item" :to="{ name: 'userDashboard', params: { id: userInfo.id }}" >用户中心</router-link>
-                <div class="item" v-on:click="signOut">注销</div>
-              </div>
-            </div>
-          </div>
+          <user-menu v-if="userSignInInfo" v-bind:userSignInInfo="userSignInInfo"></user-menu>
         </div>
         <user-login-modal></user-login-modal>
         <course-popup></course-popup>
@@ -38,33 +28,21 @@
 import CoursePopup from './CoursePopup'
 import AppDownloadPopup from './AppDownloadPopup'
 import UserLoginModal from './UserLoginModal'
-
-import { mapState, mapGetters, mapActions } from 'vuex'
+import UserMenu from './UserMenu'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'primary-nav',
+  props: ['userSignInInfo'],
   components: {
     UserLoginModal,
     CoursePopup,
-    AppDownloadPopup
+    AppDownloadPopup,
+    UserMenu
   },
-  created: function(){
-    // when user fisrt landing page
-    // if (this.$localStorage.get('access_token')!= null) {
-    //   this.$store.dispatch('logIn')
-      // this.currentUserInfo = this.$localStorage.get('user_info')
-      // console.log(this.$store.state.userRegLog.userInfo.nickname)
-    // }
-  },
-  computed: mapGetters(['USER_SIGN_IN_INFO']),
   methods: {
-    ...mapActions(['toggleUserLoginPopup'])
+    ...mapActions(['TOGGLE_USER_LOGIN_POPUP'])
   },
-  mounted: function() {
-    //TODO: responsive needed,
-    //problem: semantic need performance issue for set the sidebar inside the #app div.
-    $('.ui.sidebar').sidebar('attach events', '.toc.item')
-  }
 }
 </script>
 

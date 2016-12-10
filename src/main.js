@@ -79,6 +79,7 @@ const router = new VueRouter({
   ]
 })
 
+
 /* appInstance */
 new Vue({
   router,

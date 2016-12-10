@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <primary-nav></primary-nav>
-      <router-view class="mainContent"></router-view>
+      <primary-nav v-bind:userSignInInfo="USER_SIGN_IN_INFO"></primary-nav>
+      <router-view class="mainContent" v-bind:userSignInInfo="USER_SIGN_IN_INFO"></router-view>
       <sticky-footer></sticky-footer>
   </div>
 </template>
@@ -9,6 +9,7 @@
 import PrimaryNav from './components/PrimaryNav'
 import AppFooter from './components/Footer'
 import StickyFooter from './components/StickyFooter'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -16,14 +17,15 @@ export default {
     PrimaryNav,
     StickyFooter
   },
-  ready () {
-
+  created () {
+      this.$store.dispatch('USER_CHECK_IN')
   },
-  mounted () {
-
-
+  computed: mapGetters(['USER_SIGN_IN_INFO']),
+  mounted: function() {
+    //TODO: responsive needed,
+    //problem: semantic need performance issue for set the sidebar inside the #app div.
+    $('.ui.sidebar').sidebar('attach events', '.toc.item')
   }
-
 }
 </script>
 

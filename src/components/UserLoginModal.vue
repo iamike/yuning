@@ -10,7 +10,7 @@
         <user-login-form></user-login-form>
       </div>
       <div class="center aligned column">
-        <div class="ui big green labeled icon button" @click="toggleUserRegisterPopup">
+        <div class="ui big green labeled icon button" @click="TOGGLE_USER_REGISTER_POPUP">
           <i class="signup icon"></i>
           新用户注册
         </div>
@@ -32,7 +32,7 @@ export default {
     UserLoginForm,
     UserRegisterModal
   },
-  methods: mapActions(['toggleUserRegisterPopup'])
+  methods: mapActions(['TOGGLE_USER_REGISTER_POPUP'])
 }
 </script>
 

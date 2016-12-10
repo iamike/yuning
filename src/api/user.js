@@ -3,6 +3,13 @@ import * as api from './api'
 import * as types from '../store/mutation-types'
 
 export default {
+  //check in by localStorage data
+  checkIn ({commit}) {
+    if (localStorage.getItem(types.USER_SIGN_IN_INFO)) {
+      const userInfo = JSON.parse(localStorage.getItem(types.USER_SIGN_IN_INFO))
+      commit(types.USER_SIGN_IN_SUCCESS, userInfo)
+    }
+  },
   signIn ({commit}, loginData ) {
     // success get info from server
     let success = (res) => {
@@ -20,8 +27,9 @@ export default {
     // data matched
     let logCorrect = (payload) => {
       commit(types.USER_SIGN_IN_SUCCESS, payload)
-      // console.log(Vue.localStorage)
-      // Vue.localStorage.set(types.USER_SIGN_IN_INFO, payload)
+      commit(types.TOGGLE_USER_LOGIN_POPUP)
+      localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(payload));
+      
     }
 
     // data has errors
@@ -35,20 +43,18 @@ export default {
     .then(success, failure)
 
   },
-  signOut ({commit}, userData ){
-    // this.$localStorage.remove('access_token')
-    // this.$localStorage.remove('user_info')
-    // this.$store.dispatch('logOut')
-    // this.$router.push('/')
+  signOut ({commit}){
+    localStorage.removeItem(types.USER_SIGN_IN_INFO)
+    commit(types.USER_SIGN_OUT)
   },
-  modifyInfo ( {commit}, updateData) {
+  modifyInfo ( {commit}, {id, gender, region, email, nickname}) {
     const json = JSON.parse(JSON.stringify(updateData))
     const newJson = {
-      user_id: updateData.id,
-      gender: updateData.gender,
-      region: updateData.region,
-      email: updateData.email,
-      nickname: updateData.nickname
+      user_id: id,
+      gender,
+      region,
+      email,
+      nickname
     }
     const success = (res) => {
       // console.log(commit)

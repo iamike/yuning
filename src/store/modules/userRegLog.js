@@ -1,4 +1,4 @@
-import user from '../../api/user'
+import userApi from '../../api/user'
 import * as types from '../mutation-types'
 
 const state = {
@@ -6,38 +6,54 @@ const state = {
   [types.USER_SIGN_IN_ERRORS]: undefined
 }
 const actions = {
-  toggleUserLoginPopup ({ commit }) {
-    commit('toggleUserLoginPopup')
+  [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
+    commit(types.TOGGLE_USER_LOGIN_POPUP)
   },
-  toggleUserRegisterPopup ({ commit }) {
-    commit('toggleUserRegisterPopup')
+  [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
+    commit(types.TOGGLE_USER_REGISTER_POPUP)
+  },
+  [types.USER_CHECK_IN] ({commit}, data) {
+    userApi.checkIn({commit}, data)
   },
   [types.USER_SIGN_IN] ({commit}, data ) {
-    user.signIn({commit}, data)
+    userApi.signIn({commit}, data)
+  },
+  [types.USER_SIGN_OUT] ({commit}) {
+    userApi.signOut({commit})
   },
   [types.MODIFY_USER_INFO_START] ({commit}, newData) {
     if ( newData.id ) {
       commit(types.MODIFY_USER_INFO_PROCESSING)
-      user.modifyInfo({commit}, newData)
+      userApi.modifyInfo({commit}, newData)
     }
   }
 }
 const mutations = {
-  toggleUserLoginPopup () {
+  [types.TOGGLE_USER_LOGIN_POPUP] () {
     $('.coupled.modal').modal({allowMultiple: true})
     $('.ui.user-login.modal').modal('toggle')
   },
-  toggleUserRegisterPopup () {
+  [types.TOGGLE_USER_REGISTER_POPUP] () {
     $('.ui.user-login.modal').modal('hide')
-    $('.ui.user-register.modal').modal({transition:'vertical flip',mobileTransition : 'horizontal flip'}).modal('toggle')
+    $('.ui.user-register.modal')
+    .modal({
+      transition:'vertical flip',
+      mobileTransition : 'horizontal flip'
+    })
+    .modal('toggle')
   },
-  // SIGN IN/OUT
+  // SIGN IN
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {
     state[types.USER_SIGN_IN_INFO] = payload
+    state[types.USER_SIGN_IN_ERRORS] = 'success'
   },
   [types.USER_SIGN_IN_FAILURE] (state, payload) {
     state[types.USER_SIGN_IN_INFO] = undefined
     state[types.USER_SIGN_IN_ERRORS] = payload
+  },
+  // SIGN OUT
+  [types.USER_SIGN_OUT] (state) {
+    state[types.USER_SIGN_OUT] = undefined
   },
   [types.MODIFY_USER_INFO_PROCESSING] ({commit}) {
     // MAYBE PUT LOADING? AT HERE?
