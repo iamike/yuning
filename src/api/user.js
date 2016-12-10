@@ -10,7 +10,7 @@ export default {
       commit(types.USER_SIGN_IN_SUCCESS, userInfo)
     }
   },
-  signIn ({commit}, loginData ) {
+  signIn ({commit}, loginData, resolve, reject ) {
     // success get info from server
     let success = (res) => {
       if (res.body.isSuccess == true) {
@@ -29,15 +29,24 @@ export default {
       commit(types.USER_SIGN_IN_SUCCESS, payload)
       commit(types.TOGGLE_USER_LOGIN_POPUP)
       localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(payload));
-      
+      // console.log('job finished from API')
+      // return 'success from api'
+      // setTimeout(function(){
+        resolve()
+      // },2000)
+
     }
 
     // data has errors
     let logError = (payload) => {
       commit(types.USER_SIGN_IN_FAILURE, payload)
+      // console.log('job finished from API')
+      // return 'failure from api'
+      // setTimeout(function(){
+      reject()
+      // },2000)
     }
 
-    // api request
     Vue.http
     .post(api.API_ROOT + api.API_PATH_USER_LOGIN, JSON.parse(JSON.stringify(loginData)))
     .then(success, failure)

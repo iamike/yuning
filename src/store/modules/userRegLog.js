@@ -15,8 +15,32 @@ const actions = {
   [types.USER_CHECK_IN] ({commit}, data) {
     userApi.checkIn({commit}, data)
   },
-  [types.USER_SIGN_IN] ({commit}, data ) {
-    userApi.signIn({commit}, data)
+  [types.USER_SIGN_IN] ({commit}, data )  {
+
+    let userSignInApiResult = new Promise((resolve, reject) => {
+      userApi.signIn({commit}, data, resolve, reject)
+    })
+    return userSignInApiResult
+    // console.log(userSignInApiResult)
+
+    // return new Promise((resolve, reject) => {
+
+      // resolve()
+      // console.log(resolve)
+
+      // console.log(userApi.signIn({commit}, data))
+
+      // reject()
+      //  if (userApi.signIn({commit}, data)) {
+      //   //  commit('updateTitle', data)
+      //   //  userApi.signIn({commit}, data)
+      //    resolve()
+      //  } else {
+      //    reject()
+      //  }
+    // })
+
+    // userApi.signIn({commit}, data)
   },
   [types.USER_SIGN_OUT] ({commit}) {
     userApi.signOut({commit})
