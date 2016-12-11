@@ -4,7 +4,12 @@ import * as types from '../mutation-types'
 
 const state = {
   [types.USER_SIGN_IN_INFO]: undefined,
-  [types.USER_SIGN_IN_ERRORS]: undefined
+  [types.USER_SIGN_IN_ERRORS]: undefined,
+  [types.USER_REGISTER_INFO]: {
+    mobile: '',
+    verifyCode: '',
+    password: '',
+  },
 }
 const actions = {
   [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {

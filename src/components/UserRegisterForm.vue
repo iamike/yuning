@@ -34,9 +34,7 @@ export default {
         passWord: '',
         verify_code: '',
         register_from: 'web'
-      },
-      errors: undefined,
-      verifyRemain: 60
+      }
     }
   },
   methods: {
@@ -142,7 +140,7 @@ export default {
 
       } else {
         // console.log('submitMode')
-        submitAction(verifyAllMode, vm.sendRegisterInfo)
+        // submitAction(verifyAllMode, vm.sendRegisterInfo)
       }
     })
 

@@ -63,7 +63,7 @@ export default {
       commit(types.MODIFY_USER_INFO_SUCCESS, res.body)
     }
     const failure = err => {
-      commit(types.MODIFY_USER_INFO_FAILURE)
+      commit(types.MODIFY_USER_INFO_FAILURE, res.body)
     }
     Vue.http.post(api.API_ROOT + api.API_PATH_USER_MODIFY_INFO, data).then(success, failure)
   }

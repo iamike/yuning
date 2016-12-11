@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="fields">
+  <div class="field">
     <div class="field">
       <label>手机号</label>
-      <input type="tel" name="mobile" placeholder="手机号" v-model="mobile">
+      <input type="tel" name="mobile" placeholder="手机号" >
     </div>
     <div class="field">
       <label>验证码</label>
@@ -23,14 +23,12 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'verify-mobile',
   props: ['verifyRequestInterval','verifyRequestRemain'],
-  data: function () {
-    return {
-      mobile: ''
-    }
-  },
+  computed: mapGetters(['USER_REGISTER_INFO']),
   mounted () {
 
   }
