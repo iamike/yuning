@@ -1,8 +1,11 @@
 <template lang="html">
   <div class="ui compact menu" >
     <div class="ui simple dropdown item">
-      <img class="ui avatar image" v-bind:src="userSignInInfo.avatar">
-      <span>{{userSignInInfo.nickname}}</span>
+      <img class="ui avatar image" v-if="userSignInInfo.avatar==''" src="../assets/images/brand.png" alt="" />
+      <img class="ui avatar image" v-else v-bind:src="userSignInInfo.avatar">
+
+      <span v-if="userSignInInfo.nickname!=''">{{userSignInInfo.nickname}}</span>
+      <span v-else>新用户</span>
       <i class="dropdown icon"></i>
       <div class="menu">
         <router-link class="item" :to="{ name: 'userDashboard', params: { id: userSignInInfo.id }}" >用户中心</router-link>

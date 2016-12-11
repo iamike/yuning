@@ -38,10 +38,10 @@ export default {
   data () {
     return {
       userInfo: {
-        username: '',
-        password: '',
-        // username: '15871781105',
-        // password: '19880623',
+        // username: '',
+        // password: '',
+        username: '15871781105',
+        password: '19880623',
         type: 1,
         from: 'web',
       }

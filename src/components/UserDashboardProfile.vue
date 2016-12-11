@@ -22,4 +22,7 @@ export default {
 </script>
 
 <style lang="css">
+.tabular.menu {
+  margin-bottom: 3rem;
+}
 </style>

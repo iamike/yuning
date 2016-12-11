@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui pointing menu">
+  <div class="ui tabular menu ">
     <router-link class="item" :to="{ name: 'profile' }">个人资料</router-link>
     <router-link class="item" :to="{ name: 'account' }">帐户资料</router-link>
     <router-link class="item" :to="{ name: 'order' }">订单资料</router-link>
