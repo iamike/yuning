@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <primary-nav v-bind:userSignInInfo="USER_SIGN_IN_INFO"></primary-nav>
-      <router-view class="mainContent" v-bind:userSignInInfo="USER_SIGN_IN_INFO"></router-view>
+      <router-view class="mainContent"></router-view>
       <sticky-footer></sticky-footer>
   </div>
 </template>

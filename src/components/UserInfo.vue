@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="ui grid">
     <div class="sixteen wide column">
-      <div class="ui piled segment raised ">
+      <div v-if="USER_SIGN_IN_INFO!=undefined" class="ui piled segment raised ">
           <a class="ui teal ribbon label"><i class="settings icon"></i> 个人资料</a>
           <div class="ui form">
-            <img :src="USER_SIGN_IN_INFO.avatar" class="ui small circular bordered image right floated">
+            <img :src="userInfo.avatar" class="ui small circular bordered image right floated">
             <h4 class="ui header"><i class="user icon"></i> {{ USER_SIGN_IN_INFO.nickname }}
               <input type="text" name="name" v-model="userInfo.nickname" v-bind:value="userInfo.nickname"></h4>
             <div class="ui divider"></div>
@@ -42,9 +42,8 @@ export default {
   data () {
     return {
       userInfo: {
-        
         nickname: this.$store.state.userRegLog.USER_SIGN_IN_INFO.nickname,
-
+        avatar: this.$store.state.userRegLog.USER_SIGN_IN_INFO.avatar,
       }
     }
   },

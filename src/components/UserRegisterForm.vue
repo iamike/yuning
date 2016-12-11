@@ -1,9 +1,6 @@
 <template lang="html">
   <div class="ui form" id="userRegisterForm">
-    <div class="field">
-      <label>手机号</label>
-      <input type="tel" name="mobile" placeholder="手机号" v-model="userRegisterInfo.mobile">
-    </div>
+
     <slot></slot>
     <div class="field">
       <label>密码</label>
@@ -43,52 +40,28 @@ export default {
     }
   },
   methods: {
-    sendVerifyCode ( callback ) {
 
-      let userVerifyInfoObj = JSON.parse(JSON.stringify({ mobile: this.userRegisterInfo.mobile }))
-
-      this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/sendMsg', userVerifyInfoObj )
-      .then((res) => {
-          if (res.status == 200 && res.body.isSuccess == true ) {
-            // console.log('testSendVerifyCode')
-            // this.$store.dispatch('register')
-            // this.$router.push('/user/' + res.body.result.id)
-            callback
-
-          } else {
-            //if user login info has error, print the error message on the form
-            // console.log('test')
-            this.errors = res.body.errorMsg
-          }
-      }, (err) => {
-        // console.log(err)
-        // this.$localStorage.remove('access_token')
-        // this.$localStorage.remove('user_info')
-        // this.$store.dispatch('logOut')
-        // return 'ops....'
-      })
-    },
-    sendRegisterInfo () {
-      let userRegisterInfoObj = JSON.parse(JSON.stringify(this.userRegisterInfo))
-      this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/userRegist', this.userRegisterInfo )
-      .then((res) => {
-          if (res.status == 200 && res.body.isSuccess == true ) {
-            this.$store.dispatch('register')
-            // this.$router.push('/user/' + res.body.result.id)
-          } else {
-            //if user login info has error, print the error message on the form
-            // console.log('test')
-            this.errors = res.body.errorMsg
-          }
-      }, (err) => {
-        // console.log(err)
-        // this.$localStorage.remove('access_token')
-        // this.$localStorage.remove('user_info')
-        // this.$store.dispatch('logOut')
-        // return 'ops....'
-      })
-    },
-    ...mapActions(['register','SEND_VERIFY_CODE'])
+  //   sendRegisterInfo () {
+  //     let userRegisterInfoObj = JSON.parse(JSON.stringify(this.userRegisterInfo))
+  //     this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/userRegist', this.userRegisterInfo )
+  //     .then((res) => {
+  //         if (res.status == 200 && res.body.isSuccess == true ) {
+  //           this.$store.dispatch('register')
+  //           // this.$router.push('/user/' + res.body.result.id)
+  //         } else {
+  //           //if user login info has error, print the error message on the form
+  //           // console.log('test')
+  //           this.errors = res.body.errorMsg
+  //         }
+  //     }, (err) => {
+  //       // console.log(err)
+  //       // this.$localStorage.remove('access_token')
+  //       // this.$localStorage.remove('user_info')
+  //       // this.$store.dispatch('logOut')
+  //       // return 'ops....'
+  //     })
+  //   },
+  //   // ...mapActions(['register','SEND_VERIFY_CODE'])
   },
   mounted () {
 
@@ -163,7 +136,9 @@ export default {
       if ($(this).attr('data-mode') == 'verifyMode' && vm.verifyRemain > 59 ) {
         // console.log('verifyMode')
         // submitAction(verifyCodeMode, vm.sendVerifyCode, timer )
-        vm.$store.dispatch('SEND_VERIFY_CODE', { mobile: '18930706272' })
+        vm.$store.dispatch('SEND_VERIFY_CODE', { mobile: '18930706272' }).then((res)=>{
+          console.log('success',res)
+        })
 
       } else {
         // console.log('submitMode')

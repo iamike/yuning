@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="ui container">
-    <router-view name="userNav"></router-view>
+    <user-nav></user-nav>
     <div class="ui grid">
       <router-view name="userSection"></router-view>
     </div>
@@ -8,8 +8,13 @@
 </template>
 
 <script>
+import UserNav from './UserNav'
+
 export default {
   name: 'user-dashboard',
+  components: {
+    UserNav
+  },
   beforeRouteEnter (route, from, next) {
     let userInfo = window.localStorage.USER_SIGN_IN_INFO
     if (userInfo) {

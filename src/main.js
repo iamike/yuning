@@ -31,7 +31,6 @@ const router = new VueRouter({
         name: 'profile',
         redirect: '/user/:id/profile/info',
         components: {
-          userNav: resolve => require(['./components/UserNav.vue'], resolve),
           userSection: resolve => require(['./components/UserDashboardProfile.vue'], resolve)
         },
         children:[{
@@ -39,35 +38,30 @@ const router = new VueRouter({
           name: 'info',
           components: {
             userMain: resolve => require(['./components/UserInfo.vue'], resolve),
-            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
           }
         },{
           path: 'modifyPassword',
           name: 'modifyPassword',
           components: {
             userMain: resolve => require(['./components/UserModifyPassword.vue'], resolve),
-            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
           }
         },{
           path: 'babyInfo',
           name: 'babyInfo',
           components: {
             userMain: resolve => require(['./components/UserBabyInfo.vue'], resolve),
-            userSidebar: resolve => require(['./components/UserSidebar.vue'], resolve),
           }
         }]
       },{
         path: 'account',
         name: 'account',
         components: {
-          userNav: resolve => require(['./components/UserNav.vue'], resolve),
           userSection: resolve => require(['./components/UserDashboardAccount.vue'], resolve)
         }
       },{
         path: 'order',
         name: 'order',
         components: {
-          userNav: resolve => require(['./components/UserNav.vue'], resolve),
           userSection: resolve => require(['./components/UserDashboardOrder.vue'], resolve)
         }
       }]

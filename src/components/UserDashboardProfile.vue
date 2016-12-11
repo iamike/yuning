@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="row">
     <div class="four wide column">
-      <router-view name="userSidebar"></router-view>
+      <user-sidebar></user-sidebar>
     </div>
     <div class="twelve wide column">
       <router-view name="userMain"></router-view>
@@ -10,7 +10,14 @@
 </template>
 
 <script>
+import UserSidebar from './UserSidebar'
+
 export default {
+  name: 'user-dashboard',
+  components: {
+    UserSidebar
+  },
+
 }
 </script>
 
