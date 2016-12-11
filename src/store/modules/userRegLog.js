@@ -5,11 +5,8 @@ import * as types from '../mutation-types'
 const state = {
   [types.USER_SIGN_IN_INFO]: undefined,
   [types.USER_SIGN_IN_ERRORS]: undefined,
-  [types.USER_REGISTER_INFO]: {
-    mobile: '',
-    verifyCode: '',
-    password: '',
-  },
+  [types.USER_REGISTER_INFO]: undefined,
+  [types.USER_REGISTER_ERRORS]: undefined,
 }
 const actions = {
   [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
@@ -18,20 +15,24 @@ const actions = {
   [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
     commit(types.TOGGLE_USER_REGISTER_POPUP)
   },
+  [types.USER_REGISTER_ACTION] ({ commit, state }, data) {
+    return new Promise((resolve, reject) => {
+      state[types.USER_REGISTER_INFO] = data
+      userApi.register({commit}, data, resolve, reject)
+    })
+  },
   [types.USER_CHECK_IN] ({commit}, data) {
     userApi.checkIn({commit}, data)
   },
   [types.USER_SIGN_IN_ACTION] ({commit}, data )  {
-    let userSignInApiResult = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       userApi.signIn({commit}, data, resolve, reject)
     })
-    return userSignInApiResult
   },
   [types.USER_SIGN_OUT] ({commit}) {
-    let userSignOutApiResult = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       userApi.signOut({commit},resolve, reject)
     })
-    return userSignOutApiResult
   },
   [types.MODIFY_USER_INFO_START] ({commit}, newData) {
     if ( newData.id ) {
@@ -42,7 +43,8 @@ const actions = {
 }
 const mutations = {
   [types.TOGGLE_USER_LOGIN_POPUP] () {
-    $('.coupled.modal').modal({allowMultiple: true})
+    // $('.coupled.modal').modal({allowMultiple: true})
+    $('.ui.user-register.modal').modal('hide')
     $('.ui.user-login.modal').modal('toggle')
   },
   [types.TOGGLE_USER_REGISTER_POPUP] () {
@@ -53,6 +55,13 @@ const mutations = {
       mobileTransition : 'horizontal flip'
     })
     .modal('toggle')
+  },
+  // REGISTER
+  [types.USER_REGISTER_SUCCESS] (state, payload) {
+    state[types.USER_REGISTER_ERRORS] = payload
+  },
+  [types.USER_REGISTER_FAILURE] (state, payload) {
+    state[types.USER_REGISTER_ERRORS] = payload
   },
   // SIGN IN
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {
@@ -77,11 +86,13 @@ const mutations = {
   },
   [types.MODIFY_USER_INFO_FAILURE] ({commit},payload) {
     console.log('failure, data has not updated',payload)
-  }
+  },
 }
 const getters = {
   [types.USER_SIGN_IN_INFO]: state => state[types.USER_SIGN_IN_INFO],
-  [types.USER_SIGN_IN_ERRORS]: state => state[types.USER_SIGN_IN_ERRORS]
+  [types.USER_SIGN_IN_ERRORS]: state => state[types.USER_SIGN_IN_ERRORS],
+  [types.USER_REGISTER_INFO]: state => state[types.USER_REGISTER_INFO],
+  [types.USER_REGISTER_ERRORS]: state => state[types.USER_REGISTER_ERRORS],
 }
 export default {
   state,

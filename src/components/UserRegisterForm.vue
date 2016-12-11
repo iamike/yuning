@@ -1,12 +1,30 @@
 <template lang="html">
   <div class="ui form" id="userRegisterForm">
-
-    <slot></slot>
+    <div class="field">
+      <label>手机号</label>
+      <input type="tel" name="mobile" placeholder="手机号" v-model="userInfo.mobile" >
+    </div>
+    <div class="field">
+      <label>验证码</label>
+      <div class="ui action input">
+        <input type="tel" name="verifyCode" placeholder="验证码" v-model="userInfo.verify_code">
+        <button class="ui teal submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+          发送验证码
+        </button>
+      </div>
+    </div>
+    <div class="ui success visible message" v-show="global.verifyRequestRemain < global.verifyCodeInterval">
+      <i class="close icon"></i>
+      <div class="header">
+        验证码已经发送成功.
+      </div>
+      <p>如果您没有收到， 请在{{global.verifyRequestRemain}}秒后重试...</p>
+    </div>
     <div class="field">
       <label>密码</label>
-      <input type="password" name="password" v-model="userRegisterInfo.passWord" >
+      <input type="password" name="password" v-model="userInfo.passWord" >
     </div>
-    <div class="ui submit olive button" >注册</div>
+    <div class="ui submit olive button">注册</div>
     <!-- errors from frontend -->
     <div class="ui error message">
       <ul>
@@ -14,22 +32,22 @@
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="errors"  class="ui visible error message">
+    <div v-if="USER_REGISTER_ERRORS"  class="ui visible message" v-bind:class="USER_REGISTER_ERRORS.isSuccess==true?'success':'error'">
       <ul class="list">
-        <li>{{ errors }}</li>
+        <li>{{ USER_REGISTER_ERRORS.errorMsg }}</li>
       </ul>
     </div>
 </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'user-register-form',
   data () {
     return {
-      userRegisterInfo: {
+      userInfo: {
         mobile: '',
         passWord: '',
         verify_code: '',
@@ -37,35 +55,14 @@ export default {
       }
     }
   },
-  methods: {
-
-  //   sendRegisterInfo () {
-  //     let userRegisterInfoObj = JSON.parse(JSON.stringify(this.userRegisterInfo))
-  //     this.$http.post('http://192.168.16.178:8099/czb-server/czb/user/userRegist', this.userRegisterInfo )
-  //     .then((res) => {
-  //         if (res.status == 200 && res.body.isSuccess == true ) {
-  //           this.$store.dispatch('register')
-  //           // this.$router.push('/user/' + res.body.result.id)
-  //         } else {
-  //           //if user login info has error, print the error message on the form
-  //           // console.log('test')
-  //           this.errors = res.body.errorMsg
-  //         }
-  //     }, (err) => {
-  //       // console.log(err)
-  //       // this.$localStorage.remove('access_token')
-  //       // this.$localStorage.remove('user_info')
-  //       // this.$store.dispatch('logOut')
-  //       // return 'ops....'
-  //     })
-  //   },
-  //   // ...mapActions(['register','SEND_VERIFY_CODE'])
+  computed: {
+     ...mapGetters(['global','USER_REGISTER_ERRORS'])
   },
   mounted () {
-
-    let vm = this
-    let formTrigger = $('#userRegisterForm .submit')
-    let verifyCodeMode = {
+    const vm = this
+    const global = vm.$store.state.global
+    const $formTrigger = $('#userRegisterForm .submit')
+    const verifyRules = {
       mobile: {
         identifier: 'mobile',
         rules: [
@@ -76,7 +73,7 @@ export default {
         ]
       }
     }
-    let verifyAllMode = {
+    const registerRules = {
       mobile: {
         identifier: 'mobile',
         rules: [
@@ -105,42 +102,47 @@ export default {
         ]
       }
     }
-    let submitAction = function(fieldsObject, successAction, additionalAction) {
-
+    const formAction = function(rules, validateAction) {
       $('#userRegisterForm').form({
-        fields: fieldsObject,
+        fields: rules,
         onSuccess: function(event){
-          successAction()
-          additionalAction && additionalAction()
+          validateAction && validateAction()
         }
       })
     }
-    let timer = function(){
-      let timerInstance = setInterval(function(){
+    const verifyAction = () => {
+      vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
+        // console.log('success send verify code to',res)
+        vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
 
-        if (vm.verifyRemain < 1){
-          clearInterval(timerInstance)
-          vm.verifyRemain = 60
-          return
-        }
-        vm.verifyRemain -= 1
-
-      },1000)
+      }).catch((err)=>{
+        // console.log('failure send verify code',err)
+      })
     }
+    const registerAction = () => {
+      vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
+        // console.log('success submit form values',res)
+        setTimeout(()=>{
 
-    formTrigger.on('click',function(){
+          vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
+
+        }, 2000)
+
+      }).catch((err)=>{
+        // console.log('failure submit form values',err)
+      })
+    }
+    // form submit events
+    $formTrigger.on('click',function(){
+
+      //re-initialize the form plugin, so make it only response for the currently action's error message
       $('#userRegisterForm').form('destory')
-
-      if ($(this).attr('data-mode') == 'verifyMode' && vm.verifyRemain > 59 ) {
+      if ($(this).attr('data-mode') == 'verifyMode') {
         // console.log('verifyMode')
-        // submitAction(verifyCodeMode, vm.sendVerifyCode, timer )
-        vm.$store.dispatch('SEND_VERIFY_CODE', { mobile: '18930706272' }).then((res)=>{
-          console.log('success',res)
-        })
-
+        formAction(verifyRules, verifyAction)
       } else {
         // console.log('submitMode')
-        // submitAction(verifyAllMode, vm.sendRegisterInfo)
+        formAction(registerRules, registerAction)
       }
     })
 

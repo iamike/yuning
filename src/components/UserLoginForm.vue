@@ -31,39 +31,24 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-login-form',
   data () {
     return {
       userInfo: {
-        // username: '',
-        // password: '',
-        username: '15871781105',
-        password: '19880623',
+        username: '',
+        password: '',
+        // username: '15871781105',
+        // password: '19880623',
         type: 1,
-        from: 'web'
+        from: 'web',
       }
     }
   },
   computed: {
      ...mapGetters(['USER_SIGN_IN_ERRORS'])
-  },
-  methods: {
-    userSignIn () {
-      this.$store.dispatch('USER_SIGN_IN_ACTION', this.userInfo)
-      .then((res) => {
-        // success
-        console.log('success from components')
-        this.$router.push('/user/' + this.$store.state.userRegLog.USER_SIGN_IN_INFO.id )
-
-      })
-      .catch((err) => {
-        // failure
-        console.log('failure from components')
-      })
-    }
   },
   mounted () {
     let vm = this
@@ -84,12 +69,22 @@ export default {
         },
         onSuccess: function(){
           // login(loginData, success, failure)
-          vm.userSignIn()
-        }
+          vm.$store.dispatch('USER_SIGN_IN_ACTION', vm.userInfo)
+          .then((res) => {
+            // success
+            // console.log('success from components')
+            vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id )
+          })
+          .catch((err) => {
+            // failure
+            // console.log('failure from components')
+          })
+        },
       })
   }
 }
 </script>
 
 <style lang="css">
+
 </style>

@@ -3,6 +3,33 @@ import * as api from './api'
 import * as types from '../store/mutation-types'
 
 export default {
+  register ({commit}, data, resolve, reject) {
+
+    //connection success
+    const success = res => {
+      if (res.body.isSuccess) {
+        commit(types.USER_REGISTER_SUCCESS, res.body)
+        resolve(res.body)
+      } else {
+        // debug switch login panel!!!
+        // res.body.isSuccess = true
+        // commit(types.USER_REGISTER_SUCCESS, res.body)
+        // resolve(res.body)
+
+        commit(types.USER_REGISTER_FAILURE, res.body)
+        reject(res.body)
+      }
+    }
+    // connection failure
+    const failure = err => {
+      reject(err.body)
+    }
+
+    Vue.http
+    .post(api.API_ROOT + api.API_PATH_USER_REGIST, JSON.parse(JSON.stringify(data)))
+    .then(success, failure)
+
+  },
   //check in by localStorage data
   checkIn ({commit}) {
     if (localStorage.getItem(types.USER_SIGN_IN_INFO)) {
@@ -19,10 +46,9 @@ export default {
         logError(res.body.errorMsg)
       }
     }
-
     // connection problem?
     let failure = (err) => {
-      commit(types.USER_SIGN_IN_FAILURE, '网络连接有些小问题...')
+      commit(types.USER_SIGN_IN_FAILURE, '网络连接问题...')
     }
 
     // data matched
