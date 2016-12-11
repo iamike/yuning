@@ -37,7 +37,7 @@ const router = new VueRouter({
           path: 'info',
           name: 'info',
           components: {
-            userMain: resolve => require(['./components/UserInfo.vue'], resolve),
+            userMain: resolve => require(['./components/UserInfoModify.vue'], resolve),
           }
         },{
           path: 'modifyPassword',

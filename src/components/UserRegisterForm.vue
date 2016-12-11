@@ -126,7 +126,7 @@ export default {
 
           vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
 
-        }, 2000)
+        }, 1500)
 
       }).catch((err)=>{
         // console.log('failure submit form values',err)

@@ -4,9 +4,13 @@
       <div v-if="USER_SIGN_IN_INFO!=undefined" class="ui piled segment raised ">
           <a class="ui teal ribbon label"><i class="settings icon"></i> 个人资料</a>
           <div class="ui form">
-            <img :src="userInfo.avatar" class="ui small circular bordered image right floated">
+            <pre>
+              {{USER_SIGN_IN_INFO}}
+            </pre>
+
+            <img v-if="!USER_SIGN_IN_INFO.avatar==''" :src="USER_SIGN_IN_INFO.avatar" class="ui small circular bordered image right floated">
             <h4 class="ui header"><i class="user icon"></i> {{ USER_SIGN_IN_INFO.nickname }}
-              <input type="text" name="name" v-model="userInfo.nickname" v-bind:value="userInfo.nickname"></h4>
+              <input type="text" name="name" v-model="USER_SIGN_IN_INFO.nickname" v-bind:value="USER_SIGN_IN_INFO.nickname"></h4>
             <div class="ui divider"></div>
             <p>
               <i class="icon map"></i> {{ USER_SIGN_IN_INFO.region }}
@@ -24,8 +28,8 @@
             <template v-if="USER_SIGN_IN_INFO.gender == 1"><i class="icon man"></i> 爸爸</template>
             <template v-else><i class="icon"></i> 妈妈</template>
           </p>
-          <div class="ui action">
-            <div class="ui button" @click="modifyUserInfo()">
+          <div class="ui action center aligned">
+            <div class="ui teal button">
               修改信息
             </div>
           </div>
@@ -39,22 +43,18 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'user-info',
-  data () {
-    return {
-      userInfo: {
-        nickname: this.$store.state.userRegLog.USER_SIGN_IN_INFO.nickname,
-        avatar: this.$store.state.userRegLog.USER_SIGN_IN_INFO.avatar,
-      }
-    }
-  },
+  // data () {
+  //   return {
+  //     USER_SIGN_IN_INFO: {
+  //       nickname: this.$store.state.userRegLog.USER_SIGN_IN_INFO.nickname,
+  //       avatar: this.$store.state.userRegLog.USER_SIGN_IN_INFO.avatar,
+  //     }
+  //   }
+  // },
   computed: mapGetters([
     'USER_SIGN_IN_INFO'
   ]),
-  methods: {
-    modifyUserInfo () {
-      this.$store.dispatch('MODIFY_USER_INFO_START', )
-    }
-  }
+
 }
 </script>
 
