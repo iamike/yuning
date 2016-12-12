@@ -27,7 +27,7 @@ export default {
 }
 .segment.piled.raised {
   padding-top: 40px;
-
+  padding-bottom: 40px;
   .ui.form {
     padding-top: 30px;
   }

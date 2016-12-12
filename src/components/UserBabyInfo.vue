@@ -2,7 +2,7 @@
   <div class="ui grid">
     <div class="sixteen wide column">
       <div class="ui piled segment raised ">
-        <a class="ui yellow ribbon label"><i class="settings icon"></i> 宝宝档案</a>
+        <a class="ui yellow ribbon label"><i class="settings icon"></i> 宝宝</a>
         <div class="ui three column grid profile-list">
           <div class="column">
             <div class="ui fluid card">
@@ -20,8 +20,8 @@
               </div>
               <div class="extra content ">
                 <div class="ui two buttons">
-                  <div class="ui basic green button">修改档案</div>
-                  <div class="ui basic red button">删除档案</div>
+                  <div class="ui basic green button">修改</div>
+                  <div class="ui basic red button">删除</div>
                 </div>
               </div>
             </div>
@@ -43,8 +43,8 @@
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui basic green button">修改档案</div>
-                  <div class="ui basic red button">删除档案</div>
+                  <div class="ui basic green button">修改</div>
+                  <div class="ui basic red button">删除</div>
                 </div>
               </div>
             </div>
@@ -66,8 +66,8 @@
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui basic green button">修改档案</div>
-                  <div class="ui basic red button">删除档案</div>
+                  <div class="ui basic green button">修改</div>
+                  <div class="ui basic red button">删除</div>
                 </div>
               </div>
             </div>
@@ -89,8 +89,8 @@
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui basic green button">修改档案</div>
-                  <div class="ui basic red button">删除档案</div>
+                  <div class="ui basic green button">修改</div>
+                  <div class="ui basic red button">删除</div>
                 </div>
               </div>
             </div>

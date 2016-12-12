@@ -31,7 +31,6 @@
                         </div>
                       </div>
                     </div>
-
                   </div>
 
                   <div class="fields">
@@ -44,8 +43,6 @@
                           修改
                         </button>
                       </div>
-
-
                     </div>
                     <div class="eight wide field">
                       <label><i class="icon mail"></i> Email</label>
@@ -54,9 +51,7 @@
                         请正确填写您的email，订阅我们的最新活动消息
                       </div>
                     </div>
-
                   </div>
-
                   <div class="fields">
                     <div class="sixteen wide field">
                       <label><i class="icon map"></i> 地址</label><input type="text" name="name" v-bind:value="USER_SIGN_IN_INFO.region">
@@ -65,14 +60,11 @@
                       </div>
                     </div>
                   </div>
-
-
-                <div class="ui action center aligned">
+                <div class="ui action">
                   <div class="ui teal button">
-                    <i class="save icon"></i> 修改信息
+                    <i class="save submit icon"></i> 修改信息
                   </div>
                 </div>
-
               </div>
             </div>
 
