@@ -6,23 +6,24 @@
         <div class="ui two column centered grid">
           <div class="column">
             <div class="ui form" id="userModifyPasswordForm">
-                <div class="field">
+              <div class="field">
+                <label>验证码</label>
+                <div class="ui action input">
+                  <input type="tel" name="verifyCode" placeholder="验证码" maxlength="4" v-model="changeRequest.verify_code" >
+                  <button class="ui submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+                    <i class="send icon"></i>
+                    发送验证码
+                  </button>
+                </div>
+              </div>
+              <div class="field">
                   <label>新密码</label>
                   <div class="ui left icon input">
                     <i class="warning sign icon"></i>
                     <input type="password" name="passWord" v-model="changeRequest.passWord">
                   </div>
                 </div>
-                <div class="field">
-                  <label>验证码</label>
-                  <div class="ui action input">
-                    <input type="tel" name="verifyCode" placeholder="验证码" maxlength="4" v-model="changeRequest.verify_code" >
-                    <button class="ui red submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
-                      <i class="send icon"></i>
-                      发送验证码
-                    </button>
-                  </div>
-                </div>
+
                 <div class="ui success visible message" v-show="global.verifyRequestRemain < global.verifyCodeInterval">
                   <i class="close icon"></i>
                   <div class="header">
