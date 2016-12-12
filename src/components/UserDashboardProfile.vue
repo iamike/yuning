@@ -21,8 +21,15 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
 .tabular.menu {
   margin-bottom: 3rem;
+}
+.segment.piled.raised {
+  padding-top: 40px;
+
+  .ui.form {
+    padding-top: 30px;
+  }
 }
 </style>

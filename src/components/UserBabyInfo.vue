@@ -2,24 +2,109 @@
   <div class="ui grid">
     <div class="sixteen wide column">
       <div class="ui piled segment raised ">
-        <a class="ui red ribbon label"><i class="settings icon"></i> 修改密码</a>
-        <form class="ui form">
-          <div class="field">
-            <label>First Name</label>
-            <input type="text" name="first-name" placeholder="First Name">
-          </div>
-          <div class="field">
-            <label>Last Name</label>
-            <input type="text" name="last-name" placeholder="Last Name">
-          </div>
-          <div class="field">
-            <div class="ui checkbox">
-              <input type="checkbox" tabindex="0" class="hidden">
-              <label>I agree to the Terms and Conditions</label>
+        <a class="ui yellow ribbon label"><i class="settings icon"></i> 宝宝档案</a>
+        <div class="ui three column grid profile-list">
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="content">
+                <img class="right floated mini ui image" src="../assets/images/brand.png">
+                <div class="header">
+                  小宝宝A
+                </div>
+                <div class="meta">
+                  Friends of Veronika
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+              </div>
+              <div class="extra content ">
+                <div class="ui two buttons">
+                  <div class="ui basic green button">修改档案</div>
+                  <div class="ui basic red button">删除档案</div>
+                </div>
+              </div>
             </div>
           </div>
-          <button class="ui button" type="submit">Submit</button>
-        </form>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="content">
+                <img class="right floated mini ui image" src="../assets/images/brand.png">
+                <div class="header">
+                  小宝宝B
+                </div>
+                <div class="meta">
+                  Friends of Veronika
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui basic green button">修改档案</div>
+                  <div class="ui basic red button">删除档案</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="content">
+                <img class="right floated mini ui image" src="../assets/images/brand.png">
+                <div class="header">
+                  小宝宝B
+                </div>
+                <div class="meta">
+                  Friends of Veronika
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui basic green button">修改档案</div>
+                  <div class="ui basic red button">删除档案</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="content">
+                <img class="right floated mini ui image" src="../assets/images/brand.png">
+                <div class="header">
+                  小宝宝B
+                </div>
+                <div class="meta">
+                  Friends of Veronika
+                </div>
+                <div class="description">
+                  Elliot requested permission to view your contact details
+                </div>
+
+              </div>
+              <div class="extra content">
+                <div class="ui two buttons">
+                  <div class="ui basic green button">修改档案</div>
+                  <div class="ui basic red button">删除档案</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column right floated">
+              <div class="ui action">
+                <div class="ui yellow button right floated">
+                  <i class="add icon"></i> 添加新宝宝
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -30,5 +115,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.profile-list {
+  padding-top: 20px;
+}
 </style>

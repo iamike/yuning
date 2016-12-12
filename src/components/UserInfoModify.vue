@@ -69,7 +69,7 @@
 
                 <div class="ui action center aligned">
                   <div class="ui teal button">
-                    修改信息
+                    <i class="save icon"></i> 修改信息
                   </div>
                 </div>
 
@@ -112,11 +112,5 @@ export default {
 </script>
 
 <style lang="scss">
-.segment.piled.raised {
-  padding-top: 40px;
 
-  .ui.form {
-    padding-top: 30px;
-  }
-}
 </style>
