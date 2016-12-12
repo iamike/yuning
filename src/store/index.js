@@ -6,6 +6,7 @@ import * as getters from './getters'
 import userRegLog from './modules/userRegLog'
 import userInfoModify from './modules/userInfoModify'
 import userPasswordModify from './modules/userPasswordModify'
+import baby from './modules/baby'
 
 // console.log(userRegLog)
 // console.log(userInfoModify)
@@ -21,5 +22,6 @@ export default new Vuex.Store({
     userRegLog,
     userInfoModify,
     userPasswordModify,
+    baby,
   }
 })
