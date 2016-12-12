@@ -3,19 +3,27 @@ import * as types from '../mutation-types'
 
 const state = {
   [types.CHILD_LIST]: undefined,
-  [types.BABY_DETAIL]: undefined,
+  [types.CHILD_DETAIL]: undefined,
 }
 
 const actions = {
   getAllChilds ({commit}, userid) {
-    babyApi.getChilds( userid, function(childs){
-      return commit(types.RECEIVED_CHILDS, childs)
+    babyApi.getChilds( userid, (childs) => {
+      commit(types.CHILD_RECEIVED, childs)
     })
-  }
+  },
+  addChild () {
+    babyApi.addChild( userid, function(childs){
+      // return commit()
+    })
+  },
 }
 
 const mutations = {
-  [types.RECEIVED_CHILDS] (state, childs ) {
+  [types.TOGGLE_CHILD_ADD_POPUP] (state) {
+    
+  },
+  [types.CHILD_RECEIVED] (state, childs ) {
     state[types.CHILD_LIST] = childs
   },
 }
