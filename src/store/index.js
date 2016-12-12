@@ -5,6 +5,10 @@ import * as actions from './actions'
 import * as getters from './getters'
 import userRegLog from './modules/userRegLog'
 import userInfoModify from './modules/userInfoModify'
+import userPasswordModify from './modules/userPasswordModify'
+
+// console.log(userRegLog)
+// console.log(userInfoModify)
 
 /* vuex */
 Vue.use(Vuex)
@@ -16,5 +20,6 @@ export default new Vuex.Store({
   modules: {
     userRegLog,
     userInfoModify,
+    userPasswordModify,
   }
 })

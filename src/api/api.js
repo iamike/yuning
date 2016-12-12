@@ -12,7 +12,7 @@ export const API_PATH_USER_GET_VERIFY_CODE = '/czb-server/czb/user/sendMsg'
 // 2.3 mobile*|passWord*|verify_code*|register_from:'web'*
 export const API_PATH_USER_REGIST = '/czb-server/czb/user/userRegist'
 
-// 2.4 mobiel*|passWord*|verify_code*
+// 2.4 mobile*|passWord*|verify_code*
 export const API_PATH_USER_MODIFY_PASSWORD = '/czb-server/czb/user/passWordModify'
 
 // 2.5 mobile*|verify_code*

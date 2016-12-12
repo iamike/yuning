@@ -38,7 +38,7 @@
                       <label><i class="icon mobile"></i> 手机</label>
                       <div class="ui action input">
                         <input class="disabled" disabled type="text" name="name" v-bind:value="USER_SIGN_IN_INFO.mobile">
-                        <button class="ui teal right labeled icon button">
+                        <button class="ui right labeled icon button">
                           <i class="edit icon"></i>
                           修改
                         </button>

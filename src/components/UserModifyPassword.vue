@@ -5,15 +5,18 @@
         <a class="ui red ribbon label"><i class="settings icon"></i> 修改密码</a>
         <div class="ui two column centered grid">
           <div class="column">
-            <form class="ui form" id="userModifyPasswordForm">
+            <div class="ui form" id="userModifyPasswordForm">
                 <div class="field">
                   <label>新密码</label>
-                  <input type="password" name="newPassword" placeholder="">
+                  <div class="ui left icon input">
+                    <i class="warning sign icon"></i>
+                    <input type="password" name="passWord" v-model="changeRequest.passWord">
+                  </div>
                 </div>
                 <div class="field">
                   <label>验证码</label>
                   <div class="ui action input">
-                    <input type="tel" name="verifyCode" placeholder="验证码" >
+                    <input type="tel" name="verifyCode" placeholder="验证码" maxlength="4" v-model="changeRequest.verify_code" >
                     <button class="ui red submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
                       <i class="send icon"></i>
                       发送验证码
@@ -28,8 +31,8 @@
                   <p>如果您没有收到， 请在{{global.verifyRequestRemain}}秒后重试...</p>
                 </div>
                 <div class="ui action">
-                  <div class="ui red button">
-                    <i class="save submit icon"></i> 确定修改
+                  <div class="ui submit red button">
+                    <i class="save  icon"></i> 确定修改
                   </div>
                 </div>
                 <!-- errors from frontend -->
@@ -44,57 +47,54 @@
                     <li>{{ USER_MODIFY_PASSWORD_ERRORS.errorMsg }}</li>
                   </ul>
                 </div>
-            </form>
+            </div>
           </div>
-
         </div>
-
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-modify-password',
   computed: {
-    ...mapGetters(['global'])
+    ...mapGetters(['global','USER_MODIFY_PASSWORD_ERRORS'])
+  },
+  data () {
+    return {
+      changeRequest: {
+        mobile:this.$store.state.userRegLog.USER_SIGN_IN_INFO.mobile,
+        passWord:'',
+        verify_code:'',
+      }
+    }
   },
   mounted () {
     const vm = this
     const global = vm.$store.state.global
     const $formTrigger = $('#userModifyPasswordForm .submit')
+    const $form = $('#userModifyPasswordForm')
     const verifyRules = {
-      mobile: {
-        identifier: 'mobile',
+      passWord: {
+        identifier: 'passWord',
         rules: [
           {
             type: 'empty',
-            prompt: '请输入手机号码'
+            prompt: '请输入您的新密码'
           }
         ]
       }
     }
-    const registerRules = {
-      mobile: {
-        identifier: 'mobile',
+    const submitRules = {
+      passWord: {
+        identifier: 'passWord',
         rules: [
           {
             type: 'empty',
-            prompt: '请输入手机号码'
-          }
-        ]
-      },
-      password: {
-        identifier: 'password',
-        rules: [
-          {
-            type: 'empty',
-            prompt: '请输入密码'
+            prompt: '请输入您的新密码'
           }
         ]
       },
@@ -109,7 +109,7 @@ export default {
       }
     }
     const formAction = function(rules, validateAction) {
-      $('#userRegisterForm').form({
+      $form.form({
         fields: rules,
         onSuccess: function(event){
           validateAction && validateAction()
@@ -117,7 +117,7 @@ export default {
       })
     }
     const verifyAction = () => {
-      vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
+      vm.$store.dispatch('GET_VERIFY_CODE', { mobile: this.$store.state.userRegLog.USER_SIGN_IN_INFO.mobile }).then((res)=>{
         // console.log('success send verify code to',res)
         vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
 
@@ -125,30 +125,25 @@ export default {
         // console.log('failure send verify code',err)
       })
     }
-    const registerAction = () => {
-      vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
-        // console.log('success submit form values',res)
-        setTimeout(()=>{
-
-          vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
-
-        }, 1500)
-
-      }).catch((err)=>{
-        // console.log('failure submit form values',err)
-      })
+    const submitAction = () => {
+      vm.$store.dispatch('USER_MODIFY_PASSWORD_ACTION', vm.changeRequest )
+      // .then((res)=>{
+      //   // console.log('success submit form values',res)
+      //
+      // }).catch((err)=>{
+      //   // console.log('failure submit form values',err)
+      // })
     }
     // form submit events
     $formTrigger.on('click',function(){
-
       //re-initialize the form plugin, so make it only response for the currently action's error message
-      $('#userRegisterForm').form('destory')
+      $form.form('destory')
       if ($(this).attr('data-mode') == 'verifyMode') {
         // console.log('verifyMode')
         formAction(verifyRules, verifyAction)
       } else {
         // console.log('submitMode')
-        formAction(registerRules, registerAction)
+        formAction(submitRules, submitAction)
       }
     })
   }
