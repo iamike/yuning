@@ -1,5 +1,4 @@
 import userApi from '../../api/user'
-import commonApi from '../../api/common'
 import * as types from '../mutation-types'
 
 const state = {
@@ -8,16 +7,16 @@ const state = {
 }
 
 const actions = {
-  [types.USER_MODIFY_PASSWORD_ACTION] ({commit}, data) {
-      userApi.modifyPassword({commit}, data)
+  [types.USER_MODIFY_PASSWORD_ACTION]({ commit }, data) {
+    userApi.modifyPassword({ commit }, data)
   },
 }
 
 const mutations = {
-  [types.USER_MODIFY_PASSWORD_SUCCESS] (state, payload ) {
+  [types.USER_MODIFY_PASSWORD_SUCCESS](state, payload) {
     state[types.USER_MODIFY_PASSWORD_ERRORS] = payload
   },
-  [types.USER_MODIFY_PASSWORD_FAILURE] (state, payload ) {
+  [types.USER_MODIFY_PASSWORD_FAILURE](state, payload) {
     state[types.USER_MODIFY_PASSWORD_ERRORS] = payload
   },
 }

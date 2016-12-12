@@ -74,15 +74,8 @@ export default {
     commit(types.USER_SIGN_OUT)
     resolve()
   },
-  modifyInfo ( {commit}, {id, gender, region, email, nickname}) {
-    const json = JSON.parse(JSON.stringify(updateData))
-    const data = {
-      user_id: id,
-      gender,
-      region,
-      email,
-      nickname
-    }
+  modifyInfo ( {commit}, data ) {
+
     const success = (res) => {
       // console.log(commit)
       commit(types.USER_MODIFY_INFO_SUCCESS, res.body)

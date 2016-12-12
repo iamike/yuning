@@ -4,7 +4,6 @@ import * as types from '../store/mutation-types'
 
 export default {
   getVerifyCode ({commit}, data, resolve, reject) {
-
     Vue.http.post(api.API_ROOT + api.API_PATH_USER_GET_VERIFY_CODE, data)
     .then((res) => {
         // console.log(res)

@@ -1,5 +1,4 @@
 import userApi from '../../api/user'
-import commonApi from '../../api/common'
 import * as types from '../mutation-types'
 
 const state = {

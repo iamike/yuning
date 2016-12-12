@@ -1,30 +1,37 @@
 import userApi from '../../api/user'
-import commonApi from '../../api/common'
 import * as types from '../mutation-types'
 
+const state = {
+  [types.USER_MODIFY_INFO_ERRORS]: undefined,
+}
+
 const actions = {
-  [types.USER_MODIFY_INFO_START] ({commit}, newData) {
-    if ( newData.id ) {
-      commit(types.USER_MODIFY_INFO_PROCESSING)
-      userApi.modifyInfo({commit}, newData)
+  [types.USER_MODIFY_INFO_ACTION]({ commit }, data) {
+    if (data.user_id) {
+      console.log(data.user_id)
+      userApi.modifyInfo({ commit }, data)
     }
   },
 }
 
 const mutations = {
-  [types.USER_MODIFY_INFO_PROCESSING] ({commit}) {
-    // MAYBE PUT LOADING? AT HERE?
-    // console.log('user is at updating infomation')
+  [types.USER_MODIFY_INFO_SUCCESS](state, payload) {
+    state[types.USER_MODIFY_INFO_ERRORS] = payload
+    console.log('successful, data updated', payload)
   },
-  [types.USER_MODIFY_INFO_SUCCESS] ({commit},payload) {
-    console.log('successful, data updated',payload)
-  },
-  [types.USER_MODIFY_INFO_FAILURE] ({commit},payload) {
-    console.log('failure, data has not updated',payload)
+  [types.USER_MODIFY_INFO_FAILURE](state, payload) {
+    state[types.USER_MODIFY_INFO_ERRORS] = payload
+    console.log('failure, data has not updated', payload)
   },
 }
 
+const getters = {
+  [types.USER_MODIFY_INFO_ERRORS]: state => state[types.USER_MODIFY_INFO_ERRORS],
+}
+
 export default {
+  state,
+  getters,
   actions,
   mutations
 }
