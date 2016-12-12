@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui fixed bottom sticky fluid container" id="stickyFooter">
+  <div class="ui fluid container" id="stickyFooter">
     <div class="ui segment basic inverted message">
       <i class="close icon"></i>
       <div class="ui container three column grid mobile only ">
@@ -36,7 +36,6 @@
 export default {
   name: "sticky-footer",
   mounted: function(){
-
     $('.message .close').on('click', function() {
         $(this).closest('.message').transition('fade')
       })

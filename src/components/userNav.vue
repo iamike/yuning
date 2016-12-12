@@ -2,7 +2,7 @@
   <div class="ui tabular menu ">
     <router-link class="item" :to="{ name: 'profile' }">个人资料</router-link>
     <router-link class="item" :to="{ name: 'account' }">帐户资料</router-link>
-    <router-link class="item" :to="{ name: 'order' }">订单资料</router-link>
+    <router-link class="item" :to="{ name: 'order' }">订单资料<div class="floating ui red label">22</div></router-link>
 
     <!-- <div class="right menu">
       <div class="item">

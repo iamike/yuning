@@ -9,6 +9,7 @@
       <div class="ui action input">
         <input type="tel" name="verifyCode" placeholder="验证码" v-model="userInfo.verify_code">
         <button class="ui teal submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+          <i class="send icon"></i>
           发送验证码
         </button>
       </div>

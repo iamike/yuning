@@ -46,6 +46,7 @@ export default {
   },
   mounted: function () {
     // console.log(this.$children[1].animation())
+    $("#stickyFooter").addClass('fixed bottom sticky')
     let vm = this;
 
     let swiper = new Swiper('#homeSlider', {
@@ -68,6 +69,10 @@ export default {
           vm.$children[swiper.activeIndex].animation && vm.$children[swiper.activeIndex].animation()
         }
     });
+  },
+  destroyed () {
+    // console.log('test')
+    $("#stickyFooter").removeClass('fixed bottom sticky')
   }
 }
 </script>

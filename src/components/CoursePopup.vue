@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="coursePopup" class="ui fluid popup bottom left transition hidden">
+  <div id="coursePopup" class="ui fluid popup bottom center transition hidden">
    <div class="ui four column relaxed divided grid">
      <div class="column">
        <h4 class="ui header">课程</h4>

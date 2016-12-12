@@ -36,6 +36,8 @@ export default {
   }
   .mainContent {
     padding-top: 108px;
+    min-height: 95vh;
+
   }
 </style>
 <style >
