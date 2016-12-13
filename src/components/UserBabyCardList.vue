@@ -13,21 +13,34 @@
       </div>
 
     <user-baby-card-item v-for="child in CHILD_GET_ALL" v-bind:baby-info="child" ></user-baby-card-item>
+
     <div class="row">
       <div class="column right floated">
         <div class="ui action">
-          <div class="ui orange button right floated" @click="showAddModal = true">
+          <div class="ui orange button right floated" @click="TOGGLE_SIMPLE_POPUP('#addChildModal')">
             <i class="add icon"></i> 添加新宝宝
           </div>
         </div>
       </div>
     </div>
-    <simpleModal>
+
+    <simpleModal id="addChildModal">
+      <div class="header" slot="header">
+        添加宝贝信息
+      </div>
+      <div class="content" slot="content">
+
+        
+      </div>
+    </simpleModal>
+
+    <simpleModal id="modifyChildModal">
       <div class="header" slot="header">
         修改宝贝信息
       </div>
     </simpleModal>
-    <basic-modal>
+
+    <basic-modal id="removeChildModal">
       <div class="header ui icon" slot="header">
         <i class="archive icon"></i>
         删除宝贝资料？
@@ -50,9 +63,6 @@
           </div>
         </div>
     </basic-modal>
-    <modal v-if="showAddModal" @close="showAddModal = false">
-      <h3 slot="header">custom header</h3>
-    </modal>
   </div>
 </template>
 
@@ -62,7 +72,7 @@ import Modal from './Modal'
 import BasicModal from './BasicModal'
 import SimpleModal from './SimpleModal'
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'user-baby-card-list',
@@ -70,17 +80,10 @@ export default {
     UserBabyCardItem,
     BasicModal,
     SimpleModal,
-    Modal,
   },
-  data () {
-    return {
-      showAddModal: false,
-      showModifyModal: false,
-    }
-  },
-  methods:{
 
-    ...mapActions(['CHILD_ADD'])
+  methods:{
+    ...mapActions(['TOGGLE_SIMPLE_POPUP'])
   },
   computed: {
     ...mapGetters(['CHILD_GET_ALL'])
@@ -89,12 +92,6 @@ export default {
     // console.log('created baby list view')
     this.$store.dispatch('CHILD_GET_ALL', this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
   },
-  mounted () {
-
-  },
-  destroyed () {
-
-  }
 }
 </script>
 

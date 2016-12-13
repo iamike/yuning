@@ -11,13 +11,13 @@
           <span v-else>小公主</span>
         </div>
         <div class="description">
-          <i class="birthday icon"></i>  {{babyInfo.baby_birth}}
+          <i class="birthday icon"></i> {{babyInfo.baby_birth}}
         </div>
       </div>
       <div class="extra content ">
         <div class="ui two buttons">
-          <div class="ui basic olive button" @click="TOGGLE_SIMPLE_POPUP">修改</div>
-          <div class="ui basic orange button" @click="TOGGLE_BASIC_POPUP">删除</div>
+          <div class="ui basic olive button" @click="TOGGLE_SIMPLE_POPUP('#modifyChildModal')">修改</div>
+          <div class="ui basic orange button" @click="TOGGLE_BASIC_POPUP('#removeChildModal')">删除</div>
         </div>
       </div>
     </div>

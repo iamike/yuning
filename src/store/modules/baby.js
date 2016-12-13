@@ -8,9 +8,7 @@ const state = {
 
 const actions = {
   [types.CHILD_ADD] ({commit}, userid) {
-    commit(types.TOGGLE_SIMPLE_POPUP)
     commit(types.CHILD_ADD,userid)
-
     // babyApi.addChild( function(childs){
     //   // return commit()
     //   commit(types.CHILD_ADD)
