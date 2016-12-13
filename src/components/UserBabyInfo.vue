@@ -6,15 +6,21 @@
         <user-baby-card-list></user-baby-card-list>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
 import UserBabyCardList from './UserBabyCardList'
+
 export default {
     name: 'user-baby-info',
     components: {
-      UserBabyCardList
+      UserBabyCardList,
+
+    },
+    mounted () {
+
     }
 }
 </script>

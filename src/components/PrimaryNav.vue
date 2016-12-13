@@ -19,6 +19,7 @@
         <user-login-modal></user-login-modal>
         <course-popup></course-popup>
         <app-download-popup></app-download-popup>
+
       </div>
     </div>
   </div>
@@ -28,6 +29,8 @@
 import CoursePopup from './CoursePopup'
 import AppDownloadPopup from './AppDownloadPopup'
 import UserLoginModal from './UserLoginModal'
+
+
 import UserMenu from './UserMenu'
 import { mapActions } from 'vuex'
 

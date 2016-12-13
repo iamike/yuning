@@ -6,7 +6,7 @@
     </div>
     <div class="image content">
       <div class="ui medium image">
-        <img src="/images/avatar/large/chris.jpg">
+
       </div>
       <div class="description">
         <slot name="description">
@@ -33,7 +33,7 @@
 <script>
 export default {
   name: 'simple-modal',
-  
+
 }
 </script>
 

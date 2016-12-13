@@ -7,21 +7,25 @@ const state = {
 }
 
 const actions = {
-  getAllChilds ({commit}, userid) {
+  [types.CHILD_ADD] ({commit}, userid) {
+    commit(types.TOGGLE_SIMPLE_POPUP)
+    commit(types.CHILD_ADD,userid)
+
+    // babyApi.addChild( function(childs){
+    //   // return commit()
+    //   commit(types.CHILD_ADD)
+    // })
+  },
+  [types.CHILD_GET_ALL] ({commit}, userid) {
     babyApi.getChilds( userid, (childs) => {
       commit(types.CHILD_RECEIVED, childs)
-    })
-  },
-  addChild () {
-    babyApi.addChild( userid, function(childs){
-      // return commit()
     })
   },
 }
 
 const mutations = {
-  [types.TOGGLE_CHILD_ADD_POPUP] (state) {
-    
+  [types.CHILD_ADD] (state, childs) {
+    console.log('mutations add childs')
   },
   [types.CHILD_RECEIVED] (state, childs ) {
     state[types.CHILD_LIST] = childs
@@ -29,7 +33,7 @@ const mutations = {
 }
 
 const getters = {
-  allChilds: state => state[types.CHILD_LIST]
+  [types.CHILD_GET_ALL]: state => state[types.CHILD_LIST]
 }
 
 export default {
