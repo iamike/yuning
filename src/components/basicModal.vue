@@ -1,9 +1,9 @@
 <template lang="html">
-  <div class="ui basic modal">
+  <div class="ui basic modal" id="basicModal">
     <slot name="header">
     <div class="header ui icon">
       <i class="archive icon"></i>
-      删除宝贝资料？
+    DUMMY TEXT
     </div>
     </slot>
     <slot name="content">
@@ -13,7 +13,6 @@
         </div>
       </div>
     </slot>
-
     <slot name="action">
     <div class="actions">
         <div class="ui cancel red inverted button">

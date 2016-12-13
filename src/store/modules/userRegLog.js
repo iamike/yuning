@@ -37,12 +37,12 @@ const actions = {
 const mutations = {
   [types.TOGGLE_USER_LOGIN_POPUP] () {
     // $('.coupled.modal').modal({allowMultiple: true})
-    $('.ui.user-register.modal').modal('hide')
-    $('.ui.user-login.modal').modal('toggle')
+    $('#userRegisterModal').modal('hide')
+    $('#userLoginModal').modal('toggle')
   },
   [types.TOGGLE_USER_REGISTER_POPUP] () {
-    $('.ui.user-login.modal').modal('hide')
-    $('.ui.user-register.modal')
+    $('#userLoginModal').modal('hide')
+    $('#userRegisterModal')
     .modal({
       transition:'vertical flip',
       mobileTransition : 'horizontal flip'

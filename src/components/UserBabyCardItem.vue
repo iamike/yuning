@@ -16,7 +16,7 @@
       </div>
       <div class="extra content ">
         <div class="ui two buttons">
-          <div class="ui basic olive button">修改</div>
+          <div class="ui basic olive button" @click="TOGGLE_SIMPLE_POPUP">修改</div>
           <div class="ui basic orange button" @click="TOGGLE_BASIC_POPUP">删除</div>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default {
   name: 'user-baby-card-item',
   props: ['babyInfo'],
   methods:{
-    ...mapActions(['TOGGLE_BASIC_POPUP'])
+    ...mapActions(['TOGGLE_BASIC_POPUP','TOGGLE_SIMPLE_POPUP'])
   },
 
 }

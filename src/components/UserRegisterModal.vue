@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui modal small user-register coupled">
+  <div class="ui modal small user-register coupled" id="userRegisterModal">
     <i class="close icon"></i>
     <div class="header">
       用户注册

@@ -12,17 +12,21 @@
         </div>
       </div>
 
-
     <user-baby-card-item v-for="child in CHILD_GET_ALL" v-bind:baby-info="child" ></user-baby-card-item>
     <div class="row">
       <div class="column right floated">
         <div class="ui action">
-          <div class="ui orange button right floated" @click="CHILD_ADD">
+          <div class="ui orange button right floated" @click="showAddModal = true">
             <i class="add icon"></i> 添加新宝宝
           </div>
         </div>
       </div>
     </div>
+    <simpleModal>
+      <div class="header" slot="header">
+        修改宝贝信息
+      </div>
+    </simpleModal>
     <basic-modal>
       <div class="header ui icon" slot="header">
         <i class="archive icon"></i>
@@ -36,28 +40,27 @@
         </div>
       </div>
         <div class="actions ui equal width center aligned grid" slot="action">
-            <div class="ui cancel red inverted button">
-              <i class="remove icon"></i>
-              取消
-            </div>
-            <div class="ui ok green inverted button">
-              <i class="checkmark icon"></i>
-              确定
-            </div>
+          <div class="ui cancel red inverted button">
+            <i class="remove icon"></i>
+            取消
+          </div>
+          <div class="ui ok green inverted button">
+            <i class="checkmark icon"></i>
+            确定
+          </div>
         </div>
     </basic-modal>
-    <simple-modal>
-
-    </simple-modal>
-
+    <modal v-if="showAddModal" @close="showAddModal = false">
+      <h3 slot="header">custom header</h3>
+    </modal>
   </div>
 </template>
 
 <script>
 import UserBabyCardItem from './UserBabyCardItem'
+import Modal from './Modal'
 import BasicModal from './BasicModal'
 import SimpleModal from './SimpleModal'
-
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -67,8 +70,16 @@ export default {
     UserBabyCardItem,
     BasicModal,
     SimpleModal,
+    Modal,
+  },
+  data () {
+    return {
+      showAddModal: false,
+      showModifyModal: false,
+    }
   },
   methods:{
+
     ...mapActions(['CHILD_ADD'])
   },
   computed: {

@@ -11,12 +11,12 @@ const actions = {
 
 const mutations = {
   [types.TOGGLE_BASIC_POPUP] (state) {
-    $('.ui.basic.modal').modal({
+    $('#basicModal').modal({
       detachable: false,
     }).modal('toggle')
   },
   [types.TOGGLE_SIMPLE_POPUP] (state) {
-    $('.ui.modal').modal({
+    $('#simpleModal').modal({
       detachable: false,
     }).modal('toggle')
   },

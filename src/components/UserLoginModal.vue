@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui modal user-login coupled">
+  <div class="ui modal user-login coupled" id="userLoginModal">
   <i class="close icon"></i>
   <div class="header">
     用户登录
