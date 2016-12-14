@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'user-baby-card-item',
   props: ['babyInfo'],
@@ -48,26 +50,30 @@ export default {
       let vm = this
       const modalPayload = {
         selector,
+        onShowAction: function () {
+          // transfer the props data into vuex state before the modal popup
+          vm.$store.state.baby.CHILD_DETAIL = vm.babyInfo
+
+          //TODO fix the datepicker problem...
+          vm.$store.state.baby.baby_birth.time = vm.babyInfo.baby_birth
+          // console.log('before change',vm.$store.state.baby.CHILD_DETAIL)
+        },
         onApproveAction: function () {
 
-          vm.$store.dispatch('CHILD_MODIFY_ACTION', {id:vm.babyInfo.id}).then((res)=>{
-            // console.log('remove success')
-              vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
-            }).catch((err)=>{
-              // console.log('remove failure')
-            })
+          // vm.babyInfo.baby_birth = vm.$store.state.baby.baby_birth.time
+          // // console.log('after change',vm.$store.state.baby.CHILD_DETAIL)
+          //
+          // vm.$store.dispatch('CHILD_MODIFY_ACTION', {id:vm.babyInfo.id}).then((res)=>{
+          //   // console.log('remove success')
+          //     vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+          //   }).catch((err)=>{
+          //     // console.log('remove failure')
+          //   })
         },
-        onDenyAction: function() {
-          // window.alert('action canceled')
-        }
       }
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP', modalPayload )
     },
   },
-  mounted () {
-
-  }
-
 }
 </script>
 

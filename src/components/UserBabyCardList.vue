@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="ui two column centered grid profile-list stackable">
 
-      <div class="column" v-if="CHILD_GET_ALL==undefined" >
+      <div class="column" v-if="CHILD_LIST==undefined" >
         <div class="ui icon message">
           <i class="notched circle loading icon"></i>
           <div class="content">
@@ -13,7 +13,7 @@
         </div>
       </div>
 
-    <user-baby-card-item v-for="child in CHILD_GET_ALL" v-bind:baby-info="child" ></user-baby-card-item>
+    <user-baby-card-item v-for="child in CHILD_LIST" v-bind:baby-info="child" ></user-baby-card-item>
 
     <div class="row">
       <div class="column right floated">
@@ -31,7 +31,7 @@
       </div>
 
       <div class="content" slot="content">
-        <user-baby-add-form ></user-baby-add-form>
+        <user-baby-add-form></user-baby-add-form>
       </div>
 
       <div class="actions invisible" slot="actions" style="border:none;" >
@@ -43,7 +43,7 @@
         修改宝贝信息
       </div>
       <div class="content" slot="content">
-        <user-baby-modify-form ></user-baby-modify-form>
+        <user-baby-modify-form></user-baby-modify-form>
       </div>
       <div class="actions invisible" slot="actions" style="border:none;" ></div>
     </simple-modal>
@@ -104,7 +104,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['CHILD_GET_ALL'])
+    ...mapGetters(['CHILD_LIST'])
   },
   created () {
     this.$store.dispatch('CHILD_GET_ALL', this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)

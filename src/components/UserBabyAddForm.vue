@@ -148,7 +148,7 @@ export default {
       onSuccess: addChildAction
     })
 
-    $('.selection.dropdown').dropdown({
+    $('#addChildModal .selection.dropdown').dropdown({
      onChange: function(val) {
         vm.newChildInfo.baby_gender = val
      }
