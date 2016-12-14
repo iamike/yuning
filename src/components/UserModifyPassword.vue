@@ -1,12 +1,15 @@
 <template lang="html">
   <div class="ui grid">
     <div class="sixteen wide column">
-      <div class="ui piled segment raised ">
+      <div class="ui piled segment raised  ">
         <a class="ui red ribbon label"><i class="settings icon"></i> 修改密码</a>
-        <div class="ui two column centered grid">
+        <div class="ui two column centered grid stackable">
           <div class="column">
             <div class="ui form" id="userModifyPasswordForm">
               <div class="field">
+                  <label>将发送验证码至绑定手机:{{mobileBlurNumber}}</label>
+                </div>
+                <div class="field">
                   <label>新密码</label>
                   <div class="ui left icon input">
                     <i class="warning sign icon"></i>
@@ -63,6 +66,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'user-modify-password',
   computed: {
+    mobileBlurNumber () {
+      return this.$store.state.userRegLog.USER_SIGN_IN_INFO.mobile.substring(0,3)+'****'+this.$store.state.userRegLog.USER_SIGN_IN_INFO.mobile.substring(7,11)
+    },
     ...mapGetters(['global','USER_MODIFY_PASSWORD_ERRORS'])
   },
   data () {

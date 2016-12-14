@@ -32,6 +32,7 @@ export default {
   //check in by localStorage data
   checkIn ({commit}) {
     if (localStorage.getItem(types.USER_SIGN_IN_INFO)) {
+
       commit(types.USER_CHECK_IN,JSON.parse(localStorage.getItem(types.USER_SIGN_IN_INFO)))
     }
   },
@@ -43,6 +44,8 @@ export default {
         commit(types.USER_SIGN_IN_SUCCESS,res.body)
         commit(types.TOGGLE_USER_LOGIN_POPUP)
         localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(res.body.result));
+        // localStorage.setItem('loginData', JSON.stringify(loginData));
+
         resolve()
       } else {
         commit(types.USER_SIGN_IN_FAILURE, res.body)
@@ -61,6 +64,7 @@ export default {
   },
   signOut ({commit},resolve, reject){
     localStorage.removeItem(types.USER_SIGN_IN_INFO)
+    // localStorage.removeItem('loginData')
     commit(types.USER_SIGN_OUT)
     resolve()
   },

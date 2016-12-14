@@ -160,9 +160,15 @@ export default {
       vm.$store.dispatch('USER_MODIFY_INFO_ACTION', JSON.parse(JSON.stringify(vm.changeRequest))).then((res)=>{
 
           setTimeout(()=>{
-            
+
             vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS = undefined
-            console.log('modifyInfo success',vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS)
+            //TODO it shall be refresh the page, and get the lastest user profile from server
+            vm.$store.state.userRegLog.USER_SIGN_IN_INFO.nickname = vm.changeRequest.nickname
+            vm.$store.state.userRegLog.USER_SIGN_IN_INFO.gender = vm.changeRequest.gender
+            vm.$store.state.userRegLog.USER_SIGN_IN_INFO.email = vm.changeRequest.email
+            vm.$store.state.userRegLog.USER_SIGN_IN_INFO.region = vm.changeRequest.region
+
+            // console.log('modifyInfo success',vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS)
 
           },2000)
       })
