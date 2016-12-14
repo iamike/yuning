@@ -23,9 +23,6 @@
       </div>
     </div>
     <div class="actions" >
-        <div class="ui black deny button">
-          取消
-        </div>
         <div class="ui green right labeled icon button submit">
           完成，提交
           <i class="checkmark icon"></i>

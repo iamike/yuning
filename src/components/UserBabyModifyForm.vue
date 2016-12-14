@@ -26,12 +26,9 @@
         </div>
       </div>
       <div class="actions" >
-          <div class="ui black deny button">
-            取消
-          </div>
           <div class="ui green right labeled icon button submit">
             完成，提交
-            <i class="checkmark icon"></i>
+            <i class="save icon"></i>
           </div>
       </div>
       <!-- errors from frontend -->
@@ -122,37 +119,15 @@ export default {
     const modifyChildAction = (event) => {
       // copy the datepicker value into vuex state
       vm.CHILD_DETAIL.baby_birth = vm.$store.state.baby.baby_birth.time
-      // console.log('after change',vm.$store.state.baby.CHILD_DETAIL)
-      // console.log(vm.CHILD_DETAIL)
 
       vm.$store.dispatch('CHILD_MODIFY_ACTION', JSON.parse(JSON.stringify(vm.CHILD_DETAIL))).then((res)=>{
-        // console.log('remove success')
+        // notify the list view to update
           vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
-        }).catch((err)=>{
-          // console.log('remove failure')
-        })
 
-      // //fix event problem
-      // vm.childInfo.baby_birth = vm.baby_birth.time
-      // // check data before send
-      // vm.$store.dispatch('CHILD_ADD_ACTION', JSON.parse(JSON.stringify(vm.childInfo))).then(()=>{
-      //
-      //   vm.childInfo =  {
-      //         user_id: vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id,
-      //         baby_name: '',
-      //         baby_gender: 1,
-      //         baby_birth: '',
-      //       }
-      //       setTimeout(()=>{
-      //         const modalPayload = {
-      //           selector:'#addChildModal',
-      //         }
-      //         vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',modalPayload)
-      //         vm.$store.state.baby.CHILD_MODIFY_ERRORS = undefined
-      //         vm.$store.dispatch('CHILD_GET_ALL',vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
-      //
-      //       },2000)
-      // })
+        }).catch((err)=>{
+          // TODO ask backend about this
+          console.log('modify failure')
+        })
     }
 
     $modifyChildForm.form({

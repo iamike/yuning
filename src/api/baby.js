@@ -73,8 +73,15 @@ export default {
     //connection success
     const success = res => {
       if (res.body.isSuccess) {
-        commit(types.CHILD_MODIFY_SUCCESS, res.body)
-        resolve(res.body)
+        // console.log(res.body)
+        if (res.body.isSuccess==true){
+          commit(types.CHILD_MODIFY_SUCCESS, res.body)
+          resolve(res.body)
+        } else {
+          commit(types.CHILD_MODIFY_FAILURE, res.body)
+          reject(res.body)
+        }
+
       } else {
         commit(types.CHILD_MODIFY_FAILURE, res.body)
         reject(res.body)
