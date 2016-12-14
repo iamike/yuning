@@ -4,7 +4,7 @@
       <img class="ui logo left floated" src="../assets/images/logo.png" alt="" />
       <div class="ui large container menu right floated">
         <a class="toc item "><i class="sidebar icon"></i></a>
-        <router-link class="green item" :to="{ name: 'home' }"><i class="icon home"></i> 首页</router-link>
+        <router-link class="green item" :to="{ name: 'home' }" style="color:#9dca4c;"><i class="icon home"></i> 首页</router-link>
         <a class="ui item courseCenter" href="#" @click.prevent style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
         <router-link class="item blue" :to="{ name: 'bookstore' }" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>

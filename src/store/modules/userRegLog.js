@@ -10,6 +10,7 @@ const state = {
 const actions = {
   [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
     commit(types.TOGGLE_USER_LOGIN_POPUP)
+
   },
   [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
     commit(types.TOGGLE_USER_REGISTER_POPUP)

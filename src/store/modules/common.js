@@ -5,19 +5,35 @@ const actions = {
     commit(types.TOGGLE_BASIC_POPUP,modalSelector)
   },
   [types.TOGGLE_SIMPLE_POPUP] ({commit},modalSelector) {
+
     commit(types.TOGGLE_SIMPLE_POPUP,modalSelector)
   },
 }
 
 const mutations = {
-  [types.TOGGLE_BASIC_POPUP] (state, modalSelector) {
-    $(modalSelector).modal({
+  [types.TOGGLE_BASIC_POPUP] (state, {selector,onApproveAction, onDenyAction}) {
+
+    $(selector).modal({
       detachable: false,
-    }).modal('toggle')
+      onDeny    : function(){
+        onDenyAction && onDenyAction()
+      },
+      onApprove : function() {
+        onApproveAction && onApproveAction()
+      },
+    })
+    .modal('toggle')
   },
-  [types.TOGGLE_SIMPLE_POPUP] (state, modalSelector) {
-    $(modalSelector).modal({
+  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onApproveAction, onDenyAction}) {
+
+    $(selector).modal({
       detachable: false,
+      onDeny    : function(){
+        onDenyAction && onDenyAction()
+      },
+      onApprove : function() {
+        onApproveAction && onApproveAction()
+      },
     }).modal('toggle')
   },
 }

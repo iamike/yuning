@@ -21,7 +21,6 @@
     </slot>
     <slot name="actions">
       <div class="actions">
-        <slot name="actions">
           <div class="ui black deny button">
             Nope
           </div>
@@ -29,7 +28,6 @@
             Yep, that's me
             <i class="checkmark icon"></i>
           </div>
-        </slot>
       </div>
     </slot>
   </div>
