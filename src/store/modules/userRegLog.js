@@ -21,8 +21,9 @@ const actions = {
       userApi.register({commit}, data, resolve, reject)
     })
   },
-  [types.USER_CHECK_IN] ({commit}, data) {
+  [types.USER_CHECK_IN] ({commit,state}, data) {
     userApi.checkIn({commit}, data)
+
   },
   [types.USER_SIGN_IN_ACTION] ({commit}, data )  {
     return new Promise((resolve, reject) => {
@@ -56,6 +57,10 @@ const mutations = {
   },
   [types.USER_REGISTER_FAILURE] (state, payload) {
     state[types.USER_REGISTER_ERRORS] = payload
+  },
+  // CHECK in
+  [types.USER_CHECK_IN] (state, payload) {
+    state[types.USER_SIGN_IN_INFO] = payload
   },
   // SIGN IN
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {

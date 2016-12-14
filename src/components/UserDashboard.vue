@@ -16,8 +16,7 @@ export default {
     UserNav
   },
   beforeRouteEnter (route, from, next) {
-    let userInfo = window.localStorage.USER_SIGN_IN_INFO
-    if (userInfo) {
+    if (window.localStorage.USER_SIGN_IN_INFO) {
       next(vm => {
         // console.log(vm)
       })

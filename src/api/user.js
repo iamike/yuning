@@ -32,8 +32,7 @@ export default {
   //check in by localStorage data
   checkIn ({commit}) {
     if (localStorage.getItem(types.USER_SIGN_IN_INFO)) {
-      const userInfo = JSON.parse(localStorage.getItem(types.USER_SIGN_IN_INFO))
-      commit(types.USER_SIGN_IN_SUCCESS, userInfo)
+      commit(types.USER_CHECK_IN,JSON.parse(localStorage.getItem(types.USER_SIGN_IN_INFO)))
     }
   },
   signIn ({commit}, loginData, resolve, reject ) {

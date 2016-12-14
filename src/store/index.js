@@ -9,9 +9,6 @@ import userInfoModify from './modules/userInfoModify'
 import userPasswordModify from './modules/userPasswordModify'
 import baby from './modules/baby'
 
-// console.log(userRegLog)
-// console.log(userInfoModify)
-
 /* vuex */
 Vue.use(Vuex)
 

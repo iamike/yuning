@@ -129,9 +129,11 @@ export default {
               baby_birth: '',
             }
             setTimeout(()=>{
+
               const modalPayload = {
                 selector:'#addChildModal',
               }
+
               vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',modalPayload)
               vm.$store.state.baby.CHILD_ADD_ERRORS = undefined
               vm.$store.dispatch('CHILD_GET_ALL',vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
