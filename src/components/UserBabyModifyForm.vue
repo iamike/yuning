@@ -56,7 +56,7 @@ export default {
     'date-picker': myDatepicker,
   },
   computed: {
-    ...mapGetters(['CHILD_ADD_ERRORS'])
+    ...mapGetters(['CHILD_MODIFY_ERRORS'])
   },
   data () {
     return {
@@ -89,7 +89,7 @@ export default {
   mounted () {
     // INITIALISE THE ADD CHILD FORM
     const vm = this
-    const $addChildForm = $('#addChildModal .ui.form')
+    const $addChildForm = $('#modifyChildModal .ui.form')
     const addChildRules = {
         baby_name: {
           identifier: 'baby_name',

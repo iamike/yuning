@@ -16,8 +16,8 @@
       </div>
       <div class="extra content ">
         <div class="ui two buttons">
-          <div class="ui basic olive button" @click="toggleSimplePopup('#modifyChildModal')">修改</div>
-          <div class="ui basic orange button" @click="toggleBasicPopup('#removeChildModal')">删除</div>
+          <div class="ui basic olive button" @click="toggleModifyPopup('#modifyChildModal')">修改</div>
+          <div class="ui basic orange button" @click="toggleRemovePopup('#removeChildModal')">删除</div>
         </div>
       </div>
     </div>
@@ -29,29 +29,36 @@ export default {
   name: 'user-baby-card-item',
   props: ['babyInfo'],
   methods:{
-    toggleBasicPopup(selector){
+    toggleRemovePopup(selector){
       let vm = this
       const modalPayload = {
         selector,
         onApproveAction: function () {
           vm.$store.dispatch('CHILD_REMOVE_ACTION', {id:vm.babyInfo.id}).then((res)=>{
-            console.log('remove success')
+            // console.log('remove success')
               vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
             }).catch((err)=>{
-              console.log('remove failure')
+              // console.log('remove failure')
             })
         }
       }
       this.$store.dispatch('TOGGLE_BASIC_POPUP', modalPayload )
     },
-    toggleSimplePopup(selector){
+    toggleModifyPopup(selector){
+      let vm = this
       const modalPayload = {
         selector,
         onApproveAction: function () {
-          window.alert('test baby id:1231231')
+
+          vm.$store.dispatch('CHILD_MODIFY_ACTION', {id:vm.babyInfo.id}).then((res)=>{
+            // console.log('remove success')
+              vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+            }).catch((err)=>{
+              // console.log('remove failure')
+            })
         },
         onDenyAction: function() {
-          window.alert('action canceled')
+          // window.alert('action canceled')
         }
       }
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP', modalPayload )

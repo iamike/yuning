@@ -18,7 +18,7 @@
     <div class="row">
       <div class="column right floated">
         <div class="ui action">
-          <div class="ui orange button right floated" @click="toggleAddChildPopup('#addChildModal')">
+          <div class="ui orange button right floated" @click="toggleAddPopup('#addChildModal')">
             <i class="add icon"></i> 添加新宝宝
           </div>
         </div>
@@ -45,8 +45,7 @@
       <div class="content" slot="content">
         <user-baby-modify-form ></user-baby-modify-form>
       </div>
-      <div class="actions invisible" slot="actions" style="border:none;" >
-      </div>
+      <div class="actions invisible" slot="actions" style="border:none;" ></div>
     </simple-modal>
 
     <basic-modal id="removeChildModal">
@@ -61,16 +60,18 @@
           </div>
         </div>
       </div>
-        <div class="actions ui equal width center aligned grid" slot="action">
-          <div class="ui cancel red inverted button">
-            <i class="remove icon"></i>
-            取消
-          </div>
-          <div class="ui ok green inverted button">
-            <i class="checkmark icon"></i>
-            确定
-          </div>
+
+      <div class="actions ui equal width center aligned grid" slot="action">
+        <div class="ui cancel red inverted button">
+          <i class="remove icon"></i>
+          取消
         </div>
+        <div class="ui ok green inverted button">
+          <i class="checkmark icon"></i>
+          确定
+        </div>
+      </div>
+
     </basic-modal>
   </div>
 </template>
@@ -94,7 +95,7 @@ export default {
     UserBabyModifyForm,
   },
   methods:{
-    toggleAddChildPopup (selector) {
+    toggleAddPopup (selector) {
       let vm = this
       const modalPayload = {
         selector,

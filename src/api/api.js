@@ -47,6 +47,9 @@ export const API_PATH_USER_GET_CHILD = '/czb-server/czb/user/userChild'
 // 2.14 user_id*|baby_name*|baby_gender*|baby_birth*
 export const API_PATH_USER_ADD_CHILD = '/czb-server/czb/user/saveChild'
 
+// 2.15 id*|baby_name@|baby_gender@|baby_birth@
+export const API_PATH_USER_MODIFY_CHILD = '/czb-server/czb/user/editChild'
+
 // 2.15 id*
 export const API_PATH_USER_REMOVE_CHILD = '/czb-server/czb/user/deleteChild'
 
