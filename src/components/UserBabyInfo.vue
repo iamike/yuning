@@ -17,11 +17,7 @@ export default {
     name: 'user-baby-info',
     components: {
       UserBabyCardList,
-
     },
-    mounted () {
-
-    }
 }
 </script>
 

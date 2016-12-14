@@ -22,9 +22,9 @@
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="USER_SIGN_IN_ERRORS" class="ui visible error message">
+    <div v-if="USER_SIGN_IN_ERRORS" class="ui visible message" v-bind:class="USER_SIGN_IN_ERRORS.isSuccess==true?'success':'error'">
       <ul class="list">
-        <li>{{ USER_SIGN_IN_ERRORS }}</li>
+        <li>{{ USER_SIGN_IN_ERRORS.errorMsg }}</li>
       </ul>
     </div>
   </div>
@@ -73,7 +73,8 @@ export default {
           .then((res) => {
             // success
             // console.log('success from components')
-            vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id )
+              vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+
           })
           .catch((err) => {
             // failure

@@ -116,7 +116,6 @@ export default {
   ]),
   mounted () {
     const vm = this
-    const global = vm.$store.state.global
     const $form = $('#userModifyInfoForm')
     const $formTrigger = $('#userModifyInfoForm .submit')
 
@@ -158,7 +157,14 @@ export default {
       })
     }
     const submitAction = () => {
-      vm.$store.dispatch('USER_MODIFY_INFO_ACTION', vm.changeRequest )
+      vm.$store.dispatch('USER_MODIFY_INFO_ACTION', JSON.parse(JSON.stringify(vm.changeRequest))).then((res)=>{
+
+          setTimeout(()=>{
+            vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS = undefined
+            console.log('modifyInfo success',vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS)
+
+          },2000)
+      })
     }
     // form submit events
     $formTrigger.on('click',function(){

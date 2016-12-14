@@ -40,28 +40,19 @@ export default {
     // success get info from server
     let success = (res) => {
       if (res.body.isSuccess == true) {
-        logCorrect(res.body.result)
+        // console.log(res.body.result)
+        commit(types.USER_SIGN_IN_SUCCESS,res.body)
+        commit(types.TOGGLE_USER_LOGIN_POPUP)
+        localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(res.body.result));
+        resolve()
       } else {
-        logError(res.body.errorMsg)
+        commit(types.USER_SIGN_IN_FAILURE, res.body)
+        reject()
       }
     }
     // connection problem?
     let failure = (err) => {
       commit(types.USER_SIGN_IN_FAILURE, '网络连接问题...')
-    }
-
-    // data matched
-    let logCorrect = (payload) => {
-      commit(types.USER_SIGN_IN_SUCCESS, payload)
-      commit(types.TOGGLE_USER_LOGIN_POPUP)
-      localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(payload));
-      resolve()
-    }
-
-    // data has errors
-    let logError = (payload) => {
-      commit(types.USER_SIGN_IN_FAILURE, payload)
-      reject()
     }
 
     Vue.http
@@ -74,11 +65,20 @@ export default {
     commit(types.USER_SIGN_OUT)
     resolve()
   },
-  modifyInfo ( {commit}, data ) {
-
+  modifyInfo ( {commit}, data , resolve, reject) {
+    // console.log('api received data = ', data)
     const success = (res) => {
-      // console.log(commit)
-      commit(types.USER_MODIFY_INFO_SUCCESS, res.body)
+      if (res.body.isSuccess == true){
+        // console.log('user data updated',res.body)
+
+        commit(types.USER_MODIFY_INFO_SUCCESS, res.body)
+        resolve()
+      } else {
+        // console.log(res.body)
+
+        commit(types.USER_MODIFY_INFO_FAILURE, res.body)
+        reject()
+      }
     }
     const failure = err => {
       commit(types.USER_MODIFY_INFO_FAILURE, res.body)

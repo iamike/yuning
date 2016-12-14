@@ -59,8 +59,9 @@ const mutations = {
   },
   // SIGN IN
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {
-    state[types.USER_SIGN_IN_INFO] = payload
-    state[types.USER_SIGN_IN_ERRORS] = 'success'
+    // console.log('user sign in success in mutations', payload)
+    state[types.USER_SIGN_IN_INFO] = payload.result
+    state[types.USER_SIGN_IN_ERRORS] = payload
   },
   [types.USER_SIGN_IN_FAILURE] (state, payload) {
     state[types.USER_SIGN_IN_INFO] = undefined

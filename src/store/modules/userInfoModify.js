@@ -7,21 +7,20 @@ const state = {
 
 const actions = {
   [types.USER_MODIFY_INFO_ACTION]({ commit }, data) {
-    if (data.user_id) {
-      console.log(data.user_id)
-      userApi.modifyInfo({ commit }, data)
-    }
+    return new Promise((resolve,reject)=>{
+      userApi.modifyInfo({ commit }, data, resolve, reject)
+    })
   },
 }
 
 const mutations = {
   [types.USER_MODIFY_INFO_SUCCESS](state, payload) {
     state[types.USER_MODIFY_INFO_ERRORS] = payload
-    console.log('successful, data updated', payload)
+    // console.log('successful, data updated', payload)
   },
   [types.USER_MODIFY_INFO_FAILURE](state, payload) {
     state[types.USER_MODIFY_INFO_ERRORS] = payload
-    console.log('failure, data has not updated', payload)
+    // console.log('failure, data has not updated', payload)
   },
 }
 
