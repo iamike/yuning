@@ -43,16 +43,9 @@
         修改宝贝信息
       </div>
       <div class="content" slot="content">
-
+        <user-baby-modify-form ></user-baby-modify-form>
       </div>
-      <div class="actions" slot="actions">
-        <div class="ui black deny button">
-          取消
-        </div>
-        <div class="ui positive right labeled icon button submit">
-          完成，提交
-          <i class="checkmark icon"></i>
-        </div>
+      <div class="actions invisible" slot="actions" style="border:none;" >
       </div>
     </simple-modal>
 
@@ -87,8 +80,9 @@ import UserBabyCardItem from './UserBabyCardItem'
 import BasicModal from './BasicModal'
 import SimpleModal from './SimpleModal'
 import UserBabyAddForm from './UserBabyAddForm'
+import UserBabyModifyForm from './UserBabyModifyForm'
 
-import { mapGetters, mapActions} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-baby-card-list',
@@ -97,11 +91,7 @@ export default {
     BasicModal,
     SimpleModal,
     UserBabyAddForm,
-  },
-  data () {
-    return {
-
-    }
+    UserBabyModifyForm,
   },
   methods:{
     toggleAddChildPopup (selector) {
@@ -110,21 +100,14 @@ export default {
         selector,
       }
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP',modalPayload)
-      // TOGGLE_SIMPLE_POPUP('#addChildModal')
     },
-    ...mapActions(['TOGGLE_SIMPLE_POPUP'])
   },
   computed: {
     ...mapGetters(['CHILD_GET_ALL'])
   },
   created () {
-    // GET ALL CHILDS INFOMATION FROM THE DATABASE THROUGH THE API CALL
     this.$store.dispatch('CHILD_GET_ALL', this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
   },
-  mounted () {
-
-
-  }
 }
 </script>
 
@@ -132,7 +115,7 @@ export default {
 .cov-vue-date {
   width: 100%;
 }
-#addChildModal {
+#addChildModal, #modifyChildModal {
 .ui.form {
     padding-top: 0px;
   }

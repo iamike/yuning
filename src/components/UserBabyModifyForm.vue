@@ -51,7 +51,7 @@ import myDatepicker from 'vue-datepicker'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'user-baby-add-form',
+  name: 'user-baby-modify-form',
   components: {
     'date-picker': myDatepicker,
   },
