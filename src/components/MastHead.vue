@@ -88,7 +88,11 @@ export default {
         })
       }
     }
-  }
+  },
+  destroyed () {
+    // console.log($('.brandleaf'))
+    $('.brandleaf,.introduction .ui.statistic .label, .introduction .ui.statistic .value, .introduction .slogan, .introduction .green.button').transition('destroyed')
+  },
 }
 </script>
 <style>

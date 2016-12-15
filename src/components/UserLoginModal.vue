@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui modal user-login coupled" id="userLoginModal">
+  <div class="ui modal user-login coupled" id="userLoginModal" v-if="USER_SIGN_IN_INFO==undefined">
   <i class="close icon"></i>
   <div class="header">
     用户登录
@@ -24,7 +24,7 @@
 <script>
 import UserLoginForm from './UserLoginForm'
 import UserRegisterModal from './UserRegisterModal'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'user-login-modal',
@@ -32,7 +32,14 @@ export default {
     UserLoginForm,
     UserRegisterModal
   },
-  methods: mapActions(['TOGGLE_USER_REGISTER_POPUP'])
+  created () {
+    // console.log(this.USER_SIGN_IN_INFO==undefined)
+  },
+  computed: {
+    ...mapGetters(['USER_SIGN_IN_INFO'])
+  },
+  methods: mapActions(['TOGGLE_USER_REGISTER_POPUP']),
+
 }
 </script>
 

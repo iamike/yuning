@@ -29,7 +29,8 @@ export default {
     //problem: semantic need performance issue for set the sidebar inside the #app div.
     $('.ui.sidebar').sidebar('attach events', '.toc.item')
 
-  }
+  },
+
 }
 </script>
 
@@ -41,7 +42,10 @@ export default {
   .mainContent {
     padding-top: 108px;
     min-height: 95vh;
+    @media only screen and (max-width: 700px) {
+      padding-top: 77px;
 
+    }
   }
 </style>
 <style >

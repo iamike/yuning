@@ -53,5 +53,8 @@ export const API_PATH_USER_MODIFY_CHILD = '/czb-server/czb/user/editChild'
 // 2.15 id*
 export const API_PATH_USER_REMOVE_CHILD = '/czb-server/czb/user/deleteChild'
 
+// 2.16 avatar
+export const API_PATH_USER_UPLOAD_AVATAR = '/czb-server/czb/user/uploadAvatar'
+
 // 2.19 username*|password*|from='web'*|type='1'
 export const API_PATH_USER_LOGIN = '/czb-server/czb/user/login'

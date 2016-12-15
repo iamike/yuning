@@ -43,7 +43,7 @@ export default {
         // console.log(res.body.result)
         commit(types.USER_SIGN_IN_SUCCESS,res.body)
         commit(types.TOGGLE_USER_LOGIN_POPUP)
-        localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(res.body.result));
+        localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(res.body.result))
         // localStorage.setItem('loginData', JSON.stringify(loginData));
 
         resolve()

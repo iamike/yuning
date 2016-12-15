@@ -74,6 +74,10 @@ export default {
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP', modalPayload )
     },
   },
+  destroyed () {
+
+
+  },
 }
 </script>
 

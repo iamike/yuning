@@ -61,7 +61,7 @@ export default {
   },
   mounted () {
     const vm = this
-    const global = vm.$store.state.global
+    // const global = vm.$store.state.global
     const $formTrigger = $('#userRegisterForm .submit')
     const verifyRules = {
       mobile: {
@@ -115,7 +115,7 @@ export default {
       vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
         // console.log('success send verify code to',res)
         vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
-        
+
       }).catch((err)=>{
         // console.log('failure send verify code',err)
       })
@@ -147,6 +147,9 @@ export default {
       }
     })
 
+  },
+  destroyed () {
+    $('#userRegisterForm').form('destroy')
   }
 }
 </script>

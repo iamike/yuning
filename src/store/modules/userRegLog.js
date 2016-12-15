@@ -10,7 +10,6 @@ const state = {
 const actions = {
   [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
     commit(types.TOGGLE_USER_LOGIN_POPUP)
-
   },
   [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
     commit(types.TOGGLE_USER_REGISTER_POPUP)
@@ -23,7 +22,6 @@ const actions = {
   },
   [types.USER_CHECK_IN] ({commit,state}, data) {
     userApi.checkIn({commit}, data)
-
   },
   [types.USER_SIGN_IN_ACTION] ({commit}, data )  {
     return new Promise((resolve, reject) => {

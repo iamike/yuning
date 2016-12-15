@@ -162,11 +162,24 @@ export default {
           setTimeout(()=>{
 
             vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS = undefined
+
             //TODO it shall be refresh the page, and get the lastest user profile from server
             vm.$store.state.userRegLog.USER_SIGN_IN_INFO.nickname = vm.changeRequest.nickname
             vm.$store.state.userRegLog.USER_SIGN_IN_INFO.gender = vm.changeRequest.gender
             vm.$store.state.userRegLog.USER_SIGN_IN_INFO.email = vm.changeRequest.email
             vm.$store.state.userRegLog.USER_SIGN_IN_INFO.region = vm.changeRequest.region
+
+            // modify the local storage
+            let localStorageData = JSON.parse(localStorage.getItem('USER_SIGN_IN_INFO'))
+            localStorageData.nickname = vm.changeRequest.nickname
+            localStorageData.gender = vm.changeRequest.gender
+            localStorageData.email = vm.changeRequest.email
+            localStorageData.region = vm.changeRequest.region
+
+            // console.log(localStorageData)
+
+            localStorage.setItem('USER_SIGN_IN_INFO', JSON.stringify(localStorageData))
+
 
             // console.log('modifyInfo success',vm.$store.state.userInfoModify.USER_MODIFY_INFO_ERRORS)
 

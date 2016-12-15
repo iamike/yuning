@@ -39,11 +39,6 @@ export default {
     MastHead2,
     MastHead3
   },
-  data () {
-    return {
-      test:1
-    }
-  },
   mounted: function () {
     // console.log(this.$children[1].animation())
     $("#stickyFooter").addClass('fixed bottom sticky')
@@ -73,7 +68,10 @@ export default {
   destroyed () {
     // console.log('test')
     $("#stickyFooter").removeClass('fixed bottom sticky')
+    // console.log('destroyed')
+
   }
+
 }
 </script>
 

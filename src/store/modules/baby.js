@@ -25,7 +25,7 @@ const actions = {
     })
   },
   [types.CHILD_GET_DETAIL] ({commit, state }, babyid) {
-    console.log('ready to modify babyid',babyid)
+    // console.log('ready to modify babyid',babyid)
     state[types.CHILD_DETAIL] = babyid
   },
   [types.CHILD_ADD_ACTION] ({commit}, data) {

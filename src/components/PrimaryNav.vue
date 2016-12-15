@@ -103,8 +103,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', end
   }
 
   @media only screen and (max-width: 700px) {
-    .item {display: none;}
 
+    .item {display: none;}
+    #userLogin {display: none;}
     .toc.item {
       // float: left;
       display: block;

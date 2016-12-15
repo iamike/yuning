@@ -154,6 +154,10 @@ export default {
         formAction(submitRules, submitAction)
       }
     })
+  },
+  destroyed () {
+    $('#userModifyPasswordForm').form('destroy')
+
   }
 }
 </script>

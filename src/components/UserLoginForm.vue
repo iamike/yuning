@@ -82,6 +82,10 @@ export default {
           })
         },
       })
+  },
+  destoryed () {
+    // console.log('userlogin destroyed')
+    $('#userLoginForm').form('destroy')
   }
 }
 </script>

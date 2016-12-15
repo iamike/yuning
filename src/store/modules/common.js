@@ -37,9 +37,8 @@ const mutations = {
         onDenyAction && onDenyAction()
       },
       onApprove : function() {
-        console.log('test111')
 
-        console.log('test')
+        // console.log('test')
         onApproveAction && onApproveAction()
       },
     }).modal('toggle')
