@@ -14,7 +14,7 @@ export default {
       }
     }
     const failure = err => {
-      commit(types.USER_REGISTER_FAILURE, types.CONNECTION_ERROR)
+      // commit(types.USER_REGISTER_FAILURE, types.CONNECTION_ERROR)
       reject()
     }
     Vue.http
@@ -26,8 +26,8 @@ export default {
       commit(types.USER_CHECK_IN,JSON.parse(localStorage.getItem(types.USER_SIGN_IN_INFO)))
     }
   },
-  signIn ({commit}, data, resolve, reject ) {
-    const success = (res) => {
+  signIn ({commit}, data, resolve, reject) {
+    const success = res => {
       if (res.body.isSuccess == true) {
         commit(types.USER_SIGN_IN_SUCCESS,res.body)
         commit(types.TOGGLE_USER_LOGIN_POPUP)
@@ -38,7 +38,7 @@ export default {
         reject()
       }
     }
-    const failure = (err) => {
+    const failure = err => {
       commit(types.USER_SIGN_IN_FAILURE,  types.CONNECTION_ERROR)
       reject()
     }
@@ -52,7 +52,7 @@ export default {
     resolve()
   },
   modifyInfo ( {commit}, data , resolve, reject) {
-    const success = (res) => {
+    const success = res => {
       if (res.body.isSuccess == true){
         commit(types.USER_MODIFY_INFO_SUCCESS, res.body)
         resolve()
@@ -69,8 +69,7 @@ export default {
     .then(success, failure)
   },
   modifyPassword ({commit}, data, resolve, reject) {
-    const json = JSON.parse(JSON.stringify(data))
-    const success = (res) => {
+    const success = res => {
     if (res.body.isSuccess) {
         commit(types.USER_MODIFY_PASSWORD_SUCCESS, res.body)
         resolve()
@@ -84,7 +83,7 @@ export default {
       reject()
     }
     Vue.http
-    .post(api.API_ROOT + api.API_PATH_USER_MODIFY_PASSWORD, json)
+    .post(api.API_ROOT + api.API_PATH_USER_MODIFY_PASSWORD, JSON.parse(JSON.stringify(data)))
     .then(success, failure)
   },
 }

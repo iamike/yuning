@@ -27,13 +27,13 @@
     </div>
     <div class="ui submit olive button">注册</div>
     <!-- errors from frontend -->
-    <div class="ui error message">
+    <div class="ui error message front-end">
       <ul>
         <li></li>
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="USER_REGISTER_ERRORS"  class="ui visible message" v-bind:class="USER_REGISTER_ERRORS.isSuccess==true?'success':'error'">
+    <div v-if="USER_REGISTER_ERRORS" class="ui visible message back-end" v-bind:class="USER_REGISTER_ERRORS.isSuccess==true?'success':'error'">
       <ul class="list">
         <li>{{ USER_REGISTER_ERRORS.errorMsg }}</li>
       </ul>
@@ -61,7 +61,6 @@ export default {
   },
   mounted () {
     const vm = this
-    // const global = vm.$store.state.global
     const $formTrigger = $('#userRegisterForm .submit')
     const verifyRules = {
       mobile: {
@@ -105,44 +104,42 @@ export default {
     }
     const formAction = function(rules, validateAction) {
       $('#userRegisterForm').form({
+        selector: {
+          message: '.error.message.front-end'
+        },
         fields: rules,
         onSuccess: function(event){
           validateAction && validateAction()
+          $('.message.back-end').show()
+
+        },
+        onFailure: function(event){
+          $('.message.back-end').hide()
         }
       })
     }
     const verifyAction = () => {
       vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
-        // console.log('success send verify code to',res)
         vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
-
       }).catch((err)=>{
-        // console.log('failure send verify code',err)
+
       })
     }
     const registerAction = () => {
       vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
-        // console.log('success submit form values',res)
         setTimeout(()=>{
-
           vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
-
         }, 1500)
-
       }).catch((err)=>{
-        // console.log('failure submit form values',err)
+
       })
     }
     // form submit events
     $formTrigger.on('click',function(){
-
-      //re-initialize the form plugin, so make it only response for the currently action's error message
       $('#userRegisterForm').form('destory')
       if ($(this).attr('data-mode') == 'verifyMode') {
-        // console.log('verifyMode')
         formAction(verifyRules, verifyAction)
       } else {
-        // console.log('submitMode')
         formAction(registerRules, registerAction)
       }
     })

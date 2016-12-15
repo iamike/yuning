@@ -54,6 +54,7 @@ const mutations = {
     state[types.USER_REGISTER_ERRORS] = payload
   },
   [types.USER_REGISTER_FAILURE] (state, payload) {
+    console.log(payload)
     state[types.USER_REGISTER_ERRORS] = payload
   },
   // CHECK in
@@ -62,7 +63,6 @@ const mutations = {
   },
   // SIGN IN
   [types.USER_SIGN_IN_SUCCESS] (state, payload) {
-    // console.log('user sign in success in mutations', payload)
     state[types.USER_SIGN_IN_INFO] = payload.result
     state[types.USER_SIGN_IN_ERRORS] = payload
   },
