@@ -2,6 +2,12 @@
 export const TOGGLE_SIMPLE_POPUP = 'TOGGLE_SIMPLE_POPUP'
 export const TOGGLE_BASIC_POPUP = 'TOGGLE_BASIC_POPUP'
 
+// export global
+export const CONNECTION_ERROR = {
+  isSuccess:false,
+  errorMsg: '网络连接有问题，请稍候再试...',
+}
+
 // VERIFY CODE
 export const GET_VERIFY_CODE = 'GET_VERIFY_CODE'
 export const RE_SEND_VERIFY_CODE  = 'RE_SEND_VERIFY_CODE'

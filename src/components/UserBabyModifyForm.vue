@@ -25,6 +25,7 @@
           </div>
         </div>
       </div>
+
       <div class="actions" >
           <div class="ui green right labeled icon button submit">
             完成，提交
@@ -44,10 +45,12 @@
       </ul>
     </div>
   </div>
+
 </template>
 
 <script>
 import myDatepicker from 'vue-datepicker'
+
 import { mapGetters } from 'vuex'
 
 export default {
@@ -140,6 +143,10 @@ export default {
         vm.$store.state.baby.CHILD_DETAIL.baby_gender = val
      }
     })
+  },
+  destroyed () {
+    $('#modifyChildModal').dropdown('destroy')
+    
   }
 }
 </script>
