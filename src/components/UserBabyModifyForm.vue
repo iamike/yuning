@@ -146,7 +146,7 @@ export default {
   },
   destroyed () {
     $('#modifyChildModal').dropdown('destroy')
-    
+
   }
 }
 </script>

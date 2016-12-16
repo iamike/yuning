@@ -54,7 +54,7 @@ const mutations = {
     state[types.USER_REGISTER_ERRORS] = payload
   },
   [types.USER_REGISTER_FAILURE] (state, payload) {
-    console.log(payload)
+    // console.log(payload)
     state[types.USER_REGISTER_ERRORS] = payload
   },
   // CHECK in

@@ -136,7 +136,7 @@ export default {
     }
     // form submit events
     $formTrigger.on('click',function(){
-      $('#userRegisterForm').form('destory')
+      $('#userRegisterForm').form('destroy')
       if ($(this).attr('data-mode') == 'verifyMode') {
         formAction(verifyRules, verifyAction)
       } else {

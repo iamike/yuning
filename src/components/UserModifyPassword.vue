@@ -145,7 +145,7 @@ export default {
     // form submit events
     $formTrigger.on('click',function(){
       //re-initialize the form plugin, so make it only response for the currently action's error message
-      $form.form('destory')
+      $form.form('destroy')
       if ($(this).attr('data-mode') == 'verifyMode') {
         // console.log('verifyMode')
         formAction(verifyRules, verifyAction)

@@ -5,11 +5,7 @@
           <a class="ui teal ribbon label"><i class="settings icon"></i> 个人资料</a>
           <div class="ui grid stackable">
             <div class="six wide column">
-              <div class="ui fluid image">
-                <img class="ui bordered image" v-if="USER_SIGN_IN_INFO.avatar==''" src="../assets/images/brand.png" alt="" />
-                <img class="ui bordered image" v-else :src="USER_SIGN_IN_INFO.avatar" >
-                <a class="ui bottom right attached label teal"><i class="upload icon"></i> 上传新头像</a>
-              </div>
+              <user-avatar></user-avatar>
             </div>
             <div class="ten wide column">
               <div class="ui form" id="userModifyInfoForm">
@@ -90,15 +86,22 @@
               </div>
             </div>
           </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserAvatar from './UserAvatar'
+
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'user-info',
+  components: {
+    UserAvatar,
+  },
   data () {
     return {
       changeRequest: {
