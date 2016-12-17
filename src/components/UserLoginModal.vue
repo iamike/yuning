@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     toggleRegisterModal () {
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userRegisterModal'})
     }
   },

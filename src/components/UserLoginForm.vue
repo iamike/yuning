@@ -14,7 +14,7 @@
         <i class="lock icon"></i>
       </div>
     </div>
-    <div class="ui blue submit button">登录</div>
+    <div class="ui blue submit button" @click="submit()">登录</div>
     <!-- errors from frontend -->
     <div class="ui error message front-end" v-show="frontErr==true">
       <ul>
@@ -51,43 +51,40 @@ export default {
   computed: {
      ...mapGetters(['USER_SIGN_IN_ERRORS'])
   },
-  mounted () {
-    let vm = this
-    $('#userLoginForm').form({
-      fields: {
-        username: {
-          rules: [{
-              type: 'empty',
-            prompt: '用户名是必填字段'
-            }]
-          },
-          password: {
+  methods: {
+
+    submit () {
+      let vm = this
+      $('#userLoginForm').form({
+        fields: {
+          username: {
             rules: [{
                 type: 'empty',
-              prompt: '密码是必填字段'
+              prompt: '用户名是必填字段'
               }]
-          }
-        },
-        onFailure: function(){
-          vm.frontErr = true
-        },
-        onSuccess: function(){
-          vm.frontErr = false
-          // login(loginData, success, failure)
-          vm.$store.dispatch('USER_SIGN_IN_ACTION', vm.userInfo)
-          .then((res) => {
-            // success
-            // console.log('success from components')
-            vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
-            vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
-
-          })
-          .catch((err) => {
-            // failure
-            // console.log('failure from components')
-          })
-        },
-      })
+            },
+            password: {
+              rules: [{
+                  type: 'empty',
+                prompt: '密码是必填字段'
+                }]
+            }
+          },
+          onFailure: function(){
+            vm.frontErr = true
+          },
+          onSuccess: function(){
+            vm.frontErr = false
+            vm.$store.dispatch('USER_SIGN_IN_ACTION', vm.userInfo)
+            .then((res) => {
+              vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
+              vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+            })
+            .catch((err) => {
+            })
+          },
+        }).form('submit')
+    }
   },
   destoryed () {
     $('#userLoginForm').form('destroy')
