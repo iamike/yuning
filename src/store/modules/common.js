@@ -27,7 +27,7 @@ const mutations = {
     .modal('toggle')
   },
   [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction}) {
-
+    // console.log(selector)
     $(selector).modal({
       detachable: false,
       onShow    : function(){

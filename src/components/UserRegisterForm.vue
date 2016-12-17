@@ -8,7 +8,7 @@
       <label>验证码</label>
       <div class="ui action input">
         <input type="tel" name="verifyCode" placeholder="验证码" v-model="userInfo.verify_code">
-        <button class="ui teal submit right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+        <button @click="sendVerifyCode()" class="ui teal right labeled icon button " data-mode='verifyMode' v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
           <i class="send icon"></i>
           发送验证码
         </button>
@@ -25,21 +25,21 @@
       <label>密码</label>
       <input type="password" name="password" v-model="userInfo.passWord" >
     </div>
-    <div class="ui submit olive button">注册</div>
+    <div class="ui olive button" @click="submitRegisterForm()">注册</div>
     <!-- errors from frontend -->
-    <div class="ui error message front-end">
+    <div class="ui error message" v-show="frontErr==true">
       <ul>
         <li></li>
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="USER_REGISTER_ERRORS" class="ui visible message back-end" v-bind:class="USER_REGISTER_ERRORS.isSuccess==true?'success':'error'">
+    <div v-if="USER_REGISTER_ERRORS && frontErr==false" class="ui visible message back-end" v-bind:class="USER_REGISTER_ERRORS.isSuccess==true?'success':'error'">
       <ul class="list">
         <li>{{ USER_REGISTER_ERRORS.errorMsg }}</li>
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="VERIFY_ERRORS" class="ui visible message back-end" v-bind:class="VERIFY_ERRORS.result==true?'success':'error'">
+    <div v-if="VERIFY_ERRORS" class="ui visible message" v-bind:class="VERIFY_ERRORS.result==true?'success':'error'">
       <ul class="list">
         <li>{{ VERIFY_ERRORS.msg }}</li>
       </ul>
@@ -54,6 +54,7 @@ export default {
   name: 'user-register-form',
   data () {
     return {
+      frontErr:true,
       userInfo: {
         mobile: '',
         passWord: '',
@@ -62,93 +63,90 @@ export default {
       }
     }
   },
-  computed: {
-     ...mapGetters(['global','USER_REGISTER_ERRORS','VERIFY_ERRORS'])
-  },
-  mounted () {
-    const vm = this
-    const $formTrigger = $('#userRegisterForm .submit')
-    const verifyRules = {
-      mobile: {
-        identifier: 'mobile',
-        rules: [
-          {
-            type: 'empty',
-            prompt: '请输入手机号码'
-          }
-        ]
+  methods: {
+    sendVerifyCode () {
+      let vm = this
+      $('#userRegisterForm').form('destroy')
+      const sendVerifyCode = {
+        mobile: {
+          identifier: 'mobile',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '请输入手机号码'
+            }
+          ]
+        }
       }
-    }
-    const registerRules = {
-      mobile: {
-        identifier: 'mobile',
-        rules: [
-          {
-            type: 'empty',
-            prompt: '请输入手机号码'
-          }
-        ]
-      },
-      password: {
-        identifier: 'password',
-        rules: [
-          {
-            type: 'empty',
-            prompt: '请输入密码'
-          }
-        ]
-      },
-      verifyCode: {
-        identifier: 'verifyCode',
-        rules: [
-          {
-            type: 'empty',
-            prompt: '请输入验证码'
-          }
-        ]
-      },
-    }
-    const formAction = function(rules, validateAction) {
       $('#userRegisterForm').form({
-        selector: {
-          message: '.error.message.front-end'
-        },
-        fields: rules,
+        fields: sendVerifyCode,
         onSuccess: function(event){
-          validateAction && validateAction()
-          $('.message.back-end').show()
+          vm.frontErr = false
+          vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
+            vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
+          }).catch((err)=>{
+
+          })
         },
         onFailure: function(event){
-          $('.message.back-end').hide()
+          vm.frontErr = true
         }
-      })
-    }
-    const verifyAction = () => {
-      vm.$store.dispatch('GET_VERIFY_CODE', { mobile: vm.userInfo.mobile }).then((res)=>{
-        vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
-      }).catch((err)=>{
+      }).form('submit')
 
-      })
-    }
-    const registerAction = () => {
-      vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
-        setTimeout(()=>{
-          vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
-        }, 1500)
-      }).catch((err)=>{
-
-      })
-    }
-    // form submit events
-    $formTrigger.on('click',function(){
+    },
+    submitRegisterForm () {
+      let vm = this
       $('#userRegisterForm').form('destroy')
-      if ($(this).attr('data-mode') == 'verifyMode') {
-        formAction(verifyRules, verifyAction)
-      } else {
-        formAction(registerRules, registerAction)
+      const registerRules = {
+        mobile: {
+          identifier: 'mobile',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '请输入手机号码'
+            }
+          ]
+        },
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '请输入密码'
+            }
+          ]
+        },
+        verifyCode: {
+          identifier: 'verifyCode',
+          rules: [
+            {
+              type: 'empty',
+              prompt: '请输入验证码'
+            }
+          ]
+        },
       }
-    })
+      $('#userRegisterForm').form({
+        fields: registerRules,
+        onSuccess: function(event){
+          vm.frontErr = false
+          vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
+            setTimeout(()=>{
+              vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
+            }, 1500)
+          }).catch((err)=>{
 
+          })
+        },
+        onFailure: function(event){
+          vm.frontErr = true
+        }
+      }).form('submit')
+
+    },
+  },
+  computed: {
+     ...mapGetters(['global','USER_REGISTER_ERRORS','VERIFY_ERRORS'])
   },
   destroyed () {
     $('#userRegisterForm').form('destroy')

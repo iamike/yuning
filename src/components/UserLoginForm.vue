@@ -16,13 +16,13 @@
     </div>
     <div class="ui blue submit button">登录</div>
     <!-- errors from frontend -->
-    <div class="ui error message">
+    <div class="ui error message front-end" v-show="frontErr==true">
       <ul>
         <li></li>
       </ul>
     </div>
     <!-- errors from backend -->
-    <div v-if="USER_SIGN_IN_ERRORS" class="ui visible message" v-bind:class="USER_SIGN_IN_ERRORS.isSuccess==true?'success':'error'">
+    <div v-if="USER_SIGN_IN_ERRORS && frontErr==false" class="ui visible message back-end" v-bind:class="USER_SIGN_IN_ERRORS.isSuccess==true?'success':'error'">
       <ul class="list">
         <li>{{ USER_SIGN_IN_ERRORS.errorMsg }}</li>
       </ul>
@@ -37,6 +37,7 @@ export default {
   name: 'user-login-form',
   data () {
     return {
+      frontErr: true,
       userInfo: {
         // username: '',
         // password: '',
@@ -67,13 +68,18 @@ export default {
               }]
           }
         },
+        onFailure: function(){
+          vm.frontErr = true
+        },
         onSuccess: function(){
+          vm.frontErr = false
           // login(loginData, success, failure)
           vm.$store.dispatch('USER_SIGN_IN_ACTION', vm.userInfo)
           .then((res) => {
             // success
             // console.log('success from components')
-              vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+            vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
+            vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
 
           })
           .catch((err) => {
@@ -84,7 +90,6 @@ export default {
       })
   },
   destoryed () {
-    // console.log('userlogin destroyed')
     $('#userLoginForm').form('destroy')
   }
 }

@@ -3,12 +3,13 @@
       <primary-nav v-bind:userSignInInfo="USER_SIGN_IN_INFO"></primary-nav>
       <router-view class="mainContent"></router-view>
       <sticky-footer></sticky-footer>
-
+      <user-login-modal class="user-login coupled" id="userLoginModal" ></user-login-modal>
   </div>
 </template>
 <script>
 import PrimaryNav from './components/PrimaryNav'
 import AppFooter from './components/Footer'
+import UserLoginModal from './components/UserLoginModal'
 
 import StickyFooter from './components/StickyFooter'
 import { mapGetters } from 'vuex'
@@ -18,6 +19,7 @@ export default {
   components: {
     PrimaryNav,
     StickyFooter,
+    UserLoginModal,
 
   },
   created () {
@@ -30,7 +32,9 @@ export default {
     $('.ui.sidebar').sidebar('attach events', '.toc.item')
 
   },
+  destroyed () {
 
+  }
 }
 </script>
 

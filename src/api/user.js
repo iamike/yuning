@@ -30,7 +30,6 @@ export default {
     const success = res => {
       if (res.body.isSuccess == true) {
         commit(types.USER_SIGN_IN_SUCCESS,res.body)
-        commit(types.TOGGLE_USER_LOGIN_POPUP)
         localStorage.setItem(types.USER_SIGN_IN_INFO, JSON.stringify(res.body.result))
         resolve()
       } else {

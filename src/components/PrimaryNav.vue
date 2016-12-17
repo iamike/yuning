@@ -8,18 +8,15 @@
         <a class="ui item courseCenter" href="#" @click.prevent style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
         <router-link class="item blue" :to="{ name: 'bookstore' }" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
-
         <div class="right item" id="userLogin" >
-          <button class="ui tiny olive button" v-on:click="TOGGLE_USER_LOGIN_POPUP" v-if="!userSignInInfo">
+          <button class="ui tiny olive button" v-if="!userSignInInfo" @click="openLoginModal">
             <i class="icon user"></i>
             登录 | 注册
           </button>
           <user-menu v-if="userSignInInfo" v-bind:userSignInInfo="userSignInInfo"></user-menu>
         </div>
-        <user-login-modal v-if="!userSignInInfo"></user-login-modal>
         <course-popup></course-popup>
         <app-download-popup></app-download-popup>
-
       </div>
     </div>
   </div>
@@ -28,23 +25,20 @@
 <script>
 import CoursePopup from './CoursePopup'
 import AppDownloadPopup from './AppDownloadPopup'
-import UserLoginModal from './UserLoginModal'
-
-
 import UserMenu from './UserMenu'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'primary-nav',
   props: ['userSignInInfo'],
   components: {
-    UserLoginModal,
     CoursePopup,
     AppDownloadPopup,
-    UserMenu
+    UserMenu,
   },
   methods: {
-    ...mapActions(['TOGGLE_USER_LOGIN_POPUP'])
+    openLoginModal () {
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
+    }
   },
 }
 </script>

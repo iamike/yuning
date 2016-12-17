@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="ui basic modal" id="basicModal">
+  <div class="ui basic modal" >
     <slot name="header">
     <div class="header ui icon">
       <i class="archive icon"></i>
