@@ -8,12 +8,12 @@ const state = {
   [types.USER_REGISTER_ERRORS]: undefined,
 }
 const actions = {
-  [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
-    commit(types.TOGGLE_USER_LOGIN_POPUP)
-  },
-  [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
-    commit(types.TOGGLE_USER_REGISTER_POPUP)
-  },
+  // [types.TOGGLE_USER_LOGIN_POPUP] ({ commit }) {
+  //   commit(types.TOGGLE_USER_LOGIN_POPUP)
+  // },
+  // [types.TOGGLE_USER_REGISTER_POPUP] ({ commit }) {
+  //   commit(types.TOGGLE_USER_REGISTER_POPUP)
+  // },
   [types.USER_REGISTER_ACTION] ({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       state[types.USER_REGISTER_INFO] = data
@@ -35,20 +35,20 @@ const actions = {
   },
 }
 const mutations = {
-  [types.TOGGLE_USER_LOGIN_POPUP] () {
-    // $('.coupled.modal').modal({allowMultiple: true})
-    $('#userRegisterModal').modal('hide')
-    $('#userLoginModal').modal('toggle')
-  },
-  [types.TOGGLE_USER_REGISTER_POPUP] () {
-    $('#userLoginModal').modal('hide')
-    $('#userRegisterModal')
-    .modal({
-      transition:'vertical flip',
-      mobileTransition : 'horizontal flip'
-    })
-    .modal('toggle')
-  },
+  // [types.TOGGLE_USER_LOGIN_POPUP] () {
+  //   // $('.coupled.modal').modal({allowMultiple: true})
+  //   $('#userRegisterModal').modal('hide')
+  //   $('#userLoginModal').modal('toggle')
+  // },
+  // [types.TOGGLE_USER_REGISTER_POPUP] () {
+  //   $('#userLoginModal').modal('hide')
+  //   $('#userRegisterModal')
+  //   .modal({
+  //     transition:'vertical flip',
+  //     mobileTransition : 'horizontal flip'
+  //   })
+  //   .modal('toggle')
+  // },
   // REGISTER
   [types.USER_REGISTER_SUCCESS] (state, payload) {
     state[types.USER_REGISTER_ERRORS] = payload

@@ -38,6 +38,12 @@
         <li>{{ USER_REGISTER_ERRORS.errorMsg }}</li>
       </ul>
     </div>
+    <!-- errors from backend -->
+    <div v-if="VERIFY_ERRORS" class="ui visible message back-end" v-bind:class="VERIFY_ERRORS.result==true?'success':'error'">
+      <ul class="list">
+        <li>{{ VERIFY_ERRORS.msg }}</li>
+      </ul>
+    </div>
 </div>
 </template>
 
@@ -52,12 +58,12 @@ export default {
         mobile: '',
         passWord: '',
         verify_code: '',
-        register_from: 'web'
+        register_from: 'web',
       }
     }
   },
   computed: {
-     ...mapGetters(['global','USER_REGISTER_ERRORS'])
+     ...mapGetters(['global','USER_REGISTER_ERRORS','VERIFY_ERRORS'])
   },
   mounted () {
     const vm = this
@@ -100,7 +106,7 @@ export default {
             prompt: '请输入验证码'
           }
         ]
-      }
+      },
     }
     const formAction = function(rules, validateAction) {
       $('#userRegisterForm').form({
@@ -111,7 +117,6 @@ export default {
         onSuccess: function(event){
           validateAction && validateAction()
           $('.message.back-end').show()
-
         },
         onFailure: function(event){
           $('.message.back-end').hide()

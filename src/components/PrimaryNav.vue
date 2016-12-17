@@ -10,13 +10,13 @@
         <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
 
         <div class="right item" id="userLogin" >
-          <button class="ui tiny olive button" v-on:click="TOGGLE_USER_LOGIN_POPUP" v-show="!userSignInInfo">
+          <button class="ui tiny olive button" v-on:click="TOGGLE_USER_LOGIN_POPUP" v-if="!userSignInInfo">
             <i class="icon user"></i>
             登录 | 注册
           </button>
           <user-menu v-if="userSignInInfo" v-bind:userSignInInfo="userSignInInfo"></user-menu>
         </div>
-        <user-login-modal></user-login-modal>
+        <user-login-modal v-if="!userSignInInfo"></user-login-modal>
         <course-popup></course-popup>
         <app-download-popup></app-download-popup>
 

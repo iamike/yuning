@@ -1,14 +1,14 @@
 import commonApi from '../api/common'
 import * as types from './mutation-types'
 
-export const GET_VERIFY_CODE = ({ commit }, data ) => {
+export const GET_VERIFY_CODE = ({ commit,state }, data ) => {
   return new Promise((resolve, reject) => {
-    commonApi.getVerifyCode({commit}, data, resolve, reject)
+    commonApi.getVerifyCode({commit,state}, data, resolve, reject)
   })
 }
-export const CHECK_VERIFY_CODE = ({ commit }, data ) => {
+export const CHECK_VERIFY_CODE = ({ commit,state }, data ) => {
   return new Promise((resolve, reject) => {
-    commonApi.getVerifyCode({commit}, data, resolve, reject)
+    commonApi.getVerifyCode({commit,state}, data, resolve, reject)
   })
 }
 export const RE_VERIFY_TIME_COUNT = ({ commit, state }) => {
