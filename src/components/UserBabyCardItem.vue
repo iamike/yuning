@@ -16,8 +16,8 @@
       </div>
       <div class="extra content ">
         <div class="ui two buttons">
-          <div class="ui basic olive button" @click="toggleModifyPopup('#modifyChildModal')">修改</div>
-          <div class="ui basic orange button" @click="toggleRemovePopup('#removeChildModal')">删除</div>
+          <div class="ui basic orange button" @click="toggleModifyPopup('#modifyChildModal')">修改</div>
+          <div class="ui basic olive button" @click="toggleRemovePopup('#removeChildModal')">删除</div>
         </div>
       </div>
     </div>

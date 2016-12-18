@@ -44,10 +44,11 @@
                       <label><i class="icon mobile"></i> 手机</label>
                       <div class="ui action input">
                         <input class="disabled" disabled type="text" name="mobile" v-bind:value="USER_SIGN_IN_INFO.mobile">
-                        <button class="ui right icon button">
+                        <button class="ui right teal icon button" @click="modifyMobile">
                           <i class="edit icon"></i>
                         </button>
                       </div>
+                      <user-mobile id="userUpdateMobileMobile"></user-mobile>
                     </div>
                     <div class="eight wide field">
                       <label><i class="icon mail"></i> Email</label>
@@ -94,6 +95,7 @@
 
 <script>
 import UserAvatar from './UserAvatar'
+import UserMobile from './UserMobile'
 
 import { mapGetters } from 'vuex'
 
@@ -101,6 +103,13 @@ export default {
   name: 'user-info',
   components: {
     UserAvatar,
+    UserMobile,
+  },
+  methods: {
+    modifyMobile () {
+      // console.log('test')
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userUpdateMobileMobile'})
+    }
   },
   data () {
     return {

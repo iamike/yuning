@@ -165,7 +165,6 @@ export default {
   	});
     Events.$on('readFileCompleted',vm.setImageIntoCropper)
 
-
   },
   destroyed () {
     $('#userUpdateAvatarModal').modal('destroy')
