@@ -132,7 +132,10 @@ export default {
           vm.frontErr = false
           vm.$store.dispatch('USER_REGISTER_ACTION', vm.userInfo ).then((res)=>{
             setTimeout(()=>{
-              vm.$store.dispatch('TOGGLE_USER_LOGIN_POPUP')
+              vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userRegisterModal'})
+              setTimeout(()=>{
+                vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
+              },500)
             }, 1500)
           }).catch((err)=>{
 

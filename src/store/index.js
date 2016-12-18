@@ -7,6 +7,7 @@ import * as getters from './getters'
 import common from './modules/common'
 import userRegLog from './modules/userRegLog'
 import userInfoModify from './modules/userInfoModify'
+import userAvatarModify from './modules/userAvatarModify'
 import userPasswordModify from './modules/userPasswordModify'
 import baby from './modules/baby'
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     userRegLog,
     userInfoModify,
     userPasswordModify,
+    userAvatarModify,
     baby,
   }
 })

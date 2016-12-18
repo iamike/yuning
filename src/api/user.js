@@ -11,10 +11,18 @@ export default {
       } else {
         commit(types.USER_REGISTER_FAILURE, res.body)
         reject(res.body)
+        // debug
+        // let res = {
+        //     "isSuccess": true,
+        //     "errorCode": "200",
+        //     "errorMsg": "登录成功",
+        // }
+        // commit(types.USER_REGISTER_SUCCESS,res)
+        // resolve(res)
       }
     }
     const failure = err => {
-      // commit(types.USER_REGISTER_FAILURE, types.CONNECTION_ERROR)
+      commit(types.USER_REGISTER_FAILURE, types.CONNECTION_ERROR)
       reject()
     }
     Vue.http
@@ -50,6 +58,24 @@ export default {
     commit(types.USER_SIGN_OUT)
     resolve()
   },
+  modifyAvatar ( {commit}, data , resolve, reject ) {
+      const success = res => {
+        if (res.body.isSuccess == true){
+          commit(types.USER_MODIFY_AVATAR_SUCCESS, res.body)
+          resolve(res.body)
+        } else {
+          commit(types.USER_MODIFY_AVATAR_FAILURE, res.body)
+          reject()
+        }
+      }
+      const failure = err => {
+        commit(types.USER_MODIFY_INFO_FAILURE, res.body)
+        reject()
+      }
+      Vue.http
+      .post(api.API_ROOT + api.API_PATH_USER_UPLOAD_AVATAR, data)
+      .then(success, failure)
+  },
   modifyInfo ( {commit}, data , resolve, reject) {
     const success = res => {
       if (res.body.isSuccess == true){
@@ -62,6 +88,7 @@ export default {
     }
     const failure = err => {
       commit(types.USER_MODIFY_INFO_FAILURE, res.body)
+      reject()
     }
     Vue.http
     .post(api.API_ROOT + api.API_PATH_USER_MODIFY_INFO, data)
