@@ -43,7 +43,7 @@
           <div class="field" >
             <label>核实旧手机验证码</label>
             <div class="ui action input small">
-              <input type="text" name="last-name" v-model="oldPhoneVerifyCode" placeholder="四位阿拉伯数字">
+              <input type="text"  v-model="oldPhoneVerifyCode" placeholder="四位阿拉伯数字">
               <button class="ui button teal" type="submit" @click="checkOldPhoneVrifyCode" >核实旧手机验证码 <i class="icon arrow right"></i></button>
             </div>
           </div>
@@ -59,9 +59,9 @@
         <div class="ui form">
           <div class="field" >
             <label>请输入您的新手机号码</label>
-            <div class="ui action left icon input small" v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+            <div class="ui action left icon input " v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
               <i class="icon mobile"></i>
-              <input type="text" name="last-name" v-model="newPhoneNumber" placeholder="">
+              <input type="text" v-model="newPhoneNumber" placeholder="">
               <button class="ui button teal" type="submit" @click="sendVerifyCodeToNewPhone" ><i class="icon send"></i> 发送新手机验证码</button>
             </div>
           </div>
@@ -75,7 +75,7 @@
           <div class="field" >
             <label>核实新手机验证码</label>
             <div class="ui action input small">
-              <input type="text" name="last-name" v-model="newPhoneVerifyCode" placeholder="四位阿拉伯数字">
+              <input type="text"  v-model="newPhoneVerifyCode" placeholder="四位阿拉伯数字">
               <button class="ui button teal" type="submit" @click="modifyMobile" >核实新手机验证码 <i class="icon arrow right"></i></button>
             </div>
           </div>

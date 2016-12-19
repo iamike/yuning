@@ -141,7 +141,7 @@ export default {
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP',
       {
         selector:'#userUpdateAvatarModal',
-        detachable:true
+        detachable:true,
       })
     }
   },

@@ -34,16 +34,22 @@
           </div>
         </div>
       </div>
-      <div class="ui attached segment" v-show="step==0">
-        <div class="ui form getVerifyCode">
+      <div class="ui attached segment" v-show="step==0 || step==1">
+        <div class="ui form" id="UserForgetPasswordStep1" >
           <div class="field">
-            <div class="input action ui">
-              <input class="" type="text" name="phone" value="">
-              <button class="ui teal button left labeled icon submit" type="submit" >
+            <div class="input action ui" v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
+              <input class="" type="text" name="phone" value="" v-model="phoneNumber">
+              <button class="ui teal button left labeled icon submit" type="submit" @click="getVerifyCode" >
                 <i class="icon send"></i>
                 发送验证码
               </button>
             </div>
+          </div>
+          <!-- errors from frontend -->
+          <div class="ui error message" >
+            <ul>
+              <li></li>
+            </ul>
           </div>
           <div class="ui success visible message" v-show="global.verifyRequestRemain < global.verifyCodeInterval">
             <i class="close icon"></i>
@@ -55,10 +61,42 @@
         </div>
       </div>
       <div class="ui attached segment" v-show="step==1">
-        <p>1</p>
+        <div class="ui form" id="UserForgetPasswordStep2">
+          <div class="field">
+            <div class="input action ui" >
+              <input class="" type="text" name="verifyCode" value="" v-model="verifyCode">
+              <button class="ui teal button left labeled icon submit" type="submit" @click="checkVerifyCode" >
+                <i class="icon send"></i>
+                提交验证码核实
+              </button>
+            </div>
+          </div>
+          <!-- errors from frontend -->
+          <div class="ui error message" >
+            <ul>
+              <li></li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="ui attached segment" v-show="step==2">
-        <p>2</p>
+        <div class="ui form" id="UserForgetPasswordStep3">
+          <div class="field">
+            <div class="input action ui" >
+              <input class="" type="text" name="newPassword" value="" v-model="newPassword">
+              <button class="ui teal button left labeled icon submit" type="submit" @click="changePasswordRequest" >
+                <i class="icon send"></i>
+                更换新密码
+              </button>
+            </div>
+          </div>
+          <!-- errors from frontend -->
+          <div class="ui error message" >
+            <ul>
+              <li></li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="ui attached segment" v-show="step==3">
         <p>3</p>
@@ -78,6 +116,7 @@ export default {
     return {
       step:0,
       phoneNumber:'',
+      newPassword:'',
       verifyCode:'',
     }
   },
@@ -86,36 +125,91 @@ export default {
   },
   methods:{
     getVerifyCode () {
-      // this.$store.dispatch('GET_VERIFY_CODE').then((res)=>{
-      //   console.log(res)
-      // })
-      $('.ui.form.getVerifyCode').form({
-        fields: {
-          name: {
-            identifier: 'phone',
-            rules: [
-              {
-                type: 'empty',
-                prompt: '请输入您的手机号',
+
+      let vm = this
+
+          $('#UserForgetPasswordStep1').form({
+            fields: {
+              phone: {
+                identifier: 'phone',
+                rules: [{
+                  type: 'empty',
+                  prompt : '请输入您的手机号'
+                },{
+                  type: 'exactLength[11]',
+                  prompt: '请输入11位手机号码',
+                }
+
+                ]
               }
-            ]
-          }
-        },
-        onSuccess: function() {
-          console.log('test')
-        },
-        onFailure: function() {
-          console.log('test2')
-        }
-      })
+            },
+            onSuccess: function () {
+
+              vm.$store.dispatch('GET_VERIFY_CODE',{mobile:vm.phoneNumber}).then((res)=>{
+                // console.log(res)
+                vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
+
+                vm.step = 1
+              })
+
+
+            }
+          }).form('submit')
+    },
+    checkVerifyCode () {
+      let vm = this
+          $('#UserForgetPasswordStep2').form({
+            fields: {
+              verifyCode: {
+                identifier: 'verifyCode',
+                rules: [{
+                  type: 'exactLength[4]',
+                  prompt: '请输入4位验证码',
+                }
+
+                ]
+              }
+            },
+            onSuccess: function () {
+              //fake pass TODO: server side verify
+                vm.step = 2
+            }
+          }).form('submit')
     },
     changePasswordRequest () {
+      let vm = this
+      $('#UserForgetPasswordStep2').form({
+        fields: {
+          newPassword: {
+            identifier: 'newPassword',
+            rules: [{
+              type: 'empty',
+              prompt: '请输入新密码',
+            }]
+          }
+        },
+        onSuccess: function () {
+          let changeRequest = {
+              mobile:vm.phoneNumber,
+              passWord:vm.newPassword,
+              verify_code:vm.verifyCode,
+          }
+          console.log(changeRequest)
+          vm.$store.dispatch('USER_MODIFY_PASSWORD_ACTION', changeRequest ).then(()=>{
+            vm.step = 3
+          })
 
+        }
+      }).form('submit')
     },
 
   },
   components: {
     SimpleModal,
+  },
+  mounted () {
+
+
   }
 }
 </script>
