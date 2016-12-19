@@ -162,7 +162,6 @@ export default {
       let vm = this
       vm.$store.dispatch('GET_VERIFY_CODE',{ mobile:this.oldPhoneNumber }).then((res)=>{
         // console.log(res)
-        vm.step = 0.5
         vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
       })
       // console.log(this.oldPhoneNumber,API_PATH_USER_GET_VERIFY_CODE)
@@ -170,7 +169,7 @@ export default {
   },
   data () {
     return {
-      step:1,
+      step:0,
       oldPhoneNumber: this.userOldMobile,
       user_id: this.userId,
       oldPhoneVerifyCode: '',
