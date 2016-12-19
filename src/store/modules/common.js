@@ -13,7 +13,7 @@ const actions = {
 const mutations = {
   [types.TOGGLE_BASIC_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction}) {
     $(selector).modal({
-      detachable: true,
+      detachable: false,
       onShow    : function(){
         onShowAction && onShowAction()
       },
@@ -26,10 +26,11 @@ const mutations = {
     })
     .modal('toggle')
   },
-  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction}) {
+  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction, detachable, allowMultiple, onHidden, onHide, onShow, onVisible}) {
     // console.log(selector)
     $(selector).modal({
-      detachable: true,
+      allowMultiple: allowMultiple ? allowMultiple : false,
+      detachable: detachable ? detachable : false,
       onShow    : function(){
         onShowAction && onShowAction()
       },
@@ -39,6 +40,12 @@ const mutations = {
       onApprove : function() {
         onApproveAction && onApproveAction()
       },
+      onHidden : function() {
+        onHidden && onHidden()
+      },
+      onShow : function() {
+        onShow && onShow()
+      }
     }).modal('toggle')
   },
 }

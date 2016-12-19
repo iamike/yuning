@@ -59,7 +59,7 @@
         <div class="ui form">
           <div class="field" >
             <label>请输入您的新手机号码</label>
-            <div class="ui action left icon input small">
+            <div class="ui action left icon input small" v-bind:class="[ global.verifyRequestRemain < global.verifyCodeInterval ? 'disabled':'']">
               <i class="icon mobile"></i>
               <input type="text" name="last-name" v-model="newPhoneNumber" placeholder="">
               <button class="ui button teal" type="submit" @click="sendVerifyCodeToNewPhone" ><i class="icon send"></i> 发送新手机验证码</button>

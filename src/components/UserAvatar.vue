@@ -19,7 +19,7 @@
                 <div id="upload-demo" class="croppie-container" ></div>
               </div>
               <div class="eight wide column">
-                <img id="testImage" />
+                <img id="testImage" class="ui medium image centered" />
                 <div class="row" >
                   <button class="ui olive button massive"  v-on:click="generateAvatar"><i class="icon crop"></i> 剪裁</button>
                   <button class="ui olive button massive" v-on:click="submitAvatar"><i class="icon checkmark"></i> 完成</button>
@@ -57,19 +57,6 @@ export default {
   data () {
     return {
       step:0,
-      options: {
-        url: "../static/images/brand.png",
-        enableExif: true,
-        viewport: {
-            width: 200,
-            height: 200,
-            type: 'circle'
-        },
-        boundary: {
-            width: 300,
-            height: 300
-        }
-      }
     }
   },
   components:{
@@ -86,10 +73,10 @@ export default {
         type: 'blob',
         size: 'viewport'
       }).then(function (resp) {
-        	let formData = new FormData();
-        	formData.append('uid', vm.USER_SIGN_IN_INFO.id);
-        	formData.append('type', 1);
-        	formData.append('avatar', resp);
+        	let formData = new FormData()
+        	formData.append('uid', vm.USER_SIGN_IN_INFO.id)
+        	formData.append('type', 1)
+        	formData.append('avatar', resp)
 
           vm.$store.dispatch('USER_MODIFY_AVATAR_ACTION',formData).then((res)=>{
 
@@ -124,29 +111,31 @@ export default {
 
     },
     setImageIntoCropper (data) {
-      $('#upload-demo').croppie('bind', {
-      	url: data
-      }).then(function(){
+      let vm = this
+      // $('#upload-demo').croppie('destroy')
+      $('#upload-demo').croppie('bind',{url: data})
 
-      });
     },
     upload (event) {
       let vm = this
       vm.step = 1
   		if (event.target.files && event.target.files[0]) {
-            let reader = new FileReader();
+            let reader = new FileReader()
             reader.onload = function (e) {
+              // console.log(e.target.result)
               Events.$emit('readFileCompleted',e.target.result)
             }
-            reader.readAsDataURL(event.target.files[0]);
+            reader.readAsDataURL(event.target.files[0])
 
+            console.log(event.target.files[0])
         }
         else {
-          swal("Sorry - you're browser doesn't support the FileReader API");
+          swal("Sorry - you're browser doesn't support the FileReader API")
       }
     },
     updateAvatar () {
-      $('#userUpdateAvatarModal').modal('show')
+      // $('#userUpdateAvatarModal').modal('show')
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userUpdateAvatarModal'})
     }
   },
   mounted () {
@@ -162,11 +151,12 @@ export default {
   	        width: 300,
   	        height: 300
   	    }
-  	});
+  	})
     Events.$on('readFileCompleted',vm.setImageIntoCropper)
 
   },
   destroyed () {
+    // console.log('test destroy')
     $('#userUpdateAvatarModal').modal('destroy')
     $('#upload-demo').croppie('destroy')
 
@@ -179,5 +169,9 @@ export default {
 .ui.action.input input[type="file"] {
     display: none;
 }
-
+#testImage {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 40px;
+}
 </style>
