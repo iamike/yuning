@@ -8,7 +8,7 @@
           更新头像
         </div>
         <div class="content" slot="content">
-          <div class="ui center aligned segment basic" v-show="step==0">
+          <div class="ui center aligned segment basic avatarUploader" v-show="step==0">
             <button class="ui olive button massive" v-on:click="trigger"><i class="icon cloud upload"></i> 上传新头像</button>
             <input id="upload" style="display:none;" accept="image/png,image/gif,image/jpeg," ref="uploader" type="file" v-on:change="upload" />
           </div>
@@ -174,6 +174,9 @@ export default {
 <style lang="css" scoped>
 .ui.action.input input[type="file"] {
     display: none;
+}
+.avatarUploader {
+  min-height: 50vh;
 }
 #testImage {
   margin-bottom: 40px;
