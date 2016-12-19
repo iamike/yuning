@@ -35,10 +35,9 @@ export default {
   methods: {
 
     toggleRegisterModal () {
-      
-      let vm = this
-      vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal',allowMultiple:true,detachable:true})
-      vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userRegisterModal',allowMultiple:true,detachable:true})
+
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal',allowMultiple:true,detachable:true})
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userRegisterModal',allowMultiple:true,detachable:true})
 
     }
   },

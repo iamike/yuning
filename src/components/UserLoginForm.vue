@@ -14,7 +14,14 @@
         <i class="lock icon"></i>
       </div>
     </div>
-    <div class="ui blue submit button" @click="submit()">登录</div>
+    <div class="actions">
+      <div class="ui blue submit button" @click="submit()">登录</div>
+      <a class="ui label right floated" @click="openForgetPassword">
+        <i class="help icon"></i> 忘记密码
+      </a>
+      <user-forget-password id="userForgetPassword"></user-forget-password>
+    </div>
+
     <!-- errors from frontend -->
     <div class="ui error message front-end" v-show="frontErr==true">
       <ul>
@@ -31,6 +38,7 @@
 </template>
 
 <script>
+import UserForgetPassword from './UserForgetPassword'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -51,8 +59,14 @@ export default {
   computed: {
      ...mapGetters(['USER_SIGN_IN_ERRORS'])
   },
+  components: {
+    UserForgetPassword,
+  },
   methods: {
-
+    openForgetPassword () {
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal',allowMultiple:true,detachable:true})
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userForgetPassword',allowMultiple:true,detachable:true})
+    },
     submit () {
       let vm = this
       $('#userLoginForm').form({
