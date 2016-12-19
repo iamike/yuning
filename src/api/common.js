@@ -23,10 +23,13 @@ export default {
   checkVerifyCode ({commit}, data, resolve, reject) {
     Vue.http.post(api.API_ROOT + api.API_PATH_USER_CHK_VERIFY_CODE, data)
     .then((res) => {
-        if (res.status == 200 && res.body.result == true ) {
-          resolve(res.body.msg)
+
+        if (res.status == 200 && res.body.isSuccess == true ) {
+          commit(types.VERIFY_ERRORS,res.body)
+          resolve(res.body)
         } else {
-          reject(res.body.msg)
+          commit(types.VERIFY_ERRORS,res.body)
+          reject(res.body)
         }
     }, (err) => {
       reject(err.body.msg)

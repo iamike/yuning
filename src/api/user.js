@@ -58,6 +58,36 @@ export default {
     commit(types.USER_SIGN_OUT)
     resolve()
   },
+  modifyMobile ( {commit}, data , resolve, reject) {
+    setTimeout(()=>{
+      commit(types.USER_MODIFY_PHONE_SUCCESS, {
+        isSuccess:true,
+        errorMsg:'测试成功',
+      })
+      resolve({
+        isSuccess:true,
+        errorMsg:'测试成功',
+      })
+    },2000)
+
+    // const success = res => {
+    //   if (res.body.isSuccess == true){
+    //     commit(types.USER_MODIFY_PHONE_SUCCESS, res.body)
+    //     resolve(res.body)
+    //   } else {
+    //     commit(types.USER_MODIFY_PHONE_FAILURE, res.body)
+    //     reject()
+    //   }
+    // }
+    // const failure = err => {
+    //   commit(types.USER_MODIFY_PHONE_FAILURE, res.body)
+    //   reject()
+    // }
+    //
+    // Vue.http
+    // .post(api.API_ROOT + api.API_PATH_USER_MODIFY_PHONE, data)
+    // .then(success, failure)
+  },
   modifyAvatar ( {commit}, data , resolve, reject ) {
       const success = res => {
         if (res.body.isSuccess == true){

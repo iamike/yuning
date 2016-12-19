@@ -22,7 +22,7 @@ export const API_PATH_USER_CHK_VERIFY_CODE = '/czb-server/czb/user/msgCheck'
 export const API_PATH_USER_CHK_MOBILE = '/czb-server/czb/user/mobileCheck'
 
 // 2.7 user_id*|mobile*|verify_code*
-export const API_PATH_USER_MODIFY_MOBILE = '/czb-server/czb/user/mobileModify'
+export const API_PATH_USER_MODIFY_PHONE = '/czb-server/czb/user/mobileModify'
 
 // 2.8 user_id*|gender@|region@|email@|nickname@
 export const API_PATH_USER_MODIFY_INFO = '/czb-server/czb/user/userInfoModify'

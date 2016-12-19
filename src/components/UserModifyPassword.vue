@@ -35,11 +35,13 @@
                   </div>
                   <p>如果您没有收到， 请在{{global.verifyRequestRemain}}秒后重试...</p>
                 </div>
+                
                 <div class="ui action">
                   <div class="ui submit red button">
                     <i class="save  icon"></i> 确定修改
                   </div>
                 </div>
+
                 <!-- errors from frontend -->
                 <div class="ui error message">
                   <ul>

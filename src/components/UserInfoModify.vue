@@ -48,7 +48,7 @@
                           <i class="edit icon"></i>
                         </button>
                       </div>
-                      <user-mobile id="userUpdateMobileMobile"></user-mobile>
+                      <user-mobile id="userUpdateMobileMobile" :user-old-mobile="USER_SIGN_IN_INFO.mobile" :user-id="USER_SIGN_IN_INFO.id"></user-mobile>
                     </div>
                     <div class="eight wide field">
                       <label><i class="icon mail"></i> Email</label>
