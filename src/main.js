@@ -51,21 +51,52 @@ const router = new VueRouter({
           components: {
             userMain: resolve => require(['./components/UserBabyInfo.vue'], resolve),
           }
-        }]
+        }],
       },{
         path: 'account',
         name: 'account',
+        redirect: '/user/:id/account/info',
         components: {
-          userSection: resolve => require(['./components/UserDashboardAccount.vue'], resolve)
-        }
+          userSection: resolve => require(['./components/AccountDashboard.vue'], resolve)
+        },
+        children:[{
+          path: 'info',
+          name: 'accountInfo',
+          components: {
+            userMain: resolve => require(['./components/AccountInfo.vue'], resolve),
+          },
+        },{
+          path: 'charge',
+          name: 'charge',
+          components: {
+            userMain: resolve => require(['./components/AccountCharge.vue'], resolve),
+          },
+        },{
+          path: 'myCards',
+          name: 'myCards',
+          components: {
+            userMain: resolve => require(['./components/AccountCards.vue'], resolve),
+          },
+        },{
+          path: 'consultRecorder',
+          name: 'consultRecorder',
+          components: {
+            userMain: resolve => require(['./components/AccountConsultList.vue'], resolve),
+          },
+        },{
+          path: 'trainingRecorder',
+          name: 'trainingRecorder',
+          components: {
+            userMain: resolve => require(['./components/AccountTrainingList.vue'], resolve),
+          },
+        }],
       },{
         path: 'order',
         name: 'order',
         components: {
           userSection: resolve => require(['./components/UserDashboardOrder.vue'], resolve)
-        }
-      }]
-
+        },
+      }],
     },
     { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
     { path: '/', redirect: '/home' },

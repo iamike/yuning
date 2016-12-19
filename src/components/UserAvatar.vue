@@ -112,8 +112,11 @@ export default {
     },
     setImageIntoCropper (data) {
       let vm = this
-      // $('#upload-demo').croppie('destroy')
-      $('#upload-demo').croppie('bind',{url: data})
+
+      $('#upload-demo').croppie('bind',{
+        url: data
+      })
+
 
     },
     upload (event) {
@@ -127,22 +130,29 @@ export default {
             }
             reader.readAsDataURL(event.target.files[0])
 
-            console.log(event.target.files[0])
+            // console.log(event.target.files[0])
         }
         else {
           swal("Sorry - you're browser doesn't support the FileReader API")
       }
     },
     updateAvatar () {
+      let vm = this
       // $('#userUpdateAvatarModal').modal('show')
-      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userUpdateAvatarModal'})
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',
+      {
+        selector:'#userUpdateAvatarModal',
+        detachable:true,
+        onHidden:function(){
+
+
+        }
+      })
     }
   },
   mounted () {
     let vm = this
     $('#upload-demo').croppie({
-  			url: vm.USER_SIGN_IN_INFO.avatar,
-  	    enableExif: true,
   	    viewport: {
   	        width: 200,
   	        height: 200,
@@ -157,9 +167,10 @@ export default {
   },
   destroyed () {
     // console.log('test destroy')
-    $('#userUpdateAvatarModal').modal('destroy')
+    // $('#userUpdateAvatarModal').modal('destroy')
     $('#upload-demo').croppie('destroy')
-
+    $('.ui.modal').modal({detachable: false})
+    $('.ui.modals').remove()
   }
 
 }
@@ -170,8 +181,6 @@ export default {
     display: none;
 }
 #testImage {
-  width: 150px;
-  height: 150px;
   margin-bottom: 40px;
 }
 </style>
