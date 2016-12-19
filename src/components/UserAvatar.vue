@@ -14,7 +14,7 @@
           </div>
           <div class="ui center aligned segment basic" v-show="step>0">
 
-            <div class="ui equal width center aligned padded grid stackable">
+            <div class="ui equal width center aligned padded grid stackable" style="position:relative;">
               <div class="eight wide column">
                 <div id="upload-demo" class="croppie-container" ></div>
               </div>
@@ -91,7 +91,7 @@ export default {
               localStorageData.avatar = res.result
               localStorage.setItem('USER_SIGN_IN_INFO', JSON.stringify(localStorageData))
 
-              $('#userUpdateAvatarModal').modal('hide').modal('destroy')
+              vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userUpdateAvatarModal',detachable:false})
               vm.step = 0
 
             },2000)
@@ -111,7 +111,6 @@ export default {
 
     },
     setImageIntoCropper (data) {
-      let vm = this
 
       $('#upload-demo').croppie('bind',{
         url: data
@@ -142,11 +141,7 @@ export default {
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP',
       {
         selector:'#userUpdateAvatarModal',
-        detachable:true,
-        onHidden:function(){
-
-
-        }
+        detachable:true
       })
     }
   },
@@ -167,10 +162,10 @@ export default {
   },
   destroyed () {
     // console.log('test destroy')
-    // $('#userUpdateAvatarModal').modal('destroy')
+    $('#userUpdateAvatarModal').modal('destroy')
     $('#upload-demo').croppie('destroy')
-    $('.ui.modal').modal({detachable: false})
-    $('.ui.modals').remove()
+    // $('.ui.modal').modal({detachable: false})
+    $('.ui.dimmer.modals.page #userUpdateAvatarModal').remove()
   }
 
 }

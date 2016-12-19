@@ -86,9 +86,9 @@ export default {
   },
   methods:{
     getVerifyCode () {
-      this.$store.dispatch('GET_VERIFY_CODE').then((res)=>{
-        console.log(res)
-      })
+      // this.$store.dispatch('GET_VERIFY_CODE').then((res)=>{
+      //   console.log(res)
+      // })
       $('.ui.form.getVerifyCode').form({
         fields: {
           name: {

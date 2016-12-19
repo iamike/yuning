@@ -26,9 +26,10 @@ const mutations = {
     })
     .modal('toggle')
   },
-  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction, detachable, allowMultiple, onHidden, onHide, onShow, onVisible}) {
+  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction, detachable, allowMultiple, onHidden, onHide, onShow, observeChanges,onVisible}) {
     // console.log(selector)
     $(selector).modal({
+      observeChanges:observeChanges?observeChanges:false,
       allowMultiple: allowMultiple ? allowMultiple : false,
       detachable: detachable ? detachable : false,
       onShow    : function(){
