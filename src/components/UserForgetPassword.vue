@@ -9,8 +9,8 @@
         <div class="step" v-bind:class="[USER_MODIFY_PASSWORD_STEP==0?'':'disabled']">
           <i class="mobile icon"></i>
           <div class="content">
-            <div class="title">输入您的手机号</div>
-            <div class="description">注册时的手机号码</div>
+            <div class="title">输入手机号</div>
+            <div class="description">您注册时的手机</div>
           </div>
         </div>
         <div class="step" v-bind:class="[USER_MODIFY_PASSWORD_STEP==1?'':'disabled']">
@@ -134,7 +134,6 @@ export default {
     getVerifyCode () {
 
       let vm = this
-
           $('#UserForgetPasswordStep1').form({
             fields: {
               phone: {
@@ -151,14 +150,14 @@ export default {
               }
             },
             onSuccess: function () {
-              vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
-              console.log(vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP)
-              // vm.$store.dispatch('GET_VERIFY_CODE',{mobile:vm.phoneNumber}).then((res)=>{
-              //   // console.log(res)
-              //   vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
-              //
-              //   vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
-              // })
+              // vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
+              // console.log(vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP)
+              vm.$store.dispatch('GET_VERIFY_CODE',{mobile:vm.phoneNumber}).then((res)=>{
+                // console.log(res)
+                vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
+
+                vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
+              })
 
 
             }
@@ -204,14 +203,12 @@ export default {
           }
           // console.log(changeRequest)
           vm.$store.dispatch('USER_MODIFY_PASSWORD_ACTION', changeRequest ).then((res)=>{
-            console.log(res)
+            // console.log(res)
             vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 3
           }).catch((err)=>{
-
-            console.log(err)
+            // console.log(err)
             vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 2
           })
-
         }
       }).form('submit')
     },
