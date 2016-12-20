@@ -6,6 +6,10 @@
 
 <script>
 export default {
+  name: 'consult-list',
+  created () {
+    console.log('test')
+  }
 }
 </script>
 

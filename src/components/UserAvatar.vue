@@ -176,7 +176,11 @@ export default {
     display: none;
 }
 .avatarUploader {
+
   min-height: 50vh;
+}
+.avatarUploader button {
+  margin-top: 20vh;
 }
 #testImage {
   margin-bottom: 40px;

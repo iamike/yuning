@@ -1,6 +1,6 @@
 <template lang="html">
 <div class="">
-  <h2>ACCOUNT CHARGE LIST</h2>
+  ACCOUNT CHARGE LIST
 </div>
 </template>
 

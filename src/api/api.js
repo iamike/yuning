@@ -58,3 +58,8 @@ export const API_PATH_USER_UPLOAD_AVATAR = '/czb-server/czb/user/uploadAvatar'
 
 // 2.19 username*|password*|from='web'*|type='1'
 export const API_PATH_USER_LOGIN = '/czb-server/czb/user/login'
+
+/* ACCOUNT SECTION */
+// 2.43 user_id*
+export const API_PATH_ACCOUNT_CARD_LIST = '/czb-server/czb/api/queryCardInfo'
+// 2.45 user_id*
