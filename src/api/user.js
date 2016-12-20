@@ -109,21 +109,22 @@ export default {
     const success = res => {
       if (res.body.isSuccess == true){
         commit(types.USER_MODIFY_INFO_SUCCESS, res.body)
-        resolve()
+        resolve(res.body)
       } else {
         commit(types.USER_MODIFY_INFO_FAILURE, res.body)
-        reject()
+        reject(res.body)
       }
     }
     const failure = err => {
       commit(types.USER_MODIFY_INFO_FAILURE, res.body)
-      reject()
+      reject(res.body)
     }
     Vue.http
     .post(api.API_ROOT + api.API_PATH_USER_MODIFY_INFO, data)
     .then(success, failure)
   },
   modifyPassword ({commit}, data, resolve, reject) {
+
     const success = res => {
     if (res.body.isSuccess) {
         commit(types.USER_MODIFY_PASSWORD_SUCCESS, res.body)
@@ -149,5 +150,18 @@ export default {
     Vue.http
     .post(api.API_ROOT + api.API_PATH_USER_MODIFY_PASSWORD, JSON.parse(JSON.stringify(data)))
     .then(success, failure)
+    // debug
+    // setTimeout(()=>{
+    //   commit(types.USER_MODIFY_PASSWORD_FAILURE, {
+    //     isSuccess:true,
+    //     errorCode: 200,
+    //     errorMsg:"success"
+    //   })
+    //   resolve({
+    //     isSuccess:false,
+    //     errorCode: 200,
+    //     errorMsg:"success"
+    //   })
+    // },2000)
   },
 }

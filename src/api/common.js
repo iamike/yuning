@@ -25,11 +25,15 @@ export default {
     .then((res) => {
 
         if (res.status == 200 && res.body.isSuccess == true ) {
+
           commit(types.VERIFY_ERRORS,res.body)
           resolve(res.body)
+
         } else {
+
           commit(types.VERIFY_ERRORS,res.body)
           reject(res.body)
+          
         }
     }, (err) => {
       reject(err.body.msg)

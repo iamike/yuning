@@ -20,11 +20,9 @@ const actions = {
 const mutations = {
   [types.USER_MODIFY_PASSWORD_SUCCESS](state, payload) {
     state[types.USER_MODIFY_PASSWORD_ERRORS] = payload
-    state[types.USER_MODIFY_PASSWORD_STEP] = 0
   },
   [types.USER_MODIFY_PASSWORD_FAILURE](state, payload) {
     state[types.USER_MODIFY_PASSWORD_ERRORS] = payload
-    state[types.USER_MODIFY_PASSWORD_STEP] = 0
   },
 }
 const getters = {

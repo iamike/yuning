@@ -16,11 +16,9 @@ const actions = {
 const mutations = {
   [types.USER_MODIFY_INFO_SUCCESS](state, payload) {
     state[types.USER_MODIFY_INFO_ERRORS] = payload
-    // console.log('successful, data updated', payload)
   },
   [types.USER_MODIFY_INFO_FAILURE](state, payload) {
     state[types.USER_MODIFY_INFO_ERRORS] = payload
-    // console.log('failure, data has not updated', payload)
   },
 }
 

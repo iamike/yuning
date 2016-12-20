@@ -105,9 +105,11 @@
         </div>
       </div>
       <div class="ui attached segment" v-show="USER_MODIFY_PASSWORD_STEP==3">
-        <p></p>
+        <h2 class="ui center aligned icon header">
+          <i class="circular checkmark icon teal"></i>
+            恭喜！恢复密码成功！
+        </h2>
       </div>
-
     </div>
   </simple-modal>
 </template>
@@ -139,27 +141,20 @@ export default {
               phone: {
                 identifier: 'phone',
                 rules: [{
-                  type: 'empty',
-                  prompt : '请输入您的手机号'
-                },{
                   type: 'exactLength[11]',
                   prompt: '请输入11位手机号码',
-                }
-
-                ]
+                },{
+                  type: 'regExp',
+                  value: /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/,
+                  prompt: '请输入正确的手机号码'
+                }]
               }
             },
             onSuccess: function () {
-              // vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
-              // console.log(vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP)
               vm.$store.dispatch('GET_VERIFY_CODE',{mobile:vm.phoneNumber}).then((res)=>{
-                // console.log(res)
                 vm.$store.dispatch('RE_VERIFY_TIME_COUNT')
-
                 vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 1
               })
-
-
             }
           }).form('submit')
     },
@@ -185,7 +180,7 @@ export default {
     },
     changePasswordRequest () {
       let vm = this
-      $('#UserForgetPasswordStep2').form({
+      $('#UserForgetPasswordStep3').form({
         fields: {
           newPassword: {
             identifier: 'newPassword',
@@ -203,14 +198,18 @@ export default {
           }
           // console.log(changeRequest)
           vm.$store.dispatch('USER_MODIFY_PASSWORD_ACTION', changeRequest ).then((res)=>{
-            // console.log(res)
             vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 3
+            setTimeout(()=>{
+              vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userForgetPassword'})
+            },2000)
           }).catch((err)=>{
-            // console.log(err)
-            vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 2
+            setTimeout(()=>{
+              vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 2
+            },2000)
           })
         }
       }).form('submit')
+
     },
 
   },
