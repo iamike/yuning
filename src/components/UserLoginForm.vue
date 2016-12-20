@@ -19,7 +19,7 @@
       <a class="ui label right floated" @click="openForgetPassword">
         <i class="help icon"></i> 忘记密码
       </a>
-      <user-forget-password id="userForgetPassword"></user-forget-password>
+      <user-forget-password id="userForgetPassword" ref="passwordRecoveryStep"></user-forget-password>
     </div>
 
     <!-- errors from frontend -->
@@ -64,8 +64,23 @@ export default {
   },
   methods: {
     openForgetPassword () {
+
+      let vm = this
+      // console.log(vm.$refs.passwordRecoveryStep.data)
       this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal',allowMultiple:true,detachable:true})
-      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userForgetPassword',allowMultiple:true,detachable:true})
+      this.$store.dispatch('TOGGLE_SIMPLE_POPUP',{
+        selector:'#userForgetPassword',
+        allowMultiple:true,
+        detachable:true,
+        onVisiable: function(){
+          vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 0
+        },
+        onHidden:function(){
+          // console.log('closed')
+          vm.$store.state.userPasswordModify.USER_MODIFY_PASSWORD_STEP = 0
+
+        }
+      })
     },
     submit () {
       let vm = this

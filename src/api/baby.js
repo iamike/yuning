@@ -86,6 +86,9 @@ export default {
         commit(types.CHILD_MODIFY_FAILURE, res.body)
         reject(res.body)
       }
+      setTimeout(()=>{
+        commit(types.CHILD_MODIFY_FAILURE, undefined)
+      },2000)
     }
     // connection failure
     const failure = err => {

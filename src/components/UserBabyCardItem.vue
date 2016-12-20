@@ -48,10 +48,12 @@ export default {
     },
     toggleModifyPopup(selector){
       let vm = this
+      // console.log(vm.babyInfo)
       const modalPayload = {
         selector,
-        onShowAction: function () {
+        onShow: function () {
           // transfer the props data into vuex state before the modal popup
+          // console.log(vm.babyInfo)
           vm.$store.state.baby.CHILD_DETAIL = vm.babyInfo
 
           //TODO fix the datepicker problem...

@@ -127,6 +127,11 @@ export default {
         // notify the list view to update
           vm.$store.dispatch('CHILD_GET_ALL', vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
 
+          //reset state for the next session
+          setTimeout(()=>{
+            vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#modifyChildModal'})
+          },2000)
+
         }).catch((err)=>{
           // TODO ask backend about this
           console.log('modify failure')

@@ -35,7 +35,7 @@
                   </div>
                   <p>如果您没有收到， 请在{{global.verifyRequestRemain}}秒后重试...</p>
                 </div>
-                
+
                 <div class="ui action">
                   <div class="ui submit red button">
                     <i class="save  icon"></i> 确定修改
@@ -137,17 +137,18 @@ export default {
     }
     const submitAction = () => {
       vm.$store.dispatch('USER_MODIFY_PASSWORD_ACTION', vm.changeRequest )
-      // .then((res)=>{
-      //   // console.log('success submit form values',res)
-      //
-      // }).catch((err)=>{
-      //   // console.log('failure submit form values',err)
-      // })
+      .then((res)=>{
+        // console.log('success submit form values',res)
+
+      }).catch((err)=>{
+        // console.log('failure submit form values',err)
+      })
     }
     // form submit events
     $formTrigger.on('click',function(){
       //re-initialize the form plugin, so make it only response for the currently action's error message
       $form.form('destroy')
+      
       if ($(this).attr('data-mode') == 'verifyMode') {
         // console.log('verifyMode')
         formAction(verifyRules, verifyAction)

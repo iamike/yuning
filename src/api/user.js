@@ -69,7 +69,6 @@ export default {
     //     errorMsg:'测试成功',
     //   })
     // },2000)
-
     const success = res => {
       if (res.body.isSuccess == true){
         commit(types.USER_MODIFY_PHONE_SUCCESS, res.body)
@@ -128,15 +127,24 @@ export default {
     const success = res => {
     if (res.body.isSuccess) {
         commit(types.USER_MODIFY_PASSWORD_SUCCESS, res.body)
-        resolve()
+        setTimeout(()=>{
+          commit(types.USER_MODIFY_PASSWORD_SUCCESS, undefined)
+        },3000)
+        resolve(res.body)
       } else {
         commit(types.USER_MODIFY_PASSWORD_FAILURE, res.body)
-        reject()
+        setTimeout(()=>{
+          commit(types.USER_MODIFY_PASSWORD_FAILURE, undefined)
+        },3000)
+        reject(res.body)
       }
     }
     const failure = err => {
       commit(types.USER_MODIFY_PASSWORD_FAILURE, types.CONNECTION_ERROR)
-      reject()
+      setTimeout(()=>{
+        commit(types.USER_MODIFY_PASSWORD_FAILURE, undefined)
+      },3000)
+      reject(res.body)
     }
     Vue.http
     .post(api.API_ROOT + api.API_PATH_USER_MODIFY_PASSWORD, JSON.parse(JSON.stringify(data)))
