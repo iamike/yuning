@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="ui segment basic">
-    <h2 class="ui header teal">卡片列表</h2>
+    <h2 class="ui header teal"><i class="icon list"></i>卡片列表</h2>
 
     <div class="ui top attached tabular menu" id="cardList">
       <a class="item active" data-tab="act">未使用的卡片</a>

@@ -62,4 +62,6 @@ export const API_PATH_USER_LOGIN = '/czb-server/czb/user/login'
 /* ACCOUNT SECTION */
 // 2.43 user_id*
 export const API_PATH_ACCOUNT_CARD_LIST = '/czb-server/czb/api/queryCardInfo'
-// 2.45 user_id*
+
+// 2.45 card_no*|card_pwd*|user_id*
+export const API_PATH_ACCOUNT_CARD_ACTIVE = '/czb-server/czb/api/activateCard'

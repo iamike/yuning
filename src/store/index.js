@@ -11,6 +11,7 @@ import userAvatarModify from './modules/userAvatarModify'
 import userMobileModify from './modules/userMobileModify'
 import userPasswordModify from './modules/userPasswordModify'
 import accountCardList from './modules/accountCardList'
+import accountCardActive from './modules/accountCardActive'
 import baby from './modules/baby'
 
 /* vuex */
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     userAvatarModify,
     userMobileModify,
     accountCardList,
+    accountCardActive,
     baby,
   }
 })

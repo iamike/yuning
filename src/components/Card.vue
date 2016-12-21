@@ -1,9 +1,6 @@
 <template lang="html">
   <div class="card " v-bind:class="[cardInfo.status=='ACT'?'orange':'grey']" >
 
-
-
-
     <span class="ui right corner label yellow" v-if="cardCate=='年卡' && cardInfo.status!='USED'">
       <i class="star icon"></i>
     </span>
