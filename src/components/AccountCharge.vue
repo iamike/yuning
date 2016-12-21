@@ -3,7 +3,7 @@
     <div class="column eleven wide">
       <div class="ui segment basic">
         <div class="ui teal segment">
-          <h2 class="ui header teal">卡片冲值</h2>
+          <h2 class="ui header teal">卡片激活</h2>
           <span class="ui teal ribbon label"><i class="icon credit card alternative"></i></span>
           <div class="ui divider"></div>
           <div class="ui form" id="activateCard">

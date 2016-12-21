@@ -22,8 +22,11 @@ const mutations = {
 
 const getters = {
   [types.ACCOUNT_CARD_LIST]: state => state[types.ACCOUNT_CARD_LIST],
+  [types.ACCOUNT_CARD_LIST_COUNT]: state => getters[types.ACCOUNT_CARD_LIST](state).length,
   [types.ACCOUNT_CARD_LIST_ACTIVE]: state => getters[types.ACCOUNT_CARD_LIST](state).filter(card => card.status =='ACT'),
+  [types.ACCOUNT_CARD_LIST_ACTIVE_COUNT]: state => getters[types.ACCOUNT_CARD_LIST_ACTIVE](state).length,
   [types.ACCOUNT_CARD_LIST_USED]: state => getters[types.ACCOUNT_CARD_LIST](state).filter(card => card.status =='USED'),
+  [types.ACCOUNT_CARD_LIST_USED_COUNT]: state => getters[types.ACCOUNT_CARD_LIST_USED](state).length,
 }
 
 export default {

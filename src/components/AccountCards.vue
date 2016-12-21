@@ -1,10 +1,9 @@
 <template lang="html">
   <div class="ui segment basic">
-    <h2 class="ui header teal"><i class="icon list"></i>卡片列表</h2>
-
+    <!-- <h2 class="ui header teal"><i class="icon list"></i>卡片列表</h2> -->
     <div class="ui top attached tabular menu" id="cardList">
-      <a class="item active" data-tab="act">未使用的卡片</a>
-      <a class="item" data-tab="used">已使用的卡片</a>
+      <a class="item active" data-tab="act">已激活的卡片<a class="ui circular label">{{ACCOUNT_CARD_LIST_ACTIVE_COUNT}}</a></a>
+      <a class="item" data-tab="used">已失效的卡片<a class="ui circular label">{{ACCOUNT_CARD_LIST_USED_COUNT}}</a></span></a>
     </div>
     <div class="ui bottom attached tab segment active" data-tab="act">
       <div class="ui cards centered">
@@ -34,7 +33,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['ACCOUNT_CARD_LIST_ACTIVE','ACCOUNT_CARD_LIST_USED'])
+    ...mapGetters(['ACCOUNT_CARD_LIST_ACTIVE','ACCOUNT_CARD_LIST_USED','ACCOUNT_CARD_LIST_ACTIVE_COUNT','ACCOUNT_CARD_LIST_USED_COUNT'])
   },
   created () {
     // console.log('card list for',this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
