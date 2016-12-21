@@ -19,7 +19,7 @@
                   剩余学习币
                 </div>
                 <div class="value">
-                  <i class="money icon "></i>  枚
+                  <i class="money icon "></i> {{ACCOUNT_COIN_INFO.result}} 枚
                 </div>
               </div>
             </div>
@@ -62,16 +62,15 @@ import {mapGetters} from 'vuex'
 export default {
   name:'account-info',
   computed:{
-    ...mapGetters(['ACCOUNT_COURSE_INFO'])
+    ...mapGetters(['ACCOUNT_COURSE_INFO','ACCOUNT_COIN_INFO'])
   },
   created(){
 
     this.$store.dispatch('ACCOUNT_GET_COURSE_INFO_ACTION',{
       user_id:this.userId,
-      courseId:'402890ba573b097401573b1c5fe20041',
+      courseName:'多元智能训练课',
     }).then(res=>{
       // console.log(res)
-
 
     }).catch(err=>{
       // console.log(err)

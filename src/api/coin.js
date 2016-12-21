@@ -6,10 +6,10 @@ export default {
   getCoinRemainValue ({commit}, data , resolve, reject) {
     const success = res => {
       if (res.body.isSuccess) {
-        commit([types.ACCOUNT_GET_COURSE_INFO_SUCCESS],res.body)
+        commit([types.ACCOUNT_GET_COIN_INFO_SUCCESS],res.body)
         resolve(res.body)
       } else {
-        commit([types.ACCOUNT_GET_COURSE_INFO_FAILURE],res.body)
+        commit([types.ACCOUNT_GET_COIN_INFO_FAILURE],res.body)
         reject(res.body)
       }
 

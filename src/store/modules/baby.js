@@ -2,7 +2,7 @@ import babyApi from '../../api/baby'
 import * as types from '../mutation-types'
 
 const state = {
-  [types.CHILD_LIST]: undefined,
+  [types.CHILD_LIST]: [],
   [types.CHILD_ADD_ERRORS]: undefined,
   [types.CHILD_REMOVE_ERRORS]: undefined,
   [types.CHILD_DETAIL]: {
@@ -24,9 +24,8 @@ const actions = {
       commit(types.CHILD_RECEIVED, childs)
     })
   },
-  [types.CHILD_GET_DETAIL] ({commit, state }, babyid) {
-    // console.log('ready to modify babyid',babyid)
-    state[types.CHILD_DETAIL] = babyid
+  [types.CHILD_GET_DETAIL] ({commit, state }, data) {
+    state[types.CHILD_DETAIL] = data
   },
   [types.CHILD_ADD_ACTION] ({commit}, data) {
     return new Promise((resolve, reject) => {
@@ -40,8 +39,6 @@ const actions = {
   },
 
   [types.CHILD_MODIFY_ACTION] ({commit}, data) {
-    // console.log(data)
-
     return new Promise((resolve, reject) => {
       babyApi.modifyChild({commit}, data, resolve, reject)
     })
@@ -74,6 +71,7 @@ const mutations = {
 
 const getters = {
   [types.CHILD_LIST]: state => state[types.CHILD_LIST],
+  [types.CHILD_LIST_COUNT]: state => getters[types.CHILD_LIST](state).length,
   [types.CHILD_DETAIL]: state => state[types.CHILD_DETAIL],
   [types.CHILD_ADD_ERRORS]: state => state[types.CHILD_ADD_ERRORS],
   [types.CHILD_REMOVE_ERRORS]: state => state[types.CHILD_REMOVE_ERRORS],
