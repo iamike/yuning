@@ -60,8 +60,14 @@ export const API_PATH_USER_UPLOAD_AVATAR = '/czb-server/czb/user/uploadAvatar'
 export const API_PATH_USER_LOGIN = '/czb-server/czb/user/login'
 
 /* ACCOUNT SECTION */
+// 2.40 user_id*|courseId*
+export const API_PATH_ACCOUNT_COURSE_REMAIN_TIME = '/czb-server/czb/user/queryLeftHour'
+
 // 2.43 user_id*
 export const API_PATH_ACCOUNT_CARD_LIST = '/czb-server/czb/api/queryCardInfo'
 
 // 2.45 card_no*|card_pwd*|user_id*
 export const API_PATH_ACCOUNT_CARD_ACTIVE = '/czb-server/czb/api/activateCard'
+
+// 2.48 use_id*
+export const API_PATH_ACCOUNT_LEFT_COIN = '/czb-server/czb/api/queryLeftCoin'

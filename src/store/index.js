@@ -12,6 +12,8 @@ import userMobileModify from './modules/userMobileModify'
 import userPasswordModify from './modules/userPasswordModify'
 import accountCardList from './modules/accountCardList'
 import accountCardActive from './modules/accountCardActive'
+import accountCoins from './modules/accountCoins'
+import accountCourse from './modules/accountCourse'
 import baby from './modules/baby'
 
 /* vuex */
@@ -31,6 +33,8 @@ export default new Vuex.Store({
     userMobileModify,
     accountCardList,
     accountCardActive,
+    accountCoins,
+    accountCourse,
     baby,
   }
 })
