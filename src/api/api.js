@@ -1,4 +1,4 @@
-export const API_ROOT = 'http://192.168.16.178:8099'
+export const API_ROOT = '//192.168.16.178:8099'
 
 // * : must
 // @ : at least one

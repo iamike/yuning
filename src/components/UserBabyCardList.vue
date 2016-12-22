@@ -106,6 +106,7 @@ export default {
   computed: {
     ...mapGetters(['CHILD_LIST'])
   },
+
   created () {
     this.$store.dispatch('CHILD_GET_ALL', this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
   },
