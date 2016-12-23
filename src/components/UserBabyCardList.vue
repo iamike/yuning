@@ -108,15 +108,14 @@ export default {
   },
 
   created () {
+    // console.log(this.$store.state.baby.CHILD_LIST)
     this.$store.dispatch('CHILD_GET_ALL', this.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
   },
   destroyed () {
-
     // console.log()
     $('#addChildModal').form('destroy')
     $('#modifyChildModal').form('destroy')
     $('#removeChildModal').form('destroy')
-
   },
 }
 </script>

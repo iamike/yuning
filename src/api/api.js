@@ -1,4 +1,4 @@
-export const API_ROOT = '//192.168.16.178:8099'
+export const API_ROOT = 'http://192.168.16.178:8099'
 
 // * : must
 // @ : at least one
@@ -71,3 +71,5 @@ export const API_PATH_ACCOUNT_CARD_ACTIVE = '/czb-server/czb/api/activateCard'
 
 // 2.48 use_id*
 export const API_PATH_ACCOUNT_LEFT_COIN = '/czb-server/czb/api/queryLeftCoin'
+
+/* PRODUCT SECTION */

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="card " v-bind:class="[cardInfo.status=='ACT'?'orange':'grey']" >
+  <div class="card "  v-bind:class="cardColor" >
 
     <span class="ui right corner label yellow" v-if="cardCate=='年卡' && cardInfo.status!='USED'">
       <i class="star icon"></i>
@@ -43,7 +43,24 @@ export default {
   computed: {
     cardCate: function(){
       return this.cardType.filter(type => type.en == this.cardInfo.card_cat)[0]['cn']
-    }
+    },
+    cardColor: function() {
+      if (this.cardInfo.status=='ACT') {
+        if (this.cardInfo.card_cat=='SSB_ANNUAL') {
+          return 'yellow'
+        }
+
+        if (this.cardInfo.card_cat=='SSB_TEN') {
+          return 'green'
+        }
+        if (this.cardInfo.card_cat=='SSB_ONE') {
+          return 'blue'
+        }
+      } else {
+        return 'grey'
+      }
+
+    },
   }
 }
 </script>

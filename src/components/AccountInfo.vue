@@ -71,19 +71,19 @@ export default {
       courseName:'多元智能训练课',
     }).then(res=>{
       // console.log(res)
+      this.$store.dispatch('ACCOUNT_GET_COIN_INFO_ACTION',{
+        user_id:this.userId,
+      }).then(res=>{
+        // console.log(res)
 
+      }).catch(err=>{
+        // console.log(err)
+      })
     }).catch(err=>{
       // console.log(err)
     })
 
-    this.$store.dispatch('ACCOUNT_GET_COIN_INFO_ACTION',{
-      user_id:this.userId,
-    }).then(res=>{
-      console.log(res)
 
-    }).catch(err=>{
-      console.log(err)
-    })
 
   },
   data () {
