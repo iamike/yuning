@@ -16,13 +16,11 @@
     <user-baby-card-item v-for="child in CHILD_LIST" v-bind:baby-info="child" ></user-baby-card-item>
 
     <div class="row">
-      <div class="column right floated">
         <div class="ui action">
           <div class="ui orange button right floated" @click="toggleAddPopup('#addChildModal')">
             <i class="add icon"></i> 添加新宝宝
           </div>
         </div>
-      </div>
     </div>
 
     <simple-modal id="addChildModal">

@@ -1,13 +1,14 @@
 <template lang="html" >
   <div class="ui fixed menu">
     <div class="ui container">
-      <img class="ui logo left floated" src="../assets/images/logo.png" alt="" />
+      <router-link :to="{ name: 'home' }" ><img class="ui logo" src="../assets/images/logo.png" alt="" /></router-link>
       <div class="ui large container menu right floated">
         <a class="toc item "><i class="sidebar icon"></i></a>
-        <router-link class="green item" :to="{ name: 'home' }" style="color:#9dca4c;"><i class="icon home"></i> 首页</router-link>
-        <a class="ui item courseCenter" href="#" @click.prevent style="color:#64c1b0;"><i class="icon heart"></i> 选课中心 <i class="dropdown icon"></i></a>
-        <router-link class="item blue" :to="{ name: 'bookstore' }" style="color:#3887b5;"><i class="icon book"></i> 图书</router-link>
-        <a class="ui item showAppQR" href="#" @click.prevent><i class="icon tablet"></i> APP <i class="dropdown icon"></i></a>
+        <router-link class="green item" :to="{ name: 'home' }" >首页</router-link>
+        <a class="ui item courseCenter" href="#" @click.prevent >我要看 <i class="angle down icon"></i></a>
+        <router-link class="item blue" :to="{ name: 'bookstore' }" >我要问 <i class="angle down icon"></i></router-link>
+        <a class="ui item " href="#" @click.prevent >我要测 <i class="angle down icon"></i></a>
+        <a class="ui item showAppQR" href="#" @click.prevent>APP<i class="angle down icon"></i></a>
         <div class="right item" id="userLogin" >
           <button class="ui tiny olive button" v-if="!userSignInInfo" @click="openLoginModal">
             <i class="icon user"></i>
@@ -58,16 +59,20 @@ export default {
 }
 .ui.fixed.menu {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+80,ededed+100 */
-background: #feffff; /* Old browsers */
-background: -moz-linear-gradient(top,  #feffff 80%, #ededed 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #feffff 80%,#ededed 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #feffff 80%,#ededed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
-
+// background: #feffff; /* Old browsers */
+// background: -moz-linear-gradient(top,  #feffff 80%, #ededed 100%); /* FF3.6-15 */
+// background: -webkit-linear-gradient(top,  #feffff 80%,#ededed 100%); /* Chrome10-25,Safari5.1-6 */
+// background: linear-gradient(to bottom,  #feffff 80%,#ededed 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+  box-shadow: none;
+  .ui.menu .item:before {
+    background: none;
+  }
 }
 
 .logo{
-  padding: 1em 2em;
+  padding: 0em 2em 0em 0em;
+  height: 80px;
 
   @media only screen and (max-width: 700px) {
     // float: right;
