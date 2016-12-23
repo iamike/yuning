@@ -49,19 +49,19 @@ export default {
     toggleModifyPopup(selector){
       let vm = this
       // console.log(vm.babyInfo)
+      // transfer the props data into vuex state before the modal popup
+      // console.log(vm.babyInfo)
+      vm.$store.state.baby.CHILD_DETAIL = vm.babyInfo
+
+      //TODO fix the datepicker problem...
+      vm.$store.state.baby.baby_birth.time = vm.babyInfo.baby_birth
+      // console.log('before change',vm.$store.state.baby.CHILD_DETAIL)
+
       const modalPayload = {
         selector,
         onShow: function () {
-          // transfer the props data into vuex state before the modal popup
-          // console.log(vm.babyInfo)
-          vm.$store.state.baby.CHILD_DETAIL = vm.babyInfo
-
-          //TODO fix the datepicker problem...
-          vm.$store.state.baby.baby_birth.time = vm.babyInfo.baby_birth
-          // console.log('before change',vm.$store.state.baby.CHILD_DETAIL)
         },
         onApproveAction: function () {
-
           // vm.babyInfo.baby_birth = vm.$store.state.baby.baby_birth.time
           // // console.log('after change',vm.$store.state.baby.CHILD_DETAIL)
           //

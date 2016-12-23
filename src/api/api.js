@@ -73,3 +73,4 @@ export const API_PATH_ACCOUNT_CARD_ACTIVE = '/czb-server/czb/api/activateCard'
 export const API_PATH_ACCOUNT_LEFT_COIN = '/czb-server/czb/api/queryLeftCoin'
 
 /* PRODUCT SECTION */
+export const API_PATH_COURSE_LIST = 'http://mp.yuningwang.com/tczmall/itemList/mobile/0/1/10/1'

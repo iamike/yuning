@@ -6,7 +6,6 @@
         <user-baby-card-list></user-baby-card-list>
       </div>
     </div>
-
   </div>
 </template>
 

@@ -10,7 +10,6 @@
 import PrimaryNav from './components/PrimaryNav'
 import AppFooter from './components/Footer'
 import UserLoginModal from './components/UserLoginModal'
-
 import StickyFooter from './components/StickyFooter'
 import { mapGetters } from 'vuex'
 
@@ -45,7 +44,7 @@ export default {
   }
   .mainContent {
     padding-top: 125px;
-    min-height: 84vh;
+    min-height: 86vh;
     @media only screen and (max-width: 700px) {
       padding-top: 77px;
 
