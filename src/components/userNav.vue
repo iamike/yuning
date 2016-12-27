@@ -28,5 +28,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
+.tabular.menu {
+  margin-bottom: 3rem;
+}
 </style>

@@ -4,11 +4,20 @@
       <router-link :to="{ name: 'home' }" ><img class="ui logo" src="../assets/images/logo.png" alt="" /></router-link>
       <div class="ui large container menu right floated">
         <a class="toc item "><i class="sidebar icon"></i></a>
-        <router-link class="green item" :to="{ name: 'home' }" >首页</router-link>
+        <router-link class="item" :to="{ name: 'home' }" >首页</router-link>
         <a class="ui item courseCenter" href="#" @click.prevent >我要看 <i class="angle down icon"></i></a>
-        <router-link class="item blue" :to="{ name: 'bookstore' }" >我要问 <i class="angle down icon"></i></router-link>
+        <a id="needAskPopup" class="item dropdown ui" >我要问 <i class="angle down icon"></i>
+          <need-ask-popup></need-ask-popup>
+        </a>
         <a class="ui item " href="#" @click.prevent >我要测 <i class="angle down icon"></i></a>
         <a class="ui item showAppQR" href="#" @click.prevent>APP<i class="angle down icon"></i></a>
+        <!-- <div class="ui search">
+          <div class="ui left icon input">
+            <input class="prompt" type="text" placeholder="搜索">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div> -->
         <div class="right item" id="userLogin" >
           <button class="ui tiny olive button" v-if="!userSignInInfo" @click="openLoginModal">
             <i class="icon user"></i>
@@ -27,6 +36,7 @@
 import CoursePopup from './CoursePopup'
 import AppDownloadPopup from './AppDownloadPopup'
 import UserMenu from './UserMenu'
+import NeedAskPopup from './NeedAskPopup'
 
 export default {
   name: 'primary-nav',
@@ -35,6 +45,10 @@ export default {
     CoursePopup,
     AppDownloadPopup,
     UserMenu,
+    NeedAskPopup,
+  },
+  mounted () {
+    $('.item.dropdown').dropdown()
   },
   methods: {
     openLoginModal () {
@@ -43,7 +57,18 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.ui.menu .ui.dropdown .menu>.item {
+  padding: 1.5em!important;
+}
+.ui.search {
+  .ui.icon.input {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+}
 
+</style>
 <style lang="scss" scoped >
 .overlay {
   float: right;
@@ -79,12 +104,15 @@ export default {
     transform: scale(0.5);
     padding: 0px;
     margin: 0px;
+    display: none;
   }
 }
 .user-info {
 
 }
-
+.large.menu .active.item {
+  color:#57a437!important;
+}
 .large.menu, .compact.menu {
   border: none;
   box-shadow: none;
@@ -102,8 +130,7 @@ export default {
   }
 
   @media only screen and (max-width: 700px) {
-
-    .item {display: none;}
+    .ui.search,.item {display: none;}
     #userLogin {display: none;}
     .toc.item {
       // float: left;

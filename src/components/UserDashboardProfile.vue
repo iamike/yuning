@@ -21,10 +21,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.tabular.menu {
-  margin-bottom: 3rem;
-}
+<style lang="scss" scoped>
 .segment.piled.raised {
   padding-top: 40px;
   padding-bottom: 40px;

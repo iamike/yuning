@@ -98,17 +98,37 @@ const router = new VueRouter({
         },
       }],
     },
-    { path: '/bookstore', name: 'bookstore', component: resolve => require(['./components/BookStore.vue'], resolve)},
+    {
+      path: '/needAsk',
+      name: 'needAsk',
+      component: resolve => require(['./components/MainContent.vue'], resolve),
+      children: [{
+        path: 'multiIntelligence',
+        name: 'multiIntelligence',
+        component: resolve => require(['./components/MultiIntelligence.vue'], resolve),
+      },{
+        path: 'multiIntelligenceRoom',
+        name: 'multiIntelligenceRoom',
+        component: resolve => require(['./components/MultiIntelligenceRoom.vue'], resolve),
+      }],
+    },
     { path: '/', redirect: '/home' },
     { path: '*', redirect: '/home' }
   ]
 })
 
+Vue.filter('capitalize', function (value) {
+  // 返回处理后的值
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+})
 
 /* appInstance */
 new Vue({
   router,
   store,
+
   el: '#app',
   template: '<App/>',
   components: { App }

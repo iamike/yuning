@@ -21,7 +21,7 @@
         </div>
         <div class="seven wide column">
           <h4 class="ui inverted header"></h4>
-        
+
           <div class="divider ui"></div>
           <p>成长保 ©2011-2016 育宁文化发展（上海）有限公司沪ICP备13005274号-3</p>
         </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'footer'
 }

@@ -42,14 +42,6 @@ export default {
   #homepage.mainContent {
     padding-top: 0px;
   }
-  .mainContent {
-    padding-top: 125px;
-    min-height: 86vh;
-    @media only screen and (max-width: 700px) {
-      padding-top: 77px;
-
-    }
-  }
 </style>
 <style >
 

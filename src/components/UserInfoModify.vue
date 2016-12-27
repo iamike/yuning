@@ -206,7 +206,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .ui.fluid.image {
     padding-top: 40px;
   }

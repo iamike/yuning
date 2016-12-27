@@ -3,6 +3,13 @@ import * as api from './api'
 import * as types from '../store/mutation-types'
 
 export default {
+  getCourseList ({commit}, data, resolve, reject) {
+    
+    Vue.http
+    .post(api.API_PATH_COURSE_LIST)
+    .then(success, failure)
+
+  },
   getCourseRemainTime ({commit}, data , resolve, reject) {
     const success = res => {
       if (res.body.isSuccess) {
