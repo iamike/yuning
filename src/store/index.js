@@ -14,6 +14,7 @@ import accountCardList from './modules/accountCardList'
 import accountCardActive from './modules/accountCardActive'
 import accountCoins from './modules/accountCoins'
 import accountCourse from './modules/accountCourse'
+import miCourseRoom from './modules/miCourseRoom'
 import baby from './modules/baby'
 
 /* vuex */
@@ -36,5 +37,6 @@ export default new Vuex.Store({
     accountCoins,
     accountCourse,
     baby,
+    miCourseRoom,
   }
 })

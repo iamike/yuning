@@ -75,4 +75,8 @@ export const API_PATH_ACCOUNT_CARD_ACTIVE = '/czb/api/activateCard'
 export const API_PATH_ACCOUNT_LEFT_COIN = '/czb/api/queryLeftCoin'
 
 /* PRODUCT SECTION */
-export const API_PATH_COURSE_LIST = 'http://mp.yuningwang.com/tczmall/itemList/mobile/0/1/10/1'
+export const API_PATH_COURSE_LIST = 'http://mp.yuningwang.com/tczmall/itemList/desktop/0/1/10/1'
+
+/* multi-intelligence-room */
+// 3.1 userId*|
+export const API_PATH_GET_BOOKED_MI_COURSE_LIST = '/czb/api/getTrainBooked'

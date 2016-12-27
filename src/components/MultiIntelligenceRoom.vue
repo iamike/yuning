@@ -5,6 +5,21 @@
         <div class="row">
           <div class="sixteen wide column">
             <div class="ui message videostatus">
+              <div class="block">
+                   <p class="digit">Days{{ days | two_digits }}</p>
+               </div>
+               <div class="block">
+                   <p class="digit">Hours{{ hours | two_digits }}</p>
+                   <p class="text"></p>
+               </div>
+               <div class="block">
+                   <p class="digit">Minutes{{ minutes | two_digits }}</p>
+                   <p class="text"></p>
+               </div>
+               <div class="block">
+                   <p class="digit">Seconds{{ seconds | two_digits }}</p>
+                   <p class="text"></p>
+               </div>
             </div>
           </div>
         </div>
@@ -31,7 +46,10 @@
           </div>
         </div>
         <div class="ui sixteen wide column center aligned">
-          <button class="ui labeled icon button green" @click="openVideo">
+            <button class="ui labeled icon button " @click="userLoginRoom">
+            用户登录房间
+            </button>
+            <button class="ui labeled icon button green" @click="openVideo">
             <i class="call icon"></i>
             开始上课
             </button>
@@ -49,11 +67,186 @@
 
 
 <script>
+import Vue from 'vue'
+
+Vue.filter('two_digits', function (value) {
+    if(value.toString().length <= 1)
+    {
+        return "0"+value.toString();
+    }
+    return value.toString();
+})
+
 export default {
   name: 'multi-intelligence-room',
+
+  computed: {
+    seconds() {
+        return (this.bookedTime - this.now) % 60;
+    },
+
+    minutes() {
+        return Math.trunc((this.bookedTime - this.now) / 60) % 60;
+    },
+
+    hours() {
+        return Math.trunc((this.bookedTime - this.now) / 60 / 60) % 24;
+    },
+
+    days() {
+        return Math.trunc((this.bookedTime - this.now) / 60 / 60 / 24);
+    }
+  },
+  data () {
+    return {
+      bookedTime:'',
+      currentTime: new Date(),
+      now: Math.trunc((new Date()).getTime() / 1000),
+    }
+  },
   methods: {
-    //连接视频通话
+
+      userLoginRoom () {
+
+        let vm = this
+        // TODO .....你懂的
+        $.getScript("https://app.cloopen.com/im50/ytx-web-im-min-new.js", function(){
+          $.getScript("https://app.cloopen.com/im50/MD5.min.js", function(){
+            $.getScript("https://app.cloopen.com/im50/base64.min.js", function(){
+              $.getScript("https://app.cloopen.com/im50/pako.js", function(){
+                  window.IM.init()
+              })
+            })
+          })
+
+          RL_YTX.onCallMsgListener(function(obj) {
+            IM.callId = obj.callId;
+            IM.caller = obj.caller;
+            IM.called = obj.called;
+            if(obj.state==2){
+            $(".videostatus").html("呼叫中");
+            }else if(obj.state==3){
+            // sendMsg("bookedId=" + params.curr_bookedId);
+            // updateCourseStatus();
+            // console.log('test3')
+            $(".videostatus").html("正在通话中");
+            }else if(obj.state==4){
+            $(".videostatus").html("对方拒绝了连接");
+            }else if(obj.state==5){
+            $(".videostatus").html("通话结束");
+            }
+          })
+        })
+
+        //请求服务器成功开始登录
+        function callback(resp) {
+          //账号登录参数设置
+          var loginBuilder = new RL_YTX.LoginBuilder();
+          loginBuilder.setType(1); //登录类型 1账号登录，3通讯账号密码登录
+          loginBuilder.setUserName('aa'); //设置用户名
+          loginBuilder.setPwd(); //type值为1时，密码可以不赋值
+          loginBuilder.setSig(resp.sig); //设置sig
+          loginBuilder.setTimestamp(resp.timestamp); //设置时间戳
+
+          RL_YTX.login(loginBuilder, function(obj) {
+
+            console.log("专家登录成功@!");
+
+            //设置专家个人信息
+            var uploadPersonInfoBuilder = new RL_YTX.UploadPersonInfoBuilder();
+              uploadPersonInfoBuilder.setNickName('aaa');
+              uploadPersonInfoBuilder.setSex(1);
+              uploadPersonInfoBuilder.setBirth("1990-01-01");
+              uploadPersonInfoBuilder.setSign("个性签名");
+              RL_YTX.uploadPerfonInfo(uploadPersonInfoBuilder, function(obj) {
+                //设置成功
+                console.log("设置专家个人信息成功");
+                obj.version; //个人信息版本号
+              }, function(resp) {
+                //设置失败
+                console.log("设置专家个人信息失败");
+                console.log("失败："+resp.code);
+
+              });
+
+            RL_YTX.onMsgReceiveListener(function(obj) {});
+            RL_YTX.onNoticeReceiveListener(function(obj) {});
+            RL_YTX.onConnectStateChangeLisenter(function(obj) {
+
+              if(obj.code == 1 || obj.code == 5) {
+                IM.init();
+              }
+
+            });
+          }, function(obj) {
+            console.log("登录失败");
+          })
+        }
+
+        window.IM = window.IM || {
+          _expertNo: "",
+          _userNo: "",
+          _appid: '8aaf070858a8910b0158a8bf848a005d', // 应用I
+          _onUnitAccount: 'KF10089', // 多渠道客服帐号，目前只支持1个
+          _3rdServer: "http://192.168.16.178:8099/czb-server/czb/api/", // 3rdServer，主要用来虚拟用户服务器获取SIG
+          callId: "",
+          caller: "",
+          called: "",
+          init: function() {
+            //初始化SDK
+            IM._expertNo = ""
+            IM._userNo = vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id
+            var resp = RL_YTX.init(IM._appid)
+
+            if(170002 == resp.code) {} else if(174001 == resp.code) {} else if(200 == resp.code) {
+
+              IM._login(IM._expertNo, "")
+            }
+          },
+          _login: function() {
+            var data = {
+              "username": 'aa',
+            }
+            var url = IM._3rdServer + 'getSig'
+
+            // console.log(url)
+            $.ajax({
+              url: url,
+              dataType: 'jsonp',
+              data: data,
+              jsonp: 'cb',
+              success: function(result) {
+                // console.log(result)
+                if(result.code != '000000') {
+                  var resp = {}
+                  resp.code = result.code
+                  resp.msg = "Get SIG fail from 3rd server!..."
+                  onError(resp)
+                  return
+                } else {
+                  // console.log('test')
+                  var resp = {}
+                  resp.code = result.code
+                  resp.sig = result.sig
+                  resp.timestamp = result.timestamp
+                  // console.log(resp)
+                  callback(resp)
+                  return
+                }
+              },
+              error: function() {
+                var resp = {}
+                resp.msg = 'Get SIG fail from 3rd server!'
+                onError(resp)
+              },
+              timeout: 5000
+            })
+
+          }
+        }
+      },
      openVideo () {
+       //连接视频通话
       // params.videoCall = true
       var view = document.getElementById("receivedVideo")
       var localView = document.getElementById("localVideo")
@@ -90,141 +283,23 @@ export default {
 
   },
   created () {
+    let vm = this
+    this.$store.dispatch('GET_BOOKED_MI_COURSE_ACTION',{userId:this.$store.state.userRegLog.USER_SIGN_IN_INFO.id})
+    .then(res=>{
+      console.log(res)
+      vm.bookedTime = res[0].bookTime/1000
 
-
+    }).catch(err=>{
+      // console.log(err)
+    })
 
   },
   mounted () {
-    let vm = this
-    // TODO .....你懂的
-    $.getScript("https://app.cloopen.com/im50/ytx-web-im-min-new.js", function(){
-      $.getScript("https://app.cloopen.com/im50/MD5.min.js", function(){
-        $.getScript("https://app.cloopen.com/im50/base64.min.js", function(){
-          $.getScript("https://app.cloopen.com/im50/pako.js", function(){
-              window.IM.init()
-          })
-        })
-      })
 
-      RL_YTX.onCallMsgListener(function(obj) {
-        IM.callId = obj.callId;
-        IM.caller = obj.caller;
-        IM.called = obj.called;
-        if(obj.state==2){
-        $(".videostatus").html("呼叫中");
-        }else if(obj.state==3){
-        // sendMsg("bookedId=" + params.curr_bookedId);
-        // updateCourseStatus();
-        // console.log('test3')
-        $(".videostatus").html("正在通话中");
-        }else if(obj.state==4){
-        $(".videostatus").html("对方拒绝了连接");
-        }else if(obj.state==5){
-        $(".videostatus").html("通话结束");
-        }
-      });
-    })
+    window.setInterval(() => {
+        this.now = Math.trunc((new Date()).getTime() / 1000)
+    },1000)
 
-    //请求服务器成功开始登录
-    function callback(resp) {
-      //账号登录参数设置
-      var loginBuilder = new RL_YTX.LoginBuilder();
-      loginBuilder.setType(1); //登录类型 1账号登录，3通讯账号密码登录
-      loginBuilder.setUserName('aa'); //设置用户名
-      loginBuilder.setPwd(); //type值为1时，密码可以不赋值
-      loginBuilder.setSig(resp.sig); //设置sig
-      loginBuilder.setTimestamp(resp.timestamp); //设置时间戳
-      RL_YTX.login(loginBuilder, function(obj) {
-        console.log("专家登录成功@!");
-        //设置专家个人信息
-        var uploadPersonInfoBuilder = new RL_YTX.UploadPersonInfoBuilder();
-          uploadPersonInfoBuilder.setNickName('aa');
-          uploadPersonInfoBuilder.setSex(1);
-          uploadPersonInfoBuilder.setBirth("1990-01-01");
-          uploadPersonInfoBuilder.setSign("个性签名");
-          RL_YTX.uploadPerfonInfo(uploadPersonInfoBuilder, function(obj) {
-            //设置成功
-            console.log("设置专家个人信息成功");
-            obj.version; //个人信息版本号
-          }, function(resp) {
-            //设置失败
-            console.log("设置专家个人信息失败");
-            console.log("失败："+resp.code);
-          });
-        RL_YTX.onMsgReceiveListener(function(obj) {});
-        RL_YTX.onNoticeReceiveListener(function(obj) {});
-        RL_YTX.onConnectStateChangeLisenter(function(obj) {
-          if(obj.code == 1 || obj.code == 5) {
-            IM.init();
-          }
-        });
-      }, function(obj) {
-        console.log("登录失败");
-      })
-    }
-
-
-    window.IM = window.IM || {
-      _expertNo: "",
-      _userNo: "",
-      _appid: '8aaf070858a8910b0158a8bf848a005d', // 应用I
-      _onUnitAccount: 'KF10089', // 多渠道客服帐号，目前只支持1个
-      _3rdServer: "http://192.168.16.178:8099/czb-server/czb/api/", // 3rdServer，主要用来虚拟用户服务器获取SIG
-      callId: "",
-      caller: "",
-      called: "",
-      init: function() {
-        //初始化SDK
-        IM._expertNo = ""
-        IM._userNo = vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id
-        var resp = RL_YTX.init(IM._appid)
-
-        if(170002 == resp.code) {} else if(174001 == resp.code) {} else if(200 == resp.code) {
-
-          IM._login(IM._expertNo, "")
-        }
-      },
-      _login: function() {
-        var data = {
-          "username": 'aa',
-        }
-        var url = IM._3rdServer + 'getSig'
-
-        // console.log(url)
-        $.ajax({
-          url: url,
-          dataType: 'jsonp',
-          data: data,
-          jsonp: 'cb',
-          success: function(result) {
-            // console.log(result)
-            if(result.code != '000000') {
-              var resp = {}
-              resp.code = result.code
-              resp.msg = "Get SIG fail from 3rd server!..."
-              onError(resp)
-              return
-            } else {
-              // console.log('test')
-              var resp = {}
-              resp.code = result.code
-              resp.sig = result.sig
-              resp.timestamp = result.timestamp
-              // console.log(resp)
-              callback(resp)
-              return
-            }
-          },
-          error: function() {
-            var resp = {}
-            resp.msg = 'Get SIG fail from 3rd server!'
-            onError(resp)
-          },
-          timeout: 5000
-        })
-
-      }
-    }
   }
 }
 </script>
@@ -238,4 +313,6 @@ export default {
 video {
   width: 100%;
 }
+
+
 </style>
