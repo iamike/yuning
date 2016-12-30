@@ -3,7 +3,7 @@
       <primary-nav v-bind:userSignInInfo="USER_SIGN_IN_INFO"></primary-nav>
       <router-view class="mainContent"></router-view>
       <sticky-footer></sticky-footer>
-      <user-login-modal class="user-login coupled" id="userLoginModal" ></user-login-modal>
+      <user-login-modal class="user-login coupled" id="userLoginModal"></user-login-modal>
   </div>
 </template>
 <script>

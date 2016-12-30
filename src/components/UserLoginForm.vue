@@ -57,7 +57,7 @@ export default {
     }
   },
   computed: {
-     ...mapGetters(['USER_SIGN_IN_ERRORS'])
+     ...mapGetters(['USER_SIGN_IN_ERRORS','USER_LOGIN_REDIRECT','USER_LOGIN_REDIRECT_BEHAVIOR'])
   },
   components: {
     UserForgetPassword,
@@ -105,9 +105,22 @@ export default {
           onSuccess: function(){
             vm.frontErr = false
             vm.$store.dispatch('USER_SIGN_IN_ACTION', vm.userInfo)
+
             .then((res) => {
-              vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
-              vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+
+
+              if (vm.USER_LOGIN_REDIRECT) {
+                //custom redirect
+                vm.$router.push(vm.USER_LOGIN_REDIRECT)
+                vm.USER_LOGIN_REDIRECT_BEHAVIOR()
+
+              } else {
+                //default redirect
+                vm.$store.dispatch('TOGGLE_SIMPLE_POPUP',{selector:'#userLoginModal'})
+                vm.$router.push('/user/' + vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+
+              }
+
             })
             .catch((err) => {
             })

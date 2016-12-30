@@ -123,7 +123,13 @@ Vue.filter('capitalize', function (value) {
       value = value.toString()
       return value.charAt(0).toUpperCase() + value.slice(1)
 })
-
+Vue.filter('two_digits', function (value) {
+    if(value.toString().length <= 1)
+    {
+        return "0"+value.toString();
+    }
+    return value.toString();
+})
 /* appInstance */
 new Vue({
   router,

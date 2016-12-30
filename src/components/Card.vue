@@ -7,6 +7,9 @@
     <span class="ui right corner label green" v-if="cardCate=='十天卡' && cardInfo.status!='USED'">
       <i class="calendar icon"></i>
     </span>
+    <span class="ui right corner label teal" v-if="cardCate=='三天卡' && cardInfo.status!='USED'">
+      <i class="time icon"></i>
+    </span>
     <span class="ui right corner label blue" v-if="cardCate=='日卡' && cardInfo.status!='USED'">
       <i class="history icon"></i>
     </span>
@@ -37,7 +40,7 @@ export default {
   props: ['cardInfo'],
   data () {
     return {
-      cardType:[{ en:'SSB_ANNUAL',cn:'年卡'},{ en:'SSB_ONE',cn:'日卡'},{ en:'SSB_TEN',cn:'十天卡'}],
+      cardType:[{ en:'SSB_ANNUAL',cn:'年卡'},{ en:'SSB_ONE',cn:'日卡'},{en:'SSB_TRI',cn:'三天卡'},{ en:'SSB_TEN',cn:'十天卡'}],
     }
   },
   computed: {
@@ -52,6 +55,9 @@ export default {
 
         if (this.cardInfo.card_cat=='SSB_TEN') {
           return 'green'
+        }
+        if (this.cardInfo.card_cat=='SSB_TRI') {
+          return 'teal'
         }
         if (this.cardInfo.card_cat=='SSB_ONE') {
           return 'blue'

@@ -11,12 +11,12 @@ const actions = {
 }
 
 const mutations = {
-  [types.TOGGLE_BASIC_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction}) {
+  [types.TOGGLE_BASIC_POPUP] (state, {selector,onApproveAction, onDenyAction}) {
     $(selector).modal({
       detachable: false,
-      onShow    : function(){
-        onShowAction && onShowAction()
-      },
+      // onShow    : function(){
+      //   onShowAction && onShowAction()
+      // },
       onDeny    : function(){
         onDenyAction && onDenyAction()
       },
@@ -26,15 +26,28 @@ const mutations = {
     })
     .modal('toggle')
   },
-  [types.TOGGLE_SIMPLE_POPUP] (state, {selector,onShowAction, onApproveAction, onDenyAction, detachable, allowMultiple, onHidden, onHide, onShow, observeChanges,onVisible}) {
-    // console.log(selector)
+  [types.TOGGLE_SIMPLE_POPUP] (state, {
+    needToggle,
+    selector,
+    onApproveAction,
+    onDenyAction,
+    detachable,
+    allowMultiple,
+    onHidden,
+    onHide,
+    onShow,
+    observeChanges,
+    onVisible,
+    closable,
+    dimmerSettings,
+    }) {
+    // console.log(closable==undefined)
     $(selector).modal({
-      observeChanges:observeChanges?observeChanges:false,
-      allowMultiple: allowMultiple ? allowMultiple : false,
-      detachable: detachable ? detachable : false,
-      onShow    : function(){
-        onShowAction && onShowAction()
-      },
+      observeChanges:observeChanges!=undefined ? observeChanges:false,
+      allowMultiple: allowMultiple!=undefined ? allowMultiple : false,
+      detachable: detachable!=undefined ? detachable : false,
+      closable: closable!=undefined ? closable : true,
+      dimmerSettings: dimmerSettings!=undefined ? dimmerSettings : {closable:false, useCSS:true, opacity:0.8},
       onDeny    : function(){
         onDenyAction && onDenyAction()
       },
@@ -47,7 +60,15 @@ const mutations = {
       onShow : function() {
         onShow && onShow()
       },
-    }).modal('toggle')
+      onHide : function() {
+        // console.log('test')
+        onHide && onHide()
+      },
+      onVisible: function () {
+        onVisible && onVisible()
+      },
+    }).modal(needToggle?needToggle:'toggle')
+
   },
 }
 

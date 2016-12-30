@@ -78,6 +78,7 @@ export default {
 
 <style lang="scss" scoped>
 
+
 .swiper-slide {
   img {
     max-height: 422px;
