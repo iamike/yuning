@@ -7,6 +7,8 @@ Vue.use(VueResource)
 
 //import components
 import App from './App'
+// import Sidebar from './components/Sidebar'
+
 import Home from './components/Homepage'
 import BookStore from './components/BookStore'
 
@@ -134,8 +136,15 @@ Vue.filter('two_digits', function (value) {
 new Vue({
   router,
   store,
-
   el: '#app',
   template: '<App/>',
   components: { App }
 })
+
+// new Vue({
+//   router,
+//   store,
+//   el: '#sidebar',
+//   template:'<Sidebar/>',
+//   components: { Sidebar }
+// })

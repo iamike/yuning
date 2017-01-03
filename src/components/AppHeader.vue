@@ -20,6 +20,17 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.logo{
+  padding: 0em 2em 0em 0em;
+  height: 80px;
 
+  @media only screen and (max-width: 700px) {
+    // float: right;
+    transform: scale(0.5);
+    padding: 0px;
+    margin: 0px;
+    display: none;
+  }
+}
 </style>

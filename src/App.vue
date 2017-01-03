@@ -19,7 +19,6 @@ export default {
     PrimaryNav,
     StickyFooter,
     UserLoginModal,
-
   },
   created () {
       this.$store.dispatch('USER_CHECK_IN')

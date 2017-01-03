@@ -1,7 +1,9 @@
 <template lang="html" >
   <div class="ui fixed menu">
     <div class="ui container">
-      <router-link :to="{ name: 'home' }" ><img class="ui logo" src="../assets/images/logo.png" alt="" /></router-link>
+      <router-link :to="{ name: 'home' }" class="brand" >
+        <img class="ui logo" src="../assets/images/logo.png" alt="logo" />
+      </router-link>
       <div class="ui large container menu right floated">
         <a class="toc item "><i class="sidebar icon"></i></a>
         <router-link class="item" :to="{ name: 'home' }" >首页</router-link>
@@ -11,13 +13,6 @@
         </a>
         <a class="ui item " href="#" @click.prevent >我要测 <i class="angle down icon"></i></a>
         <a class="ui item showAppQR" href="#" @click.prevent>APP<i class="angle down icon"></i></a>
-        <!-- <div class="ui search">
-          <div class="ui left icon input">
-            <input class="prompt" type="text" placeholder="搜索">
-            <i class="search icon"></i>
-          </div>
-          <div class="results"></div>
-        </div> -->
         <div class="right item" id="userLogin" >
           <button class="ui tiny olive button" v-if="!userSignInInfo" @click="openLoginModal">
             <i class="icon user"></i>
@@ -101,10 +96,11 @@ export default {
 
   @media only screen and (max-width: 700px) {
     // float: right;
-    transform: scale(0.5);
-    padding: 0px;
-    margin: 0px;
-    display: none;
+    // transform: scale(0.5);
+    width: 80px;
+    height: 40px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 10px;
   }
 }
 .user-info {
@@ -130,6 +126,7 @@ export default {
   }
 
   @media only screen and (max-width: 700px) {
+    margin-right: 0px!important;
     .ui.search,.item {display: none;}
     #userLogin {display: none;}
     .toc.item {

@@ -1,18 +1,20 @@
 <template lang="html">
   <div id="sidebar" class="ui vertical sidebar menu right inverted">
-    <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
-    <a class="item">Login</a>
-    <a class="item">Signup</a>
+    <a class="item" @click="links({ name: 'home' })" >首页</a>
+    <a class="item" @click="links({name:'multiIntelligence'})">多元智能</a>
+
   </div>
 </template>
 <script>
 
-
 export default {
   name: 'sidebar',
+  methods: {
+    links (link) {
+      console.log(link)
+      // this.$router.push(link)
+    }
+  },
   mounted () {
     $('.ui.sidebar').sidebar('attach events', '.toc.item')
   }

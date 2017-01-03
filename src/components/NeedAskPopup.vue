@@ -15,7 +15,7 @@
 
 <script>
 export default {
-
+  name:'need-ask-popup'
 }
 </script>
 
