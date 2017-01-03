@@ -145,8 +145,17 @@ export default {
                       IM._userNo = vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id
                       var resp = RL_YTX.init(IM._appid)
 
-                      if(170002 == resp.code) {} else if(174001 == resp.code) {} else if(200 == resp.code) {
-                        console.log('login success!!!!!!!!!!!!!!!!!!!!!!')
+                      if(170002 == resp.code) {
+
+                        console.log('174002')
+
+
+                      } else if(174001 == resp.code) {
+
+                        console.log('174001')
+
+                      } else if(200 == resp.code) {
+                        // console.log('login success!!!!!!!!!!!!!!!!!!!!!!')
                         IM._login(IM._expertNo, "")
                       }
                     },
@@ -156,7 +165,7 @@ export default {
                       }
                       var url = IM._3rdServer + 'getSig'
 
-                      console.log('login success222222222222222!!!!!!!!!!!!!!!!!!!!!!')
+                      // console.log('login success222222222222222!!!!!!!!!!!!!!!!!!!!!!')
                       $.ajax({
                         url: url,
                         dataType: 'jsonp',
@@ -179,7 +188,7 @@ export default {
                             // console.log(resp)
                             // callback(resp)
 
-                            alert(vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
+                            // alert(vm.$store.state.userRegLog.USER_SIGN_IN_INFO.id)
                             //账号登录参数设置
                             var loginBuilder = new RL_YTX.LoginBuilder();
                             loginBuilder.setType(1); //登录类型 1账号登录，3通讯账号密码登录
@@ -187,13 +196,16 @@ export default {
                             loginBuilder.setPwd(); //type值为1时，密码可以不赋值
                             loginBuilder.setSig(resp.sig); //设置sig
                             loginBuilder.setTimestamp(resp.timestamp); //设置时间戳
+
+
                             RL_YTX.login(loginBuilder, function(obj) {
 
                               console.log('success3333333333')
 
-
                             }, function(obj) {
-                              console.log("登录失败");
+
+                              console.log("登录失败")
+
                             })
 
 
@@ -216,13 +228,15 @@ export default {
                       IM.callId = obj.callId;
                       IM.caller = obj.caller;
                       IM.called = obj.called;
-                      console.log('444444444444444444444')
+                      // console.log('444444444444444444444')
                       if(obj.state==2){
+                        console.log('555555555555')
 
                       }else if(obj.state==3){
                       // sendMsg("bookedId=" + params.curr_bookedId);
                       // updateCourseStatus();
                       // console.log('test3')
+                      console.log('666666666666')
 
 
                       $(".videostatus").html("正在通话中");
