@@ -4,7 +4,7 @@ import * as types from '../store/mutation-types'
 
 export default {
   getCourseList ({commit}, data, resolve, reject) {
-    
+
     Vue.http
     .post(api.API_PATH_COURSE_LIST)
     .then(success, failure)

@@ -1,4 +1,5 @@
 export const API_ROOT = 'http://192.168.16.178:8099/czb-server'
+
 // export const API_ROOT = 'http://mp1.yuningwang.com'
 
 
@@ -78,5 +79,8 @@ export const API_PATH_ACCOUNT_LEFT_COIN = '/czb/api/queryLeftCoin'
 export const API_PATH_COURSE_LIST = 'http://mp.yuningwang.com/tczmall/itemList/desktop/0/1/10/1'
 
 /* multi-intelligence-room */
+// 3.0 get getSig
+export const RL_YTX_GETSIG = '/czb/api/getSig'
+
 // 3.1 userId*|
 export const API_PATH_GET_BOOKED_MI_COURSE_LIST = '/czb/api/getTrainBooked'

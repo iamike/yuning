@@ -3,6 +3,11 @@ import * as types from '../mutation-types'
 
 
 const actions = {
+  [types.GET_RL_YTX_SIG_ACTION]({ commit }, data) {
+    return new Promise((resolve,reject)=>{
+      miCourseRoom.getSig({ commit }, data, resolve, reject)
+    })
+  },
   [types.GET_BOOKED_MI_COURSE_ACTION]({ commit }, data) {
     return new Promise((resolve,reject)=>{
       miCourseRoom.getBooked({ commit }, data, resolve, reject)
