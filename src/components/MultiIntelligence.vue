@@ -11,10 +11,10 @@
     </swiper>
     <div class="ui container">
       <div class="ui labeled icon four item menu">
-        <a class="item">
+        <router-link class="item" :to="{name:'payment', params: { item: 'multiIntelligence' }}">
           <i class="shop icon"></i>
           购买课程
-        </a>
+        </router-link>
         <a class="item">
           <i class="world icon"></i>
           多元智能测试

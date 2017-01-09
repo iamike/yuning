@@ -62,8 +62,11 @@ var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 app.use(staticPath, express.static('./static'))
 
 https.createServer({
+
   key: fs.readFileSync('./key.pem'),
   cert: fs.readFileSync('./cert.pem')
+
+  
 }, app).listen(55555);
 
 module.exports = app.listen(port, function (err) {

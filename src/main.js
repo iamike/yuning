@@ -109,10 +109,19 @@ const router = new VueRouter({
         name: 'multiIntelligence',
         component: resolve => require(['./components/MultiIntelligence.vue'], resolve),
       },{
+        path: 'payment/:itemName/',
+        name: 'multiIntelligencePayment',
+        component: resolve => require(['./components/Payment.vue'], resolve),
+      },{
         path: 'multiIntelligenceRoom',
         name: 'multiIntelligenceRoom',
         component: resolve => require(['./components/MultiIntelligenceRoom.vue'], resolve),
       }],
+    },
+    {
+      path: '/payment/:item',
+      name: 'payment',
+      component: resolve => require(['./components/Payment.vue'], resolve),
     },
     { path: '/', redirect: '/home' },
     { path: '*', redirect: '/home' }

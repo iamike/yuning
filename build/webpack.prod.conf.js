@@ -1,4 +1,5 @@
 var path = require('path')
+var PrerenderSpaPlugin = require('prerender-spa-plugin')
 var config = require('../config')
 var utils = require('./utils')
 var webpack = require('webpack')
@@ -77,7 +78,14 @@ var webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    })
+    }),
+
+    new PrerenderSpaPlugin(
+      // Absolute path to compiled SPA
+      path.join(__dirname, '../dist'),
+      // List of routes to prerender
+      [ '/' ]
+    )
   ]
 })
 
